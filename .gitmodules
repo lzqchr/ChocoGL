@@ -1,0 +1,3 @@
+[submodule "ChocoGL/vendor/spdlog"]
+	path = ChocoGL/vendor/spdlog
+	url = https://github.com/gabime/spdlog.git
