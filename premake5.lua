@@ -10,6 +10,11 @@ workspace "ChocoGL"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+IncludeDir = {}
+IncludeDir["GLFW"] = "ChocoGL/vendor/GLFW/include"
+
+include "ChocoGL/vendor/GLFW"
+
 project "ChocoGL"
 	location "ChocoGL"
 	kind"SharedLib"
@@ -32,8 +37,17 @@ project "ChocoGL"
 	includedirs
 	{
 		"%{prj.name}/vendor/spdlog/include;",
-		"%{prj.name}/src;"
+		"%{prj.name}/src;",
+		"%{IncludeDir.GLFW}"
 	}
+
+	
+	links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
+	}
+
 
 	filter "system:windows"
 		cppdialect "C++17"

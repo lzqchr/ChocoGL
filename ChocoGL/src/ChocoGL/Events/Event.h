@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "ChocoGL/Core.h";
-
+#include "ChocoGL/Core.h"
+#include "clpch.h"
 
 
 namespace ChocoGL {

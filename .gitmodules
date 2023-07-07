@@ -1,3 +1,6 @@
 [submodule "ChocoGL/vendor/spdlog"]
 	path = ChocoGL/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "ChocoGL/vendor/GLFW"]
+	path = ChocoGL/vendor/GLFW
+	url = https://github.com/TheCherno/glfw

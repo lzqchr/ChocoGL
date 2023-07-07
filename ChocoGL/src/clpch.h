@@ -11,7 +11,7 @@
 #include<unordered_map>
 #include<unordered_set>
 
-
+#include<ChocoGL/Log.h>
 
 #ifdef  CL_PLATFORM_WINDOWS
 	#include<Windows.h>

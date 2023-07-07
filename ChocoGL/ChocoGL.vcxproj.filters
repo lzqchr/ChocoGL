@@ -7,6 +7,12 @@
     <Filter Include="ChocoGL\Events">
       <UniqueIdentifier>{C8A34997-B471-3D9D-9D05-AEC389721902}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ChcocGL.h" />
@@ -34,6 +40,12 @@
     <ClInclude Include="src\ChocoGL\Log.h">
       <Filter>ChocoGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\ChocoGL\Window.h">
+      <Filter>ChocoGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\clpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Log.cpp">
       <Filter>ChocoGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\clpch.cpp" />
   </ItemGroup>
