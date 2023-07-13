@@ -37,6 +37,12 @@
     <ClInclude Include="src\ChocoGL\Events\MouseEvent.h">
       <Filter>ChocoGL\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\ChocoGL\Layer.h">
+      <Filter>ChocoGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\LayerStack.h">
+      <Filter>ChocoGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\ChocoGL\Log.h">
       <Filter>ChocoGL</Filter>
     </ClInclude>
@@ -50,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChocoGL\Application.cpp">
+      <Filter>ChocoGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Layer.cpp">
+      <Filter>ChocoGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\LayerStack.cpp">
       <Filter>ChocoGL</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Log.cpp">

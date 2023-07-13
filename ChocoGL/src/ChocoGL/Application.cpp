@@ -3,7 +3,7 @@
 
 #include"ChocoGL/Log.h"
 
-#include <GLFW/glfw3.h>
+#include<glad/glad.h>
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x,this,std::placeholders::_1)
 
@@ -16,7 +16,19 @@ namespace ChocoGL {
 	}
 	Application::~Application()
 	{
+
 	}
+
+	void Application::PushLayer(Layer* layer)
+	{
+		m_LayerStack.PushLayer(layer);
+	}
+
+	void Application::PushOverlay(Layer* layer)
+	{
+		m_LayerStack.PushOverlay(layer);
+	}
+
 
 	void Application::OnEvent(Event& e) {
 
@@ -26,6 +38,14 @@ namespace ChocoGL {
 
 
 		CL_CORE_INFO("{0}", e);
+
+		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+		{
+			(*--it)->OnEvent(e);
+			if (e.Handled)
+				break;
+		}
+
 
 	}
 

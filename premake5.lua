@@ -12,8 +12,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "ChocoGL/vendor/GLFW/include"
+IncludeDir["Glad"] = "ChocoGL/vendor/Glad/include"
 
 include "ChocoGL/vendor/GLFW"
+include "ChocoGL/vendor/Glad"
 
 project "ChocoGL"
 	location "ChocoGL"
@@ -38,13 +40,15 @@ project "ChocoGL"
 	{
 		"%{prj.name}/vendor/spdlog/include;",
 		"%{prj.name}/src;",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	
 	links 
 	{ 
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -57,7 +61,8 @@ project "ChocoGL"
 	defines
 	{
 		"CL_PLATFORM_WINDOWS",
-		"CL_BUILD_DLL"
+		"CL_BUILD_DLL",
+		"GLFW_INCLUDE_NONE"
 	 }
 	
 	postbuildcommands
@@ -68,13 +73,16 @@ project "ChocoGL"
 
 	filter "configurations:Debug"
 		defines"GL_Debug"
+		buildoptions "/MDd"
 		symbols"on"
 	filter "configurations:Release"
 		defines"GL_RELEASE"
+		buildoptions "/MD"
 		optimize"on"
 
 	filter "configurations:Dist"
 		defines"GL_DIST"
+		buildoptions "/MD"
 		optimize"on"
 
 project "Sandbox"
@@ -119,11 +127,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines"GL_Debug"
+		buildoptions "/MDd"
 		symbols"on"
 	filter "configurations:Release"
 		defines"GL_RELEASE"
+		buildoptions "/MD"
 		optimize"on"
 
 	filter "configurations:Dist"
 		defines"GL_DIST"
+		buildoptions "/MD"
 		optimize"on"
+

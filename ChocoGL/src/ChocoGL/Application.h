@@ -1,9 +1,11 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
-#include"ChocoGL/Events/ApplicationEvent.h"
+
 #include "Window.h"
+#include "ChocoGL/LayerStack.h"
+#include "ChocoGL/Events/Event.h"
+#include "ChocoGL/Events/ApplicationEvent.h"
 
 
 namespace ChocoGL {
@@ -17,12 +19,15 @@ namespace ChocoGL {
 
 		void OnEvent(Event& e);
 
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* layer);
 	
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 
+		LayerStack m_LayerStack;
 	};
 	Application* CreatApplication();
 }
