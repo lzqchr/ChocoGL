@@ -40,8 +40,8 @@ namespace ChocoGL {
 #define CL_CORE_FATAL(...) ::ChocoGL::Log::GetCoreLogger()->fatal(__VA_ARGS__)
 
 
-#define CL_CLIENT_TRACE(...) ::ChocoGL::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define CL_CLIENT_INFO(...)  ::ChocoGL::Log::GetClientLogger()->info(__VA_ARGS__)
-#define CL_CLIENT_WARN(...)  ::ChocoGL::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define CL_CLIENT_ERROR(...) ::ChocoGL::Log::GetClientLogger()->error(__VA_ARGS__)
-#define CL_CLIENT_FATAL(...) ::ChocoGL::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define CL_TRACE(...) ::ChocoGL::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define CL_INFO(...)  ::ChocoGL::Log::GetClientLogger()->info(__VA_ARGS__)
+#define CL_WARN(...)  ::ChocoGL::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define CL_ERROR(...) ::ChocoGL::Log::GetClientLogger()->error(__VA_ARGS__)
+#define CL_FATAL(...) ::ChocoGL::Log::GetClientLogger()->fatal(__VA_ARGS__)

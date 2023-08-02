@@ -7,15 +7,21 @@
     <Filter Include="ChocoGL\Events">
       <UniqueIdentifier>{C8A34997-B471-3D9D-9D05-AEC389721902}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ChocoGL\Imgui">
+      <UniqueIdentifier>{AE888BCE-1A49-0705-E383-50824F034CE1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\OpenGL">
+      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ChcocGL.h" />
+    <ClInclude Include="src\ChocoGL.h" />
     <ClInclude Include="src\ChocoGL\Application.h">
       <Filter>ChocoGL</Filter>
     </ClInclude>
@@ -37,6 +43,9 @@
     <ClInclude Include="src\ChocoGL\Events\MouseEvent.h">
       <Filter>ChocoGL\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\ChocoGL\Imgui\ImguiLayer.h">
+      <Filter>ChocoGL\Imgui</Filter>
+    </ClInclude>
     <ClInclude Include="src\ChocoGL\Layer.h">
       <Filter>ChocoGL</Filter>
     </ClInclude>
@@ -49,14 +58,22 @@
     <ClInclude Include="src\ChocoGL\Window.h">
       <Filter>ChocoGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\clpch.h" />
+    <ClInclude Include="src\ChocoGL\Input.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChocoGL\Application.cpp">
       <Filter>ChocoGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Imgui\ImguiLayer.cpp">
+      <Filter>ChocoGL\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Layer.cpp">
       <Filter>ChocoGL</Filter>
@@ -67,9 +84,13 @@
     <ClCompile Include="src\ChocoGL\Log.cpp">
       <Filter>ChocoGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\clpch.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

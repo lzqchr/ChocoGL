@@ -2,18 +2,17 @@
 
 #ifdef CL_PLATFORM_WINDOWS
 
-extern ChocoGL::Application* ChocoGL::CreatApplication();
+extern ChocoGL::Application* ChocoGL::CreateApplication();
 
 int main(int argc,char** argv)
 {
 	ChocoGL::Log::Init();
-	ChocoGL::Log::GetCoreLogger()->warn("no log!!!!!!!!");
-	ChocoGL::Log::GetClientLogger()->info("no log!!!!!!!!");
+	CL_CORE_WARN("Initialized Log!");
+	int a = 5;
+	CL_INFO("Hello! Var={0}", a);
 
-	auto app = ChocoGL::CreatApplication();
-
+	auto app = ChocoGL::CreateApplication();
 	app->Run();
-
 	delete app;
 }
 
