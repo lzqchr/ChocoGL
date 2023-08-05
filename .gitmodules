@@ -8,3 +8,6 @@
 [submodule "ChocoGL/vendor/GLFW"]
 	path = ChocoGL/vendor/GLFW
 	url = https://github.com/lzqchr/glfw.git
+[submodule "ChocoGL/vendor/glm"]
+	path = ChocoGL/vendor/glm
+	url = https://github.com/g-truc/glm.git
