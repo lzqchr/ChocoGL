@@ -9,7 +9,7 @@
 
 namespace ChocoGL {
 
-	#define BIND_EVENT_FN(x) std::bind(&Application::x,this,std::placeholders::_1)
+#define BIND_EVENT_FN(x) std::bind(&Application::x,this,std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
 
@@ -22,6 +22,8 @@ namespace ChocoGL {
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
+		//m_ImGuiLayer = new ImGuiLayer();
+		//PushOverlay(m_ImGuiLayer);
 	}
 	Application::~Application()
 	{
@@ -67,10 +69,12 @@ namespace ChocoGL {
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
-
-			auto [x, y] = Input::GetMousePosition();
-			CL_CORE_TRACE("{0},{1}", x, y);
-
+			
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
+			
 			m_Window->OnUpdate();
 		}
 	}

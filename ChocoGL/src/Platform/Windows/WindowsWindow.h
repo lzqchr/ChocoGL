@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ChocoGL/Window.h"
-
+#include "ChocoGL/Renderer/GraphicsContext.h"
+                           
 #include <GLFW/glfw3.h>
 
 namespace ChocoGL {
@@ -30,6 +31,8 @@ namespace ChocoGL {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
+
 
 		struct WindowData
 		{

@@ -1,9 +1,10 @@
 #pragma once 
 
-#pragma once
-
 #include "ChocoGL/Layer.h"
 
+#include "ChocoGL/Events/ApplicationEvent.h"
+#include "ChocoGL/Events/KeyEvent.h"
+#include "ChocoGL/Events/MouseEvent.h"
 
 namespace ChocoGL {
 
@@ -13,10 +14,13 @@ namespace ChocoGL {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void OnAttach();
-		void OnDetach();
-		void OnUpdate();
-		void OnEvent(Event& event);
+		virtual void OnAttach() override;
+		virtual void OnDetach() override;
+		virtual void OnImGuiRender() override;
+		
+		void Begin();
+		void End();
+		
 	private:
 		float m_Time = 0.0f;
 	};

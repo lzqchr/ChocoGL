@@ -7,6 +7,7 @@
 #include "ChocoGL/Events/Event.h"
 #include "ChocoGL/Events/ApplicationEvent.h"
 
+#include "ChocoGL/ImGui/ImGuiLayer.h"
 
 namespace ChocoGL {
 	class ChocoGL_API Application
@@ -26,12 +27,13 @@ namespace ChocoGL {
 		inline Window& GetWindow() { return *m_Window; }
 
 		inline static Application& Get() { return *s_Instance; }
-	
+
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-		std::unique_ptr<Window> m_Window;
-		bool m_Running = true;
 
+		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
+		bool m_Running = true;
 		LayerStack m_LayerStack;
 
 	private:

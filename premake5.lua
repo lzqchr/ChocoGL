@@ -1,5 +1,6 @@
 workspace "ChocoGL"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -14,7 +15,8 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "ChocoGL/vendor/GLFW/include"
 IncludeDir["Glad"] = "ChocoGL/vendor/Glad/include"
-IncludeDir["ImGui"] = "ChocoGL/vendor/imgui"
+IncludeDir["ImGui"]= "ChocoGL/vendor/imgui"
+IncludeDir["glm"]  = "ChocoGL/vendor/glm"
 
 include "ChocoGL/vendor/GLFW"
 include "ChocoGL/vendor/Glad"
@@ -22,8 +24,10 @@ include "ChocoGL/vendor/imgui"
 
 project "ChocoGL"
 	location "ChocoGL"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -34,7 +38,14 @@ project "ChocoGL"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -43,7 +54,8 @@ project "ChocoGL"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links 
@@ -55,8 +67,7 @@ project "ChocoGL"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
+
 		systemversion "latest"
 
 		defines
@@ -66,30 +77,29 @@ project "ChocoGL"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
+		
 
 	filter "configurations:Debug"
 		defines "CL_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "CL_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CL_DIST"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -103,7 +113,9 @@ project "Sandbox"
 	includedirs
 	{
 		"ChocoGL/vendor/spdlog/include",
-		"ChocoGL/src"
+		"ChocoGL/src",
+		"ChocoGL/vendor",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -113,7 +125,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -123,15 +134,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "CL_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
+		runtime "Debug"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "CL_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CL_DIST"
-		buildoptions "/MD"
-		optimize "On"
+		runtime "Release"
+		optimize "on"

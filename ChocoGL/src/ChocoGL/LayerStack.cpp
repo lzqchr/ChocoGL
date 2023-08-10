@@ -5,7 +5,6 @@ namespace ChocoGL {
 
 	LayerStack::LayerStack()
 	{
-		m_LayerInsert = m_Layers.begin();
 	}
 
 	LayerStack::~LayerStack()
@@ -16,7 +15,9 @@ namespace ChocoGL {
 
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);//头部插入
+		//头部插入
+		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
+		m_LayerInsertIndex++;
 	}
 
 	void LayerStack::PushOverlay(Layer* overlay)
@@ -30,7 +31,7 @@ namespace ChocoGL {
 		if (it != m_Layers.end())
 		{
 			m_Layers.erase(it);//会指向被删除元素的下一个元素
-			m_LayerInsert--;
+			m_LayerInsertIndex--;
 		}
 	}
 
