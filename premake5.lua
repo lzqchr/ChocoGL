@@ -39,8 +39,9 @@ project "ChocoGL"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
-		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/src/**.hpp", 
+		"%{prj.name}/src/**.cpp" 
+		
 	}
 
 	defines
@@ -51,7 +52,10 @@ project "ChocoGL"
 	includedirs
 	{
 		"%{prj.name}/src",
+		"%{prj.name}/vendor",
 		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/vendor/assimp/include",
+		"%{prj.name}/vendor/stb/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
@@ -107,12 +111,18 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.hpp", 
+		"%{prj.name}/src/**.cpp" 
 	}
 
 	includedirs
 	{
+		"%{prj.name}/src",
 		"ChocoGL/vendor/spdlog/include",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/vendor/assimp/include",
+		"%{prj.name}/vendor/stb/include",
 		"ChocoGL/src",
 		"ChocoGL/vendor",
 		"%{IncludeDir.glm}"
@@ -120,7 +130,8 @@ project "Sandbox"
 
 	links
 	{
-		"ChocoGL"
+		"ChocoGL",
+		"ChocoGL/vendor/assimp/win64/assimp.lib"
 	}
 
 	filter "system:windows"

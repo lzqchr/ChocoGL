@@ -4,7 +4,7 @@
 
 struct GLFWwindow;
 
-namespace Hazel {
+namespace ChocoGL {
 
 	class OpenGLContext : public GraphicsContext
 	{

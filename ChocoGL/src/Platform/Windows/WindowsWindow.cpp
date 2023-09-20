@@ -1,11 +1,13 @@
 #include "clpch.h"
 #include "WindowsWindow.h"
+#include <glad/glad.h>
 
-#include"ChocoGL//Events/ApplicationEvent.h"
-#include"ChocoGL//Events/KeyEvent.h"
-#include"ChocoGL//Events/MouseEvent.h"
+#include"ChocoGL/Events/ApplicationEvent.h"
+#include"ChocoGL/Events/KeyEvent.h"
+#include"ChocoGL/Events/MouseEvent.h"
 
-#include<glad/glad.h>
+#include<imgui.h>
+#include"Platform\OpenGL\OpenGLContext.h"
 namespace ChocoGL {
 	
 	static bool s_GLFWInitialized = false;
@@ -48,11 +50,11 @@ namespace ChocoGL {
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		
 		glfwMakeContextCurrent(m_Window);
 
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		CL_CORE_ASSERT(status, "Failed to initialize Glad!");
-
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -144,6 +146,15 @@ namespace ChocoGL {
 				data.EventCallback(event);
 			});
 
+		m_ImGuiMouseCursors[ImGuiMouseCursor_Arrow] = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
+		m_ImGuiMouseCursors[ImGuiMouseCursor_TextInput] = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
+		m_ImGuiMouseCursors[ImGuiMouseCursor_ResizeAll] = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);   // FIXME: GLFW doesn't have this.
+		m_ImGuiMouseCursors[ImGuiMouseCursor_ResizeNS] = glfwCreateStandardCursor(GLFW_VRESIZE_CURSOR);
+		m_ImGuiMouseCursors[ImGuiMouseCursor_ResizeEW] = glfwCreateStandardCursor(GLFW_HRESIZE_CURSOR);
+		m_ImGuiMouseCursors[ImGuiMouseCursor_ResizeNESW] = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);  // FIXME: GLFW doesn't have this.
+		m_ImGuiMouseCursors[ImGuiMouseCursor_ResizeNWSE] = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);  // FIXME: GLFW doesn't have this.
+		m_ImGuiMouseCursors[ImGuiMouseCursor_Hand] = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+
 	}
 
 	void WindowsWindow::Shutdown()
@@ -151,10 +162,28 @@ namespace ChocoGL {
 		glfwDestroyWindow(m_Window);
 	}
 
+	inline std::pair<float, float> WindowsWindow::GetWindowPos() const
+	{
+		int x, y;
+		glfwGetWindowPos(m_Window, &x, &y);
+		return { x, y };
+	}
+
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
+
 		glfwSwapBuffers(m_Window);
+		//m_Context->SwapBuffers();
+
+
+		ImGuiMouseCursor imgui_cursor = ImGui::GetMouseCursor();
+		glfwSetCursor(m_Window, m_ImGuiMouseCursors[imgui_cursor] ? m_ImGuiMouseCursors[imgui_cursor] : m_ImGuiMouseCursors[ImGuiMouseCursor_Arrow]);
+		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
+		float time = glfwGetTime();
+		float delta = time - m_LastFrameTime;
+		m_LastFrameTime = time;
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
