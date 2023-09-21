@@ -2,7 +2,7 @@
 #include"WindowsInput.h"
 
 #include<GLFW/glfw3.h>
-#include"ChocoGL/Application.h"
+#include"ChocoGL/Core/Application.h"
 
 namespace ChocoGL {
 

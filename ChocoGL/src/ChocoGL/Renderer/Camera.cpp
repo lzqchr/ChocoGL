@@ -1,7 +1,7 @@
 #include "clpch.h"
 #include "Camera.h"
 
-#include "ChocoGL/Input.h"
+#include "ChocoGL/Core/Input.h"
 
 #include <glfw/glfw3.h>
 #include <glm/gtc/quaternion.hpp>

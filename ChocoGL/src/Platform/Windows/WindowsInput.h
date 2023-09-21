@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include"ChocoGL/Input.h"
+#include"ChocoGL/Core/Input.h"
 
 namespace ChocoGL {
 

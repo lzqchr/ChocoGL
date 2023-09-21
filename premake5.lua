@@ -1,6 +1,7 @@
 workspace "ChocoGL"
 	architecture "x64"
-	startproject "Sandbox"
+	targetdir "build"
+	
 
 	configurations
 	{
@@ -8,6 +9,8 @@ workspace "ChocoGL"
 		"Release",
 		"Dist"
 	}
+
+	startproject "CoCo"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -38,7 +41,7 @@ project "ChocoGL"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.c",
 		"%{prj.name}/src/**.hpp", 
 		"%{prj.name}/src/**.cpp" 
 		
@@ -98,8 +101,8 @@ project "ChocoGL"
 		runtime "Release"
 		optimize "on"
 
-project "Sandbox"
-	location "Sandbox"
+project "CoCo"
+	location "CoCo"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
@@ -111,7 +114,7 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.c",
 		"%{prj.name}/src/**.hpp", 
 		"%{prj.name}/src/**.cpp" 
 	}
@@ -130,8 +133,7 @@ project "Sandbox"
 
 	links
 	{
-		"ChocoGL",
-		"ChocoGL/vendor/assimp/win64/assimp.lib"
+		"ChocoGL"
 	}
 
 	filter "system:windows"
@@ -148,12 +150,100 @@ project "Sandbox"
 		runtime "Debug"
 		symbols "on"
 
+			links
+		{
+			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}
+
 	filter "configurations:Release"
 		defines "CL_RELEASE"
 		runtime "Release"
 		optimize "on"
+		links
+		{
+			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}
 
 	filter "configurations:Dist"
 		defines "CL_DIST"
 		runtime "Release"
 		optimize "on"
+		
+		links
+		{	
+			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}
+
+
+project "Sandbox"
+	location "Sandbox"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.c",
+		"%{prj.name}/src/**.hpp", 
+		"%{prj.name}/src/**.cpp" 
+	}
+
+	includedirs
+	{
+		"%{prj.name}/src",
+		"ChocoGL/vendor/spdlog/include",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/vendor/assimp/include",
+		"%{prj.name}/vendor/stb/include",
+		"ChocoGL/src",
+		"ChocoGL/vendor",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"ChocoGL"
+	}
+
+	filter "system:windows"
+		cppdialect "C++17"
+		systemversion "latest"
+
+		defines
+		{
+			"CL_PLATFORM_WINDOWS"
+		}
+
+	filter "configurations:Debug"
+		defines "CL_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+			links
+		{
+			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}
+
+	filter "configurations:Release"
+		defines "CL_RELEASE"
+		runtime "Release"
+		optimize "on"
+		links
+		{
+			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}
+
+	filter "configurations:Dist"
+		defines "CL_DIST"
+		runtime "Release"
+		optimize "on"
+		
+		links
+		{	
+			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}

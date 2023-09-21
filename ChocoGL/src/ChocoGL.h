@@ -1,14 +1,14 @@
 #pragma once
 
 //使用核心 应用
-#include "ChocoGL/Application.h"
-#include "ChocoGL/Layer.h"
-#include "ChocoGL/Log.h"
-#include "ChocoGL/TimeStep.h"
+#include "ChocoGL/Core/Application.h"
+#include "ChocoGL/Core/Layer.h"
+#include "ChocoGL/Core/Log.h"
+#include "ChocoGL/Core/TimeStep.h"
 
-#include"ChocoGL/Input.h"
-#include"ChocoGL/KeyCodes.h"
-#include"ChocoGL/MouseButtonCodes.h"
+#include"ChocoGL/Core/Input.h"
+#include"ChocoGL/Core/KeyCodes.h"
+#include"ChocoGL/Core/MouseButtonCodes.h"
 
 #include"ChocoGL/Imgui/ImguiLayer.h"
 
@@ -28,5 +28,5 @@
 
 
 //-----------EntryPoint------------------------
-#include"ChocoGL/EntryPoint.h"
+//#include"ChocoGL\EntryPoint.h"
 //------------------------------------------

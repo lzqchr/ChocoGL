@@ -4,8 +4,11 @@
     <Filter Include="ChocoGL">
       <UniqueIdentifier>{64D0E623-D0AF-65BF-D9C7-F0954526CC20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ChocoGL\Events">
-      <UniqueIdentifier>{C8A34997-B471-3D9D-9D05-AEC389721902}</UniqueIdentifier>
+    <Filter Include="ChocoGL\Core">
+      <UniqueIdentifier>{3CD365A1-2836-F545-D1BB-2DFCBDFDC0C8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ChocoGL\Core\Events">
+      <UniqueIdentifier>{A0031EEB-0C65-FBF8-95D2-41AB013332B8}</UniqueIdentifier>
     </Filter>
     <Filter Include="ChocoGL\Imgui">
       <UniqueIdentifier>{AE888BCE-1A49-0705-E383-50824F034CE1}</UniqueIdentifier>
@@ -28,50 +31,56 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ChocoGL.h" />
-    <ClInclude Include="src\ChocoGL\Application.h">
-      <Filter>ChocoGL</Filter>
+    <ClInclude Include="src\ChocoGL\Core\Application.h">
+      <Filter>ChocoGL\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\ChocoGL\Buffer.h">
-      <Filter>ChocoGL</Filter>
+    <ClInclude Include="src\ChocoGL\Core\Buffer.h">
+      <Filter>ChocoGL\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\ChocoGL\Core.h">
-      <Filter>ChocoGL</Filter>
+    <ClInclude Include="src\ChocoGL\Core\Core.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Events\ApplicationEvent.h">
+      <Filter>ChocoGL\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Events\Event.h">
+      <Filter>ChocoGL\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Events\KeyEvent.h">
+      <Filter>ChocoGL\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Events\MouseEvent.h">
+      <Filter>ChocoGL\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Input.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\KeyCodes.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Layer.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\LayerStack.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Log.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\MouseButtonCodes.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\TimeStep.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Window.h">
+      <Filter>ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\EntryPoint.h">
       <Filter>ChocoGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\ChocoGL\Events\ApplicationEvent.h">
-      <Filter>ChocoGL\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\Events\Event.h">
-      <Filter>ChocoGL\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\Events\KeyEvent.h">
-      <Filter>ChocoGL\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\Events\MouseEvent.h">
-      <Filter>ChocoGL\Events</Filter>
-    </ClInclude>
     <ClInclude Include="src\ChocoGL\Imgui\ImGuiLayer.h">
       <Filter>ChocoGL\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\Input.h">
-      <Filter>ChocoGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\KeyCodes.h">
-      <Filter>ChocoGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\Layer.h">
-      <Filter>ChocoGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\LayerStack.h">
-      <Filter>ChocoGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\Log.h">
-      <Filter>ChocoGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\MouseButtonCodes.h">
-      <Filter>ChocoGL</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Buffer.h">
       <Filter>ChocoGL\Renderer</Filter>
@@ -109,12 +118,6 @@
     <ClInclude Include="src\ChocoGL\Renderer\Texture.h">
       <Filter>ChocoGL\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\ChocoGL\TimeStep.h">
-      <Filter>ChocoGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ChocoGL\Window.h">
-      <Filter>ChocoGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
@@ -140,25 +143,30 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\clpch.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClInclude Include="src\ChocoGL\Renderer\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ChocoGL\Application.cpp">
-      <Filter>ChocoGL</Filter>
+    <ClCompile Include="src\ChocoGL\Core\Application.cpp">
+      <Filter>ChocoGL\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Core\Layer.cpp">
+      <Filter>ChocoGL\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Core\LayerStack.cpp">
+      <Filter>ChocoGL\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Core\Log.cpp">
+      <Filter>ChocoGL\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Core\TimeStep.cpp">
+      <Filter>ChocoGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiBuild.cpp">
       <Filter>ChocoGL\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiLayer.cpp">
       <Filter>ChocoGL\Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ChocoGL\Layer.cpp">
-      <Filter>ChocoGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ChocoGL\LayerStack.cpp">
-      <Filter>ChocoGL</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ChocoGL\Log.cpp">
-      <Filter>ChocoGL</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Buffer.cpp">
       <Filter>ChocoGL\Renderer</Filter>
@@ -186,9 +194,6 @@
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Texture.cpp">
       <Filter>ChocoGL\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ChocoGL\TimeStep.cpp">
-      <Filter>ChocoGL</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Vendor\stb_image.cpp.cpp">
       <Filter>ChocoGL\Vendor</Filter>
@@ -221,5 +226,7 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\clpch.cpp" />
+    <ClCompile Include="src\ChocoGL\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
 </Project>

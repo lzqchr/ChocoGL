@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "ChocoGL/TimeStep.h"
+#include "ChocoGL/Core/TimeStep.h"
 
 namespace ChocoGL {
 

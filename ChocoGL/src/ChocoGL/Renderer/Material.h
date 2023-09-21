@@ -1,5 +1,5 @@
 #pragma once
-#include "ChocoGL/Core.h"
+#include "ChocoGL/Core/Core.h"
 
 #include "ChocoGL/Renderer/Shader.h"
 #include "ChocoGL/Renderer/Texture.h"

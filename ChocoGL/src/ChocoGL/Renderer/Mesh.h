@@ -3,8 +3,9 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-#include "ChocoGL/TimeStep.h"
+#include "ChocoGL/Core/TimeStep.h"
 
+#include "ChocoGL/Renderer/VertexArray.h"
 #include "ChocoGL/Renderer/Buffer.h"
 #include "ChocoGL/Renderer/Shader.h"
 #include "ChocoGL/Renderer/Material.h"
@@ -153,8 +154,7 @@ namespace ChocoGL {
 		uint32_t m_BoneCount = 0;
 		std::vector<BoneInfo> m_BoneInfo;
 
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		Ref<VertexArray> m_VertexArray;
 
 
 		std::vector<Vertex> m_StaticVertices;

@@ -1,10 +1,10 @@
 #pragma once 
 
-#include "ChocoGL/Layer.h"
+#include "ChocoGL/Core/Layer.h"
 
-#include "ChocoGL/Events/ApplicationEvent.h"
-#include "ChocoGL/Events/KeyEvent.h"
-#include "ChocoGL/Events/MouseEvent.h"
+#include "ChocoGL/Core/Events/ApplicationEvent.h"
+#include "ChocoGL/Core/Events/KeyEvent.h"
+#include "ChocoGL/Core/Events/MouseEvent.h"
 
 namespace ChocoGL {
 

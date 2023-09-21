@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ChocoGL/Core.h"
-#include "ChocoGL/Buffer.h"
+#include "ChocoGL/Core/Core.h"
+#include "ChocoGL/Core/Buffer.h"
 #include "RendererAPI.h"
 
 namespace ChocoGL {

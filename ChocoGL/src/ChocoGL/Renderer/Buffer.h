@@ -1,5 +1,8 @@
 #pragma once
-/*
+
+
+#include "ChocoGL/Renderer/Renderer.h"
+
 namespace ChocoGL {
 
 	enum class ShaderDataType
@@ -36,6 +39,7 @@ namespace ChocoGL {
 		uint32_t Offset;
 		bool Normalized;
 
+		BufferElement() = default;
 
 		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
 			: Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
@@ -99,59 +103,35 @@ namespace ChocoGL {
 		uint32_t m_Stride = 0;
 	};
 
+	enum class VertexBufferUsage
+	{
+		None = 0, Static = 1, Dynamic = 2
+	};
+
 	class VertexBuffer
 	{
 	public:
-
-
 		virtual ~VertexBuffer() {}
+
+		virtual void SetData(void* buffer, uint32_t size, uint32_t offset = 0) = 0;
 		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
 
 		virtual const BufferLayout& GetLayout() const = 0;
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 
-		static VertexBuffer* Create(float* vertices, uint32_t size);
+		virtual unsigned int GetSize() const = 0;
+		virtual RendererID GetRendererID() const = 0;
+
+		static Ref<VertexBuffer> Create(void* data, uint32_t size, VertexBufferUsage usage = VertexBufferUsage::Static);
+		static Ref<VertexBuffer> Create(uint32_t size, VertexBufferUsage usage = VertexBufferUsage::Dynamic);
 	};
 
 	class IndexBuffer
 	{
 	public:
 		virtual ~IndexBuffer() {}
-		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
 
-		virtual uint32_t GetCount() const = 0;
-
-		static IndexBuffer* Create(uint32_t* indices, uint32_t size);
-	};
-}
-*/
-
-#include "ChocoGL/Renderer/Renderer.h"
-
-namespace ChocoGL {
-
-	class ChocoGL_API VertexBuffer
-	{
-	public:
-		virtual ~VertexBuffer() {}
-
-		virtual void SetData(void* buffer, unsigned int size, unsigned int offset = 0) = 0;
-		virtual void Bind() const = 0;
-
-		virtual unsigned int GetSize() const = 0;
-		virtual RendererID GetRendererID() const = 0;
-
-		static VertexBuffer* Create(unsigned int size = 0);
-	};
-
-	class ChocoGL_API IndexBuffer
-	{
-	public:
-		virtual ~IndexBuffer() {}
-
-		virtual void SetData(void* buffer, unsigned int size, unsigned int offset = 0) = 0;
+		virtual void SetData(void* buffer, uint32_t size, uint32_t offset = 0) = 0;
 		virtual void Bind() const = 0;
 
 		virtual uint32_t GetCount() const = 0;
@@ -159,7 +139,7 @@ namespace ChocoGL {
 		virtual unsigned int GetSize() const = 0;
 		virtual RendererID GetRendererID() const = 0;
 
-		static IndexBuffer* Create(unsigned int size = 0);
+		static Ref<IndexBuffer> Create(void* data, uint32_t size = 0);
 	};
 
 }

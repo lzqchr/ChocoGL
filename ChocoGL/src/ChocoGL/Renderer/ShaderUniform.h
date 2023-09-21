@@ -1,6 +1,6 @@
 #pragma once
-#include "ChocoGL/Core.h"
-#include "ChocoGL/Log.h"
+#include "ChocoGL/Core/Core.h"
+#include "ChocoGL/Core/Log.h"
 
 #include <string>
 #include <vector>

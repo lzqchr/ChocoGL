@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ChocoGL/Window.h"
+#include "ChocoGL/Core/Window.h"
 #include "ChocoGL/Renderer/GraphicsContext.h"
                            
 #include <GLFW/glfw3.h>

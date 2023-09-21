@@ -2,64 +2,6 @@
 #include "OpenGLBuffer.h"
 
 #include <glad/glad.h>
-/*
-namespace ChocoGL {
-
-	/////////////////////////////////////////////////////////////////////////////
-	// VertexBuffer /////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////
-
-	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
-	{
-		glCreateBuffers(1, &m_RendererID);
-		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
-		glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
-	}
-
-	OpenGLVertexBuffer::~OpenGLVertexBuffer()
-	{
-		glDeleteBuffers(1, &m_RendererID);
-	}
-
-	void OpenGLVertexBuffer::Bind() const
-	{
-		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
-	}
-
-	void OpenGLVertexBuffer::Unbind() const
-	{
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
-
-	/////////////////////////////////////////////////////////////////////////////
-	// IndexBuffer //////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////
-
-	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count)
-		: m_Count(count)
-	{
-		glCreateBuffers(1, &m_RendererID);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
-	}
-
-	OpenGLIndexBuffer::~OpenGLIndexBuffer()
-	{
-		glDeleteBuffers(1, &m_RendererID);
-	}
-
-	void OpenGLIndexBuffer::Bind() const
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
-	}
-
-	void OpenGLIndexBuffer::Unbind() const
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-
-}*/
-
 
 namespace ChocoGL {
 
@@ -67,13 +9,37 @@ namespace ChocoGL {
 	// VertexBuffer
 	//////////////////////////////////////////////////////////////////////////////////
 
-	OpenGLVertexBuffer::OpenGLVertexBuffer(unsigned int size)
-		: m_RendererID(0), m_Size(size)
+	static GLenum OpenGLUsage(VertexBufferUsage usage)
 	{
+		switch (usage)
+		{
+		case VertexBufferUsage::Static:    return GL_STATIC_DRAW;
+		case VertexBufferUsage::Dynamic:   return GL_DYNAMIC_DRAW;
+		}
+		CL_CORE_ASSERT(false, "Unknown vertex buffer usage");
+		return 0;
+	}
+
+	OpenGLVertexBuffer::OpenGLVertexBuffer(void* data, uint32_t size, VertexBufferUsage usage)
+		: m_Size(size), m_Usage(usage)
+	{
+		m_LocalData = Buffer::Copy(data, size);
+
 		CL_RENDER_S({
-			glGenBuffers(1, &self->m_RendererID);
+			glCreateBuffers(1, &self->m_RendererID);
+			glNamedBufferData(self->m_RendererID, self->m_Size, self->m_LocalData.Data, OpenGLUsage(self->m_Usage));
 			});
 	}
+
+	OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size, VertexBufferUsage usage)
+		: m_Size(size), m_Usage(usage)
+	{
+		CL_RENDER_S({
+			glCreateBuffers(1, &self->m_RendererID);
+			glNamedBufferData(self->m_RendererID, self->m_Size, nullptr, OpenGLUsage(self->m_Usage));
+			});
+	}
+
 
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
 	{
@@ -82,12 +48,12 @@ namespace ChocoGL {
 			});
 	}
 
-	void OpenGLVertexBuffer::SetData(void* buffer, unsigned int size, unsigned int offset)
+	void OpenGLVertexBuffer::SetData(void* data, uint32_t size, uint32_t offset)
 	{
+		m_LocalData = Buffer::Copy(data, size);
 		m_Size = size;
-		CL_RENDER_S3(buffer, size, offset, {
-			glBindBuffer(GL_ARRAY_BUFFER, self->m_RendererID);
-			glBufferData(GL_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);
+		CL_RENDER_S1(offset, {
+			glNamedBufferSubData(self->m_RendererID, offset, self->m_Size, self->m_LocalData.Data);
 			});
 	}
 
@@ -95,13 +61,6 @@ namespace ChocoGL {
 	{
 		CL_RENDER_S({
 			glBindBuffer(GL_ARRAY_BUFFER, self->m_RendererID);
-
-		// TODO: Extremely temp, by default provide positions and texcoord attributes
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
-
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (const void*)(3 * sizeof(float)));
 			});
 	}
 
@@ -109,11 +68,14 @@ namespace ChocoGL {
 	// IndexBuffer
 	//////////////////////////////////////////////////////////////////////////////////
 
-	OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int size)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(void* data, uint32_t size)
 		: m_RendererID(0), m_Size(size)
 	{
+		m_LocalData = Buffer::Copy(data, size);
+
 		CL_RENDER_S({
-			glGenBuffers(1, &self->m_RendererID);
+			glCreateBuffers(1, &self->m_RendererID);
+			glNamedBufferData(self->m_RendererID, self->m_Size, self->m_LocalData.Data, GL_STATIC_DRAW);
 			});
 	}
 
@@ -124,19 +86,19 @@ namespace ChocoGL {
 			});
 	}
 
-	void OpenGLIndexBuffer::SetData(void* buffer, unsigned int size, unsigned int offset)
+	void OpenGLIndexBuffer::SetData(void* data, uint32_t size, uint32_t offset)
 	{
+		m_LocalData = Buffer::Copy(data, size);
 		m_Size = size;
-		CL_RENDER_S3(buffer, size, offset, {
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self->m_RendererID);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, buffer, GL_STATIC_DRAW);
+		CL_RENDER_S1(offset, {
+			glNamedBufferSubData(self->m_RendererID, offset, self->m_Size, self->m_LocalData.Data);
 			});
 	}
 
 	void OpenGLIndexBuffer::Bind() const
 	{
 		CL_RENDER_S({
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self->m_RendererID);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self->m_RendererID);
 			});
 	}
 

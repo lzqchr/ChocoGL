@@ -144,21 +144,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\ChocoGL.h" />
-    <ClInclude Include="src\ChocoGL\Application.h" />
-    <ClInclude Include="src\ChocoGL\Buffer.h" />
-    <ClInclude Include="src\ChocoGL\Core.h" />
+    <ClInclude Include="src\ChocoGL\Core\Application.h" />
+    <ClInclude Include="src\ChocoGL\Core\Buffer.h" />
+    <ClInclude Include="src\ChocoGL\Core\Core.h" />
+    <ClInclude Include="src\ChocoGL\Core\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\ChocoGL\Core\Events\Event.h" />
+    <ClInclude Include="src\ChocoGL\Core\Events\KeyEvent.h" />
+    <ClInclude Include="src\ChocoGL\Core\Events\MouseEvent.h" />
+    <ClInclude Include="src\ChocoGL\Core\Input.h" />
+    <ClInclude Include="src\ChocoGL\Core\KeyCodes.h" />
+    <ClInclude Include="src\ChocoGL\Core\Layer.h" />
+    <ClInclude Include="src\ChocoGL\Core\LayerStack.h" />
+    <ClInclude Include="src\ChocoGL\Core\Log.h" />
+    <ClInclude Include="src\ChocoGL\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\ChocoGL\Core\TimeStep.h" />
+    <ClInclude Include="src\ChocoGL\Core\Window.h" />
     <ClInclude Include="src\ChocoGL\EntryPoint.h" />
-    <ClInclude Include="src\ChocoGL\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\ChocoGL\Events\Event.h" />
-    <ClInclude Include="src\ChocoGL\Events\KeyEvent.h" />
-    <ClInclude Include="src\ChocoGL\Events\MouseEvent.h" />
     <ClInclude Include="src\ChocoGL\Imgui\ImGuiLayer.h" />
-    <ClInclude Include="src\ChocoGL\Input.h" />
-    <ClInclude Include="src\ChocoGL\KeyCodes.h" />
-    <ClInclude Include="src\ChocoGL\Layer.h" />
-    <ClInclude Include="src\ChocoGL\LayerStack.h" />
-    <ClInclude Include="src\ChocoGL\Log.h" />
-    <ClInclude Include="src\ChocoGL\MouseButtonCodes.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Buffer.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Camera.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Framebuffer.h" />
@@ -171,25 +173,26 @@
     <ClInclude Include="src\ChocoGL\Renderer\Shader.h" />
     <ClInclude Include="src\ChocoGL\Renderer\ShaderUniform.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Texture.h" />
-    <ClInclude Include="src\ChocoGL\TimeStep.h" />
-    <ClInclude Include="src\ChocoGL\Window.h" />
+    <ClInclude Include="src\ChocoGL\Renderer\VertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShaderUniform.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\clpch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ChocoGL\Application.cpp" />
+    <ClCompile Include="src\ChocoGL\Core\Application.cpp" />
+    <ClCompile Include="src\ChocoGL\Core\Layer.cpp" />
+    <ClCompile Include="src\ChocoGL\Core\LayerStack.cpp" />
+    <ClCompile Include="src\ChocoGL\Core\Log.cpp" />
+    <ClCompile Include="src\ChocoGL\Core\TimeStep.cpp" />
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\ChocoGL\Layer.cpp" />
-    <ClCompile Include="src\ChocoGL\LayerStack.cpp" />
-    <ClCompile Include="src\ChocoGL\Log.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Buffer.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Camera.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Framebuffer.cpp" />
@@ -199,7 +202,7 @@
     <ClCompile Include="src\ChocoGL\Renderer\Renderer.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Shader.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Texture.cpp" />
-    <ClCompile Include="src\ChocoGL\TimeStep.cpp" />
+    <ClCompile Include="src\ChocoGL\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\ChocoGL\Vendor\stb_image.cpp.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
@@ -208,6 +211,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShaderUniform.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\clpch.cpp">

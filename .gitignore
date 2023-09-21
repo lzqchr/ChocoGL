@@ -3,3 +3,6 @@
 bin-int/
 
 *.user
+
+*.sln
+*.vcxproj

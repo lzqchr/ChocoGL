@@ -2,9 +2,9 @@
 #include "WindowsWindow.h"
 #include <glad/glad.h>
 
-#include"ChocoGL/Events/ApplicationEvent.h"
-#include"ChocoGL/Events/KeyEvent.h"
-#include"ChocoGL/Events/MouseEvent.h"
+#include"ChocoGL/Core/Events/ApplicationEvent.h"
+#include"ChocoGL/Core/Events/KeyEvent.h"
+#include"ChocoGL/Core/Events/MouseEvent.h"
 
 #include<imgui.h>
 #include"Platform\OpenGL\OpenGLContext.h"
