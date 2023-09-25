@@ -33,6 +33,8 @@ namespace ChocoGL {
 		virtual void OnImGuiRender() override;
 		virtual void OnEvent(Event& event) override;
 
+		bool OnKeyPressedEvent(KeyPressedEvent& e);
+
 		// ImGui UI helpers
 		void Property(const std::string& name, bool& value);
 		void Property(const std::string& name, float& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
@@ -118,6 +120,8 @@ namespace ChocoGL {
 
 		// Editor resources
 		Ref<Texture2D> m_CheckerboardTex;
+		int m_GizmoType = -1; // -1 = no gizmo
+		glm::mat4 m_Transform;
 	};
 
 }
