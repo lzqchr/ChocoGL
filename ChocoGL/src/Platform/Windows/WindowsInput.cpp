@@ -33,9 +33,8 @@ namespace ChocoGL {
 
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
-
-
 		return { (float)xpos,(float)ypos };
+
 	}
 
 	float WinodwsInput::GetMouseXImpl()

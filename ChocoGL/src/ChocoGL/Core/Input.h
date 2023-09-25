@@ -4,7 +4,7 @@
 
 namespace ChocoGL {
 
-	class ChocoGL_API Input {
+	class  Input {
 	public:
 		inline static bool IsKeyPressed(int keycode) { return s_Instancel->IsKeyPressedImpl(keycode); }
 

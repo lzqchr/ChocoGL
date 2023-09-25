@@ -7,7 +7,7 @@
 
 namespace ChocoGL {
 
-	class ChocoGL_API LayerStack
+	class  LayerStack
 	{
 	public:
 		LayerStack();

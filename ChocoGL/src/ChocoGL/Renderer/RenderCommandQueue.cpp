@@ -45,14 +45,8 @@ namespace ChocoGL {
 
 		m_CommandBufferPtr += size;
 
-
-
-
-
 		m_CommandCount++;
-
 		return memory;
-
 	}
 
 

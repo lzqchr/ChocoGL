@@ -36,7 +36,7 @@ namespace ChocoGL
 		std::string Name;
 	};
 
-	struct ChocoGL_API UniformBuffer
+	struct  UniformBuffer
 	{
 		// TODO: This currently represents a byte buffer that has been
 		// packed with uniforms. This was primarily created for OpenGL,
@@ -105,7 +105,7 @@ namespace ChocoGL
 	};
 
 
-	class ChocoGL_API Shader
+	class  Shader
 	{
 	public:
 		using ShaderReloadedCallback = std::function<void()>;

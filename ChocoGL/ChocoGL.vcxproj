@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="src\ChocoGL.h" />
     <ClInclude Include="src\ChocoGL\Core\Application.h" />
+    <ClInclude Include="src\ChocoGL\Core\Assert.h" />
     <ClInclude Include="src\ChocoGL\Core\Buffer.h" />
     <ClInclude Include="src\ChocoGL\Core\Core.h" />
     <ClInclude Include="src\ChocoGL\Core\Events\ApplicationEvent.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="src\ChocoGL\Core\Window.h" />
     <ClInclude Include="src\ChocoGL\EntryPoint.h" />
     <ClInclude Include="src\ChocoGL\Imgui\ImGuiLayer.h" />
+    <ClInclude Include="src\ChocoGL\Imgui\ImGuizmo.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Buffer.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Camera.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Framebuffer.h" />
@@ -187,12 +189,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChocoGL\Core\Application.cpp" />
+    <ClCompile Include="src\ChocoGL\Core\Core.cpp" />
     <ClCompile Include="src\ChocoGL\Core\Layer.cpp" />
     <ClCompile Include="src\ChocoGL\Core\LayerStack.cpp" />
     <ClCompile Include="src\ChocoGL\Core\Log.cpp" />
     <ClCompile Include="src\ChocoGL\Core\TimeStep.cpp" />
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiBuild.cpp" />
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\ChocoGL\Imgui\ImGuizmo.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Buffer.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Camera.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Framebuffer.cpp" />

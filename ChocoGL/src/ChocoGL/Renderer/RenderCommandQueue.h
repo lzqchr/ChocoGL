@@ -3,7 +3,7 @@
 
 namespace ChocoGL {
 
-	class ChocoGL_API RenderCommandQueue
+	class  RenderCommandQueue
 	{
 	public:
 		typedef void(*RenderCommandFn)(void*);

@@ -1,11 +1,14 @@
 #pragma once
 
+
 #ifdef CL_PLATFORM_WINDOWS
 
 extern ChocoGL::Application* ChocoGL::CreateApplication();
 
 int main(int argc,char** argv)
 {
+
+
 	ChocoGL::Log::Init();
 	CL_CORE_WARN("Initialized Log!");
 	int a = 5;

@@ -34,6 +34,9 @@
     <ClInclude Include="src\ChocoGL\Core\Application.h">
       <Filter>ChocoGL\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Assert.h">
+      <Filter>ChocoGL\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Buffer.h">
       <Filter>ChocoGL\Core</Filter>
     </ClInclude>
@@ -82,6 +85,9 @@
     <ClInclude Include="src\ChocoGL\Imgui\ImGuiLayer.h">
       <Filter>ChocoGL\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="src\ChocoGL\Imgui\ImGuizmo.h">
+      <Filter>ChocoGL\Imgui</Filter>
+    </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Buffer.h">
       <Filter>ChocoGL\Renderer</Filter>
     </ClInclude>
@@ -118,6 +124,9 @@
     <ClInclude Include="src\ChocoGL\Renderer\Texture.h">
       <Filter>ChocoGL\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\ChocoGL\Renderer\VertexArray.h">
+      <Filter>ChocoGL\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
@@ -136,6 +145,9 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -143,11 +155,12 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\clpch.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\ChocoGL\Renderer\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChocoGL\Core\Application.cpp">
+      <Filter>ChocoGL\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Core\Core.cpp">
       <Filter>ChocoGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Core\Layer.cpp">
@@ -166,6 +179,9 @@
       <Filter>ChocoGL\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiLayer.cpp">
+      <Filter>ChocoGL\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Imgui\ImGuizmo.cpp">
       <Filter>ChocoGL\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Buffer.cpp">
@@ -195,6 +211,9 @@
     <ClCompile Include="src\ChocoGL\Renderer\Texture.cpp">
       <Filter>ChocoGL\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\ChocoGL\Renderer\VertexArray.cpp">
+      <Filter>ChocoGL\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\ChocoGL\Vendor\stb_image.cpp.cpp">
       <Filter>ChocoGL\Vendor</Filter>
     </ClCompile>
@@ -219,6 +238,9 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
       <Filter>Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
@@ -226,7 +248,5 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\clpch.cpp" />
-    <ClCompile Include="src\ChocoGL\Renderer\VertexArray.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
 </Project>
