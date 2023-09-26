@@ -184,10 +184,10 @@
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiBuild.cpp">
       <Filter>ChocoGL\Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ChocoGL\Imgui\ImGuiLayer.cpp">
+    <ClCompile Include="src\ChocoGL\Imgui\ImGuizmo.cpp">
       <Filter>ChocoGL\Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ChocoGL\Imgui\ImGuizmo.cpp">
+    <ClCompile Include="src\ChocoGL\Imgui\ImguiLayer.cpp">
       <Filter>ChocoGL\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Buffer.cpp">

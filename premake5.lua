@@ -111,6 +111,10 @@ project "CoCo"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	links
+	{
+		"ChocoGL"
+	}
 	files
 	{
 		"%{prj.name}/src/**.h",
@@ -131,9 +135,9 @@ project "CoCo"
 		"%{IncludeDir.glm}"
 	}
 
-	links
+	postbuildcommands 
 	{
-		"ChocoGL"
+		'{COPY} "../CoCo/assets" "%{cfg.targetdir}/assets"'
 	}
 
 	filter "system:windows"
@@ -150,9 +154,13 @@ project "CoCo"
 		runtime "Debug"
 		symbols "on"
 
-			links
+		links
 		{
 			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}
+		postbuildcommands 
+		{
+			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
 		}
 
 	filter "configurations:Release"
@@ -162,6 +170,10 @@ project "CoCo"
 		links
 		{
 			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
+		}
+		postbuildcommands 
+		{
+			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
 		}
 
 	filter "configurations:Dist"
@@ -173,7 +185,10 @@ project "CoCo"
 		{	
 			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
 		}
-
+		postbuildcommands 
+		{
+			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
+		}
 
 project "Sandbox"
 	location "Sandbox"
@@ -184,6 +199,11 @@ project "Sandbox"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	links
+	{
+		"ChocoGL"
+	}
 
 	files
 	{
@@ -196,19 +216,11 @@ project "Sandbox"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"ChocoGL/vendor/spdlog/include",
-		"%{prj.name}/vendor/spdlog/include",
-		"%{prj.name}/vendor/assimp/include",
-		"%{prj.name}/vendor/stb/include",
 		"ChocoGL/src",
 		"ChocoGL/vendor",
 		"%{IncludeDir.glm}"
 	}
 
-	links
-	{
-		"ChocoGL"
-	}
 
 	filter "system:windows"
 		cppdialect "C++17"
