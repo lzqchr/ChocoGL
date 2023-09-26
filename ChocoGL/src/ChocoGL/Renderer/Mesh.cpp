@@ -17,6 +17,9 @@
 
 
 #include "imgui.h"
+#include"ChocoGL\Renderer\Renderer.h"
+
+
 
 namespace ChocoGL {
 
@@ -457,10 +460,10 @@ namespace ChocoGL {
 						self->m_MeshShader->SetMat4FromRenderThread(uniformName, self->m_BoneTransforms[i]);
 					}
 				}
-
-				if (!materialOverride)
+				//
+				/*if (!materialOverride)
 					self->m_MeshShader->SetMat4FromRenderThread("u_ModelMatrix", transform * submesh.Transform);
-				glDrawElementsBaseVertex(GL_TRIANGLES, submesh.IndexCount, GL_UNSIGNED_INT, (void*)(sizeof(uint32_t) * submesh.BaseIndex), submesh.BaseVertex);
+				glDrawElementsBaseVertex(GL_TRIANGLES, submesh.IndexCount, GL_UNSIGNED_INT, (void*)(sizeof(uint32_t) * submesh.BaseIndex), submesh.BaseVertex);*/
 			}
 			});
 	}

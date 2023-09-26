@@ -97,8 +97,26 @@ namespace ChocoGL {
 		m_EnvironmentIrradiance.reset(TextureCube::Create("assets/textures/environments/Arches_E_PineTree_Irradiance.tga"));
 		m_BRDFLUT.reset(Texture2D::Create("assets/textures/BRDF_LUT.tga"));
 
-		m_Framebuffer.reset(Framebuffer::Create(1280, 720, FramebufferFormat::RGBA16F));
-		m_FinalPresentBuffer.reset(Framebuffer::Create(1280, 720, FramebufferFormat::RGBA8));
+		// Render Passes
+		FramebufferSpecification geoFramebufferSpec;
+		geoFramebufferSpec.Width = 1280;
+		geoFramebufferSpec.Height = 720;
+		geoFramebufferSpec.Format = FramebufferFormat::RGBA16F;
+		geoFramebufferSpec.ClearColor = { 0.1f, 0.1f, 0.1f, 1.0f };
+
+		RenderPassSpecification geoRenderPassSpec;
+		geoRenderPassSpec.TargetFramebuffer = ChocoGL::Framebuffer::Create(geoFramebufferSpec);
+		m_GeoPass = RenderPass::Create(geoRenderPassSpec);
+
+		FramebufferSpecification compFramebufferSpec;
+		compFramebufferSpec.Width = 1280;
+		compFramebufferSpec.Height = 720;
+		compFramebufferSpec.Format = FramebufferFormat::RGBA8;
+		compFramebufferSpec.ClearColor = { 0.1f, 0.1f, 0.1f, 1.0f };
+
+		RenderPassSpecification compRenderPassSpec;
+		compRenderPassSpec.TargetFramebuffer = ChocoGL::Framebuffer::Create(compFramebufferSpec);
+		m_CompositePass = RenderPass::Create(compRenderPassSpec);
 
 		float x = -4.0f;
 		float roughness = 0.0f;
@@ -187,7 +205,7 @@ namespace ChocoGL {
 		m_Camera.Update(ts);
 		auto viewProjection = m_Camera.GetProjectionMatrix() * m_Camera.GetViewMatrix();
 
-		m_Framebuffer->Bind();
+		Renderer::BeginRenderPass(m_GeoPass);
 		Renderer::Clear();
 		// TODO:
 		// Renderer::BeginScene(m_Camera);
@@ -262,15 +280,15 @@ namespace ChocoGL {
 		m_GridMaterial->Set("u_MVP", viewProjection * glm::scale(glm::mat4(1.0f), glm::vec3(16.0f)));
 		m_PlaneMesh->Render(ts, m_GridMaterial);
 
-		m_Framebuffer->Unbind();
+		Renderer::EndRenderPass();
 
-		m_FinalPresentBuffer->Bind();
+		Renderer::BeginRenderPass(m_CompositePass);
 		m_HDRShader->Bind();
 		m_HDRShader->SetFloat("u_Exposure", m_Exposure);
-		m_Framebuffer->BindTexture();
+		m_GeoPass->GetSpecification().TargetFramebuffer->BindTexture();
 		m_FullscreenQuadVertexArray->Bind();
 		Renderer::DrawIndexed(m_FullscreenQuadVertexArray->GetIndexBuffer()->GetCount(), false);
-		m_FinalPresentBuffer->Unbind();
+		Renderer::EndRenderPass();
 	}
 
 	void EditorLayer::Property(const std::string& name, bool& value)
@@ -591,11 +609,11 @@ namespace ChocoGL {
 		HZ_INFO("{0}, {1}", posX, posY);*/
 
 		auto viewportSize = ImGui::GetContentRegionAvail();
-		m_Framebuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
-		m_FinalPresentBuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
+		m_GeoPass->GetSpecification().TargetFramebuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
+		m_CompositePass->GetSpecification().TargetFramebuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
 		m_Camera.SetProjectionMatrix(glm::perspectiveFov(glm::radians(45.0f), viewportSize.x, viewportSize.y, 0.1f, 10000.0f));
 		m_Camera.SetViewportSize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
-		ImGui::Image((void*)m_FinalPresentBuffer->GetColorAttachmentRendererID(), viewportSize, { 0, 1 }, { 1, 0 });
+		ImGui::Image((void*)m_CompositePass->GetSpecification().TargetFramebuffer->GetColorAttachmentRendererID(), viewportSize, { 0, 1 }, { 1, 0 });
 	
 		// Gizmos
 		if (m_GizmoType != -1)

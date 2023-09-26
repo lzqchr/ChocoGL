@@ -25,7 +25,7 @@
 #include "ChocoGL/Renderer/Mesh.h"
 #include "ChocoGL/Renderer/Camera.h"
 #include "ChocoGL/Renderer/Material.h"
-
+#include "ChocoGL/Renderer/RenderPass.h"
 
 //-----------EntryPoint------------------------
 //#include"ChocoGL\EntryPoint.h"

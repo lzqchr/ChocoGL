@@ -2,7 +2,7 @@
 #include "OpenGLBuffer.h"
 
 #include <glad/glad.h>
-
+#include "ChocoGL/Renderer/Renderer.h"
 namespace ChocoGL {
 
 	//////////////////////////////////////////////////////////////////////////////////

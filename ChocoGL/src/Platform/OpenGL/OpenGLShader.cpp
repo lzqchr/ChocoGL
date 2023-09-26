@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <limits> 
+#include "ChocoGL/Renderer/Renderer.h"
 
 #include <glm/gtc/type_ptr.hpp>
 
@@ -784,9 +785,12 @@ namespace ChocoGL {
 			});
 	}
 
-	void OpenGLShader::SetMat4FromRenderThread(const std::string& name, const glm::mat4& value)
+	void OpenGLShader::SetMat4FromRenderThread(const std::string& name, const glm::mat4& value, bool bind )
 	{
-		UploadUniformMat4(name, value);
+		if (bind)
+		{
+			UploadUniformMat4(name, value);
+		}
 	}
 
 	void OpenGLShader::UploadUniformInt(uint32_t location, int32_t value)

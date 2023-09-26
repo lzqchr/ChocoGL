@@ -1,7 +1,5 @@
 #pragma once
-
-
-#include "ChocoGL/Renderer/Renderer.h"
+#include "RendererAPI.h"
 
 namespace ChocoGL {
 

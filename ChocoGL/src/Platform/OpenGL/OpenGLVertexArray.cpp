@@ -1,6 +1,6 @@
 #include "clpch.h"
 #include "OpenGLVertexArray.h"
-
+#include "ChocoGL/Renderer/Renderer.h"
 #include <glad/glad.h>
 
 namespace ChocoGL {
