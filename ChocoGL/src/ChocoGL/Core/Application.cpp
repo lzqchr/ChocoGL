@@ -79,7 +79,9 @@ namespace ChocoGL {
 					layer->OnUpdate(m_TimeStep);
 				// Render ImGui on render thread
 				Application* app = this;
-				CL_RENDER_1(app, { app->RenderImGui(); });
+				
+
+
 				Renderer::Get().WaitAndRender();
 			}
 			m_Window->OnUpdate();
@@ -113,7 +115,7 @@ namespace ChocoGL {
 			return false;
 		}
 		m_Minimized = false;
-		CL_RENDER_2(width, height, { glViewport(0, 0, width, height); });
+		Renderer::Submit([=]() { glViewport(0, 0, width, height); });
 		auto& fbs = FramebufferPool::GetGlobal()->GetAll();
 		for (auto& fb : fbs)
 		{

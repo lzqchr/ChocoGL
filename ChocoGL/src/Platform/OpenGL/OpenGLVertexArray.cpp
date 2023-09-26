@@ -28,28 +28,28 @@ namespace ChocoGL {
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
-		CL_RENDER_S({
-			glCreateVertexArrays(1, &self->m_RendererID);
+		Renderer::Submit([this]() {
+			glCreateVertexArrays(1, &m_RendererID);
 			});
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
-		CL_RENDER_S({
-			glDeleteVertexArrays(1, &self->m_RendererID);
+		Renderer::Submit([this]() {
+			glDeleteVertexArrays(1, &m_RendererID);
 			});
 	}
 
 	void OpenGLVertexArray::Bind() const
 	{
-		CL_RENDER_S({
-			glBindVertexArray(self->m_RendererID);
+		Renderer::Submit([this]() {
+			glBindVertexArray(m_RendererID);
 			});
 	}
 
 	void OpenGLVertexArray::Unbind() const
 	{
-		CL_RENDER_S({
+		Renderer::Submit([this]() {
 			glBindVertexArray(0);
 			});
 	}
@@ -61,15 +61,15 @@ namespace ChocoGL {
 		Bind();
 		vertexBuffer->Bind();
 
-		CL_RENDER_S1(vertexBuffer, {
+		Renderer::Submit([this, vertexBuffer]() {
 			const auto & layout = vertexBuffer->GetLayout();
 			for (const auto& element : layout)
 			{
 				auto glBaseType = ShaderDataTypeToOpenGLBaseType(element.Type);
-				glEnableVertexAttribArray(self->m_VertexBufferIndex);
+				glEnableVertexAttribArray(m_VertexBufferIndex);
 				if (glBaseType == GL_INT)
 				{
-					glVertexAttribIPointer(self->m_VertexBufferIndex,
+					glVertexAttribIPointer(m_VertexBufferIndex,
 						element.GetComponentCount(),
 						glBaseType,
 						layout.GetStride(),
@@ -77,14 +77,14 @@ namespace ChocoGL {
 				}
 				else
 				{
-					glVertexAttribPointer(self->m_VertexBufferIndex,
+					glVertexAttribPointer(m_VertexBufferIndex,
 						element.GetComponentCount(),
 						glBaseType,
 						element.Normalized ? GL_TRUE : GL_FALSE,
 						layout.GetStride(),
 						(const void*)(intptr_t)element.Offset);
 				}
-				self->m_VertexBufferIndex++;
+				m_VertexBufferIndex++;
 			}
 			});
 		m_VertexBuffers.push_back(vertexBuffer);

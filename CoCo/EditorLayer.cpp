@@ -1,5 +1,4 @@
 #include "EditorLayer.h"
-
 #include "ChocoGL/ImGui/ImGuizmo.h"
 
 namespace ChocoGL {
@@ -174,7 +173,7 @@ namespace ChocoGL {
 		quadVB->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" },
 			{ ShaderDataType::Float2, "a_TexCoord" }
-		});
+			});
 
 		uint32_t indices[6] = { 0, 1, 2, 2, 3, 0, };
 		auto quadIB = IndexBuffer::Create(indices, 6 * sizeof(uint32_t));
@@ -183,6 +182,7 @@ namespace ChocoGL {
 		m_FullscreenQuadVertexArray->SetIndexBuffer(quadIB);
 
 		// Set lights
+
 		m_Light.Direction = { -0.5f, -0.5f, 1.0f };
 		m_Light.Radiance = { 1.0f, 1.0f, 1.0f };
 
@@ -273,7 +273,7 @@ namespace ChocoGL {
 		else if (m_Scene == Scene::Model)
 		{
 			if (m_Mesh)
-				m_Mesh->Render(ts, m_Transform, m_MeshMaterial);
+				m_Mesh->Render(ts, m_Transform , m_MeshMaterial);
 		}
 
 		m_GridMaterial->Set("u_MVP", viewProjection * glm::scale(glm::mat4(1.0f), glm::vec3(16.0f)));
@@ -383,7 +383,7 @@ namespace ChocoGL {
 
 		// When using ImGuiDockNodeFlags_PassthruDockspace, DockSpace() will render our background and handle the pass-thru hole, so we ask Begin() to not render a background.
 		//if (opt_flags & ImGuiDockNodeFlags_PassthruDockspace)
-		//	window_flags |= ImGuiWindowFlags_NoBackground;
+			//window_flags |= ImGuiWindowFlags_NoBackground;
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 		ImGui::Begin("DockSpace Demo", &p_open, window_flags);
@@ -608,13 +608,12 @@ namespace ChocoGL {
 		HZ_INFO("{0}, {1}", posX, posY);*/
 
 		auto viewportSize = ImGui::GetContentRegionAvail();
-		
 		m_GeoPass->GetSpecification().TargetFramebuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
 		m_CompositePass->GetSpecification().TargetFramebuffer->Resize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
 		m_Camera.SetProjectionMatrix(glm::perspectiveFov(glm::radians(45.0f), viewportSize.x, viewportSize.y, 0.1f, 10000.0f));
 		m_Camera.SetViewportSize((uint32_t)viewportSize.x, (uint32_t)viewportSize.y);
 		ImGui::Image((void*)m_CompositePass->GetSpecification().TargetFramebuffer->GetColorAttachmentRendererID(), viewportSize, { 0, 1 }, { 1, 0 });
-
+	
 		// Gizmos
 		if (m_GizmoType != -1)
 		{
@@ -629,6 +628,7 @@ namespace ChocoGL {
 		ImGui::End();
 		ImGui::PopStyleVar();
 
+
 		if (ImGui::BeginMenuBar())
 		{
 			if (ImGui::BeginMenu("Docking"))
@@ -640,7 +640,7 @@ namespace ChocoGL {
 				if (ImGui::MenuItem("Flag: NoSplit", "", (opt_flags & ImGuiDockNodeFlags_NoSplit) != 0))                 opt_flags ^= ImGuiDockNodeFlags_NoSplit;
 				if (ImGui::MenuItem("Flag: NoDockingInCentralNode", "", (opt_flags & ImGuiDockNodeFlags_NoDockingInCentralNode) != 0))  opt_flags ^= ImGuiDockNodeFlags_NoDockingInCentralNode;
 				if (ImGui::MenuItem("Flag: NoResize", "", (opt_flags & ImGuiDockNodeFlags_NoResize) != 0))                opt_flags ^= ImGuiDockNodeFlags_NoResize;
-				//if (ImGui::MenuItem("Flag: PassthruDockspace", "", (opt_flags & ImGuiDockNodeFlags_PassthruDockspace) != 0))       opt_flags ^= ImGuiDockNodeFlags_PassthruDockspace;
+			//	if (ImGui::MenuItem("Flag: PassthruDockspace", "", (opt_flags & ImGuiDockNodeFlags_PassthruDockspace) != 0))       opt_flags ^= ImGuiDockNodeFlags_PassthruDockspace;
 				if (ImGui::MenuItem("Flag: AutoHideTabBar", "", (opt_flags & ImGuiDockNodeFlags_AutoHideTabBar) != 0))          opt_flags ^= ImGuiDockNodeFlags_AutoHideTabBar;
 				ImGui::Separator();
 				if (ImGui::MenuItem("Close DockSpace", NULL, false, p_open != NULL))
@@ -673,23 +673,22 @@ namespace ChocoGL {
 		dispatcher.Dispatch<KeyPressedEvent>(CL_BIND_EVENT_FN(EditorLayer::OnKeyPressedEvent));
 	}
 
-
 	bool EditorLayer::OnKeyPressedEvent(KeyPressedEvent& e)
 	{
 		switch (e.GetKeyCode())
 		{
-			case CL_KEY_Q:
-				m_GizmoType = -1;
-				break;
-			case CL_KEY_W:
-				m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
-				break;
-			case CL_KEY_E:
-				m_GizmoType = ImGuizmo::OPERATION::ROTATE;
-				break;
-			case CL_KEY_R:
-				m_GizmoType = ImGuizmo::OPERATION::SCALE;
-				break;
+		case CL_KEY_Q:
+			m_GizmoType = -1;
+			break;
+		case CL_KEY_W:
+			m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+			break;
+		case CL_KEY_E:
+			m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+			break;
+		case CL_KEY_R:
+			m_GizmoType = ImGuizmo::OPERATION::SCALE;
+			break;
 		}
 		return false;
 	}

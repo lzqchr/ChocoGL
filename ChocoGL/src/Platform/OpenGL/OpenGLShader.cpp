@@ -45,21 +45,22 @@ namespace ChocoGL {
 		m_ShaderSource = PreProcess(source);
 		Parse();
 
-		CL_RENDER_S({
-			if (self->m_RendererID)
-				glDeleteShader(self->m_RendererID);
-
-			self->CompileAndUploadShader();
-			self->ResolveUniforms();
-			self->ValidateUniforms();
-
-			if (self->m_Loaded)
+		Renderer::Submit([this]()
 			{
-				for (auto& callback : self->m_ShaderReloadedCallbacks)
-					callback();
-			}
+				if (m_RendererID)
+					glDeleteShader(m_RendererID);
 
-			self->m_Loaded = true;
+				CompileAndUploadShader();
+				ResolveUniforms();
+				ValidateUniforms();
+
+				if (m_Loaded)
+				{
+					for (auto& callback : m_ShaderReloadedCallbacks)
+						callback();
+				}
+
+				m_Loaded = true;
 			});
 	}
 
@@ -70,8 +71,8 @@ namespace ChocoGL {
 
 	void OpenGLShader::Bind()
 	{
-		CL_RENDER_S({
-			glUseProgram(self->m_RendererID);
+		Renderer::Submit([this]() {
+			glUseProgram(m_RendererID);
 			});
 	}
 
@@ -596,17 +597,17 @@ namespace ChocoGL {
 
 	void OpenGLShader::SetVSMaterialUniformBuffer(Buffer buffer)
 	{
-		CL_RENDER_S1(buffer, {
-			glUseProgram(self->m_RendererID);
-			self->ResolveAndSetUniforms(self->m_VSMaterialUniformBuffer, buffer);
+		Renderer::Submit([this, buffer]() {
+			glUseProgram(m_RendererID);
+			ResolveAndSetUniforms(m_VSMaterialUniformBuffer, buffer);
 			});
 	}
 
 	void OpenGLShader::SetPSMaterialUniformBuffer(Buffer buffer)
 	{
-		CL_RENDER_S1(buffer, {
-			glUseProgram(self->m_RendererID);
-			self->ResolveAndSetUniforms(self->m_PSMaterialUniformBuffer, buffer);
+		Renderer::Submit([this, buffer]() {
+			glUseProgram(m_RendererID);
+			ResolveAndSetUniforms(m_PSMaterialUniformBuffer, buffer);
 			});
 	}
 
@@ -739,32 +740,32 @@ namespace ChocoGL {
 			{
 				const std::string& name = decl.Name;
 				float value = *(float*)(uniformBuffer.GetBuffer() + decl.Offset);
-				CL_RENDER_S2(name, value, {
-					self->UploadUniformFloat(name, value);
+				Renderer::Submit([=]() {
+					UploadUniformFloat(name, value);
 					});
 			}
 			case UniformType::Float3:
 			{
 				const std::string& name = decl.Name;
 				glm::vec3& values = *(glm::vec3*)(uniformBuffer.GetBuffer() + decl.Offset);
-				CL_RENDER_S2(name, values, {
-					self->UploadUniformFloat3(name, values);
+				Renderer::Submit([=]() {
+					UploadUniformFloat3(name, values);
 					});
 			}
 			case UniformType::Float4:
 			{
 				const std::string& name = decl.Name;
 				glm::vec4& values = *(glm::vec4*)(uniformBuffer.GetBuffer() + decl.Offset);
-				CL_RENDER_S2(name, values, {
-					self->UploadUniformFloat4(name, values);
+				Renderer::Submit([=]() {
+					UploadUniformFloat4(name, values);
 					});
 			}
 			case UniformType::Matrix4x4:
 			{
 				const std::string& name = decl.Name;
 				glm::mat4& values = *(glm::mat4*)(uniformBuffer.GetBuffer() + decl.Offset);
-				CL_RENDER_S2(name, values, {
-					self->UploadUniformMat4(name, values);
+				Renderer::Submit([=]() {
+					UploadUniformMat4(name, values);
 					});
 			}
 			}
@@ -773,23 +774,29 @@ namespace ChocoGL {
 
 	void OpenGLShader::SetFloat(const std::string& name, float value)
 	{
-		CL_RENDER_S2(name, value, {
-			self->UploadUniformFloat(name, value);
+		Renderer::Submit([=]() {
+			UploadUniformFloat(name, value);
 			});
 	}
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
-		CL_RENDER_S2(name, value, {
-			self->UploadUniformMat4(name, value);
+		Renderer::Submit([=]() {
+			UploadUniformMat4(name, value);
 			});
 	}
 
-	void OpenGLShader::SetMat4FromRenderThread(const std::string& name, const glm::mat4& value, bool bind )
+	void OpenGLShader::SetMat4FromRenderThread(const std::string& name, const glm::mat4& value, bool bind)
 	{
 		if (bind)
 		{
 			UploadUniformMat4(name, value);
+		}
+		else
+		{
+			int location = glGetUniformLocation(m_RendererID, name.c_str());
+			if (location != -1)
+				UploadUniformMat4(location, value);
 		}
 	}
 
