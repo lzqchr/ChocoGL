@@ -12,7 +12,7 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include <string>
-
+#include "ChocoGL/Editor/SceneHierarchyPanel.h"
 namespace ChocoGL {
 
 	class EditorLayer : public Layer
@@ -28,7 +28,7 @@ namespace ChocoGL {
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
-		virtual void OnUpdate(TimeStep ts) override;
+		virtual void OnUpdate(Timestep ts) override;
 
 		virtual void OnImGuiRender() override;
 		virtual void OnEvent(Event& event) override;
@@ -38,26 +38,30 @@ namespace ChocoGL {
 		// ImGui UI helpers
 		void Property(const std::string& name, bool& value);
 		void Property(const std::string& name, float& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
+		void Property(const std::string& name, glm::vec2& value, PropertyFlag flags);
+		void Property(const std::string& name, glm::vec2& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
 		void Property(const std::string& name, glm::vec3& value, PropertyFlag flags);
 		void Property(const std::string& name, glm::vec3& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
 		void Property(const std::string& name, glm::vec4& value, PropertyFlag flags);
 		void Property(const std::string& name, glm::vec4& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
 	private:
-		Ref<Shader> m_QuadShader;
-		Ref<Shader> m_HDRShader;
-		Ref<Shader> m_GridShader;
-		Ref<Mesh> m_Mesh;
-		Ref<Mesh> m_SphereMesh, m_PlaneMesh;
-		Ref<Texture2D> m_BRDFLUT;
-		Ref<RenderPass> m_GeoPass, m_CompositePass;
+		Scope<SceneHierarchyPanel> m_SceneHierarchyPanel;
 
-		Ref<MaterialInstance> m_MeshMaterial;
-		Ref<MaterialInstance> m_GridMaterial;
+		Ref<Scene> m_Scene;
+		Ref<Scene> m_SphereScene;
+		Ref<Scene> m_ActiveScene;
+
+		Entity* m_MeshEntity = nullptr;
+
+		Ref<Shader> m_BrushShader;
+		Ref<Mesh> m_PlaneMesh;
+		Ref<Material> m_SphereBaseMaterial;
+
+		Ref<Material> m_MeshMaterial;
 		std::vector<Ref<MaterialInstance>> m_MetalSphereMaterialInstances;
 		std::vector<Ref<MaterialInstance>> m_DielectricSphereMaterialInstances;
 
 		float m_GridScale = 16.025f, m_GridSize = 0.025f;
-		float m_MeshScale = 1.0f;
 
 		struct AlbedoInput
 		{
@@ -85,18 +89,11 @@ namespace ChocoGL {
 
 		struct RoughnessInput
 		{
-			float Value = 0.5f;
+			float Value = 0.2f;
 			Ref<Texture2D> TextureMap;
 			bool UseTexture = false;
 		};
 		RoughnessInput m_RoughnessInput;
-
-		std::unique_ptr<Framebuffer> m_Framebuffer, m_FinalPresentBuffer;
-
-		Ref<VertexArray> m_FullscreenQuadVertexArray;
-		Ref<TextureCube> m_EnvironmentCubeMap, m_EnvironmentIrradiance;
-
-		Camera m_Camera;
 
 		struct Light
 		{
@@ -107,22 +104,20 @@ namespace ChocoGL {
 		float m_LightMultiplier = 0.3f;
 
 		// PBR params
-		float m_Exposure = 1.0f;
-
 		bool m_RadiancePrefilter = false;
 
 		float m_EnvMapRotation = 0.0f;
 
-		enum class Scene : uint32_t
+		enum class SceneType : uint32_t
 		{
 			Spheres = 0, Model = 1
 		};
-		Scene m_Scene;
+		SceneType m_SceneType;
 
 		// Editor resources
 		Ref<Texture2D> m_CheckerboardTex;
 		int m_GizmoType = -1; // -1 = no gizmo
-		glm::mat4 m_Transform;
+		//glm::mat4 m_Transform;
 	};
 
 }

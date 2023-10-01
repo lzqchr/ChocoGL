@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "ChocoGL/Core/TimeStep.h"
+#include "ChocoGL/Core/Timestep.h"
 
 namespace ChocoGL {
 
@@ -9,9 +9,9 @@ namespace ChocoGL {
 	{
 	public:
 		Camera(const glm::mat4& projectionMatrix);
-
+		Camera() = default;
 		void Focus();
-		void Update(TimeStep ts);
+		void Update(Timestep ts);
 
 		inline float GetDistance() const { return m_Distance; }
 		inline void SetDistance(float distance) { m_Distance = distance; }
@@ -26,6 +26,9 @@ namespace ChocoGL {
 		glm::vec3 GetRightDirection();
 		glm::vec3 GetForwardDirection();
 		const glm::vec3& GetPosition() const { return m_Position; }
+
+		float GetExposure() const { return m_Exposure; }
+		float& GetExposure() { return m_Exposure; }
 	private:
 		void MousePan(const glm::vec2& delta);
 		void MouseRotate(const glm::vec2& delta);
@@ -49,6 +52,8 @@ namespace ChocoGL {
 		float m_PanSpeed, m_RotationSpeed, m_ZoomSpeed;
 
 		float m_Pitch, m_Yaw;
+
+		float m_Exposure = 0.8f;
 
 		uint32_t m_ViewportWidth = 1280, m_ViewportHeight = 720;
 	};

@@ -2,7 +2,7 @@
 
 #include "ChocoGL/Core/Core.h"
 #include "ChocoGL/Core/Events/Event.h"
-#include "ChocoGL/Core/TimeStep.h"
+#include "ChocoGL/Core/Timestep.h"
 
 namespace ChocoGL {
 
@@ -14,7 +14,7 @@ namespace ChocoGL {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate(TimeStep ts) {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

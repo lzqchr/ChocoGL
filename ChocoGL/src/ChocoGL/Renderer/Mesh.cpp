@@ -8,6 +8,7 @@
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
 
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
@@ -19,9 +20,20 @@
 #include "imgui.h"
 #include"ChocoGL\Renderer\Renderer.h"
 
-
+#include <filesystem>
 
 namespace ChocoGL {
+
+	glm::mat4 Mat4FromAssimpMat4(const aiMatrix4x4& matrix)
+	{
+		glm::mat4 result;
+		//the a,b,c,d in assimp is the row ; the 1,2,3,4 is the column
+		result[0][0] = matrix.a1; result[1][0] = matrix.a2; result[2][0] = matrix.a3; result[3][0] = matrix.a4;
+		result[0][1] = matrix.b1; result[1][1] = matrix.b2; result[2][1] = matrix.b3; result[3][1] = matrix.b4;
+		result[0][2] = matrix.c1; result[1][2] = matrix.c2; result[2][2] = matrix.c3; result[3][2] = matrix.c4;
+		result[0][3] = matrix.d1; result[1][3] = matrix.d2; result[2][3] = matrix.d3; result[3][3] = matrix.d4;
+		return result;
+	}
 
 	static const uint32_t s_MeshImportFlags =
 		aiProcess_CalcTangentSpace |        // Create binormals/tangents just in case
@@ -49,17 +61,6 @@ namespace ChocoGL {
 		}
 	};
 
-	static glm::mat4 aiMatrix4x4ToGlm(const aiMatrix4x4& from)
-	{
-		glm::mat4 to;
-		//the a,b,c,d in assimp is the row ; the 1,2,3,4 is the column
-		to[0][0] = from.a1; to[1][0] = from.a2; to[2][0] = from.a3; to[3][0] = from.a4;
-		to[0][1] = from.b1; to[1][1] = from.b2; to[2][1] = from.b3; to[3][1] = from.b4;
-		to[0][2] = from.c1; to[1][2] = from.c2; to[2][2] = from.c3; to[3][2] = from.c4;
-		to[0][3] = from.d1; to[1][3] = from.d2; to[2][3] = from.d3; to[3][3] = from.d4;
-		return to;
-	}
-
 	Mesh::Mesh(const std::string& filename)
 		: m_FilePath(filename)
 	{
@@ -75,8 +76,9 @@ namespace ChocoGL {
 
 		m_IsAnimated = scene->mAnimations != nullptr;
 		m_MeshShader = m_IsAnimated ? Renderer::GetShaderLibrary()->Get("ChocoGLPBR_Anim") : Renderer::GetShaderLibrary()->Get("ChocoGLPBR_Static");
-		m_Material.reset(new ChocoGL::Material(m_MeshShader));
-		m_InverseTransform = glm::inverse(aiMatrix4x4ToGlm(scene->mRootNode->mTransformation));
+		m_BaseMaterial = CreateRef<Material>(m_MeshShader);
+		// m_MaterialInstance = std::make_shared<MaterialInstance>(m_BaseMaterial);
+		m_InverseTransform = glm::inverse(Mat4FromAssimpMat4(scene->mRootNode->mTransformation));
 
 		uint32_t vertexCount = 0;
 		uint32_t indexCount = 0;
@@ -176,7 +178,7 @@ namespace ChocoGL {
 						m_BoneCount++;
 						BoneInfo bi;
 						m_BoneInfo.push_back(bi);
-						m_BoneInfo[boneIndex].BoneOffset = aiMatrix4x4ToGlm(bone->mOffsetMatrix);
+						m_BoneInfo[boneIndex].BoneOffset = Mat4FromAssimpMat4(bone->mOffsetMatrix);
 						m_BoneMapping[boneName] = boneIndex;
 					}
 					else
@@ -194,6 +196,213 @@ namespace ChocoGL {
 				}
 			}
 		}
+		// Materials
+		if (scene->HasMaterials())
+		{
+			m_Textures.resize(scene->mNumMaterials);
+			m_Materials.resize(scene->mNumMaterials);
+			for (uint32_t i = 0; i < scene->mNumMaterials; i++)
+			{
+				auto aiMaterial = scene->mMaterials[i];
+				auto aiMaterialName = aiMaterial->GetName();
+
+				auto mi = CreateRef<MaterialInstance>(m_BaseMaterial);
+				m_Materials[i] = mi;
+
+				CL_CORE_INFO("Material Name = {0}; Index = {1}", aiMaterialName.data, i);
+				aiString aiTexPath;
+				uint32_t textureCount = aiMaterial->GetTextureCount(aiTextureType_DIFFUSE);
+				CL_CORE_TRACE("  TextureCount = {0}", textureCount);
+
+				aiColor3D aiColor;
+				aiMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, aiColor);
+				CL_CORE_TRACE("COLOR = {0}, {1}, {2}", aiColor.r, aiColor.g, aiColor.b);
+
+				if (aiMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &aiTexPath) == AI_SUCCESS)
+				{
+					// TODO: Temp - this should be handled by Hazel's filesystem
+					std::filesystem::path path = filename;
+					auto parentPath = path.parent_path();
+					parentPath /= std::string(aiTexPath.data);
+					std::string texturePath = parentPath.string();
+
+					auto texture = Texture2D::Create(texturePath, true);
+					if (texture->Loaded())
+					{
+						m_Textures[i] = texture;
+						CL_CORE_TRACE("  Texture Path = {0}", texturePath);
+						mi->Set("u_AlbedoTexture", m_Textures[i]);
+						mi->Set("u_AlbedoTexToggle", 1.0f);
+					}
+					else
+					{
+						CL_CORE_ERROR("Could not load texture: {0}", texturePath);
+						//mi->Set("u_AlbedoTexToggle", 0.0f);
+						mi->Set("u_AlbedoColor", glm::vec3{ aiColor.r, aiColor.g, aiColor.b });
+					}
+				}
+				else
+				{
+					mi->Set("u_AlbedoTexToggle", 0.0f);
+					mi->Set("u_AlbedoColor", glm::vec3{ aiColor.r, aiColor.g, aiColor.b });
+				}
+
+				for (uint32_t i = 0; i < aiMaterial->mNumProperties; i++)
+				{
+					auto prop = aiMaterial->mProperties[i];
+					CL_CORE_TRACE("Material Property:");
+					CL_CORE_TRACE("  Name = {0}", prop->mKey.data);
+
+					switch (prop->mSemantic)
+					{
+					case aiTextureType_NONE:
+						CL_CORE_TRACE("  Semantic = aiTextureType_NONE");
+						break;
+					case aiTextureType_DIFFUSE:
+						CL_CORE_TRACE("  Semantic = aiTextureType_DIFFUSE");
+						break;
+					case aiTextureType_SPECULAR:
+						CL_CORE_TRACE("  Semantic = aiTextureType_SPECULAR");
+						break;
+					case aiTextureType_AMBIENT:
+						CL_CORE_TRACE("  Semantic = aiTextureType_AMBIENT");
+						break;
+					case aiTextureType_EMISSIVE:
+						CL_CORE_TRACE("  Semantic = aiTextureType_EMISSIVE");
+						break;
+					case aiTextureType_HEIGHT:
+						CL_CORE_TRACE("  Semantic = aiTextureType_HEIGHT");
+						break;
+					case aiTextureType_NORMALS:
+						CL_CORE_TRACE("  Semantic = aiTextureType_NORMALS");
+						break;
+					case aiTextureType_SHININESS:
+						CL_CORE_TRACE("  Semantic = aiTextureType_SHININESS");
+						break;
+					case aiTextureType_OPACITY:
+						CL_CORE_TRACE("  Semantic = aiTextureType_OPACITY");
+						break;
+					case aiTextureType_DISPLACEMENT:
+						CL_CORE_TRACE("  Semantic = aiTextureType_DISPLACEMENT");
+						break;
+					case aiTextureType_LIGHTMAP:
+						CL_CORE_TRACE("  Semantic = aiTextureType_LIGHTMAP");
+						break;
+					case aiTextureType_REFLECTION:
+						CL_CORE_TRACE("  Semantic = aiTextureType_REFLECTION");
+						break;
+					case aiTextureType_UNKNOWN:
+						CL_CORE_TRACE("  Semantic = aiTextureType_UNKNOWN");
+						break;
+					}
+
+					if (prop->mType == aiPTI_String)
+					{
+						uint32_t strLength = *(uint32_t*)prop->mData;
+						std::string str(prop->mData + 4, strLength);
+						CL_CORE_TRACE("  Value = {0}", str);
+
+						std::string key = prop->mKey.data;
+						if (key == "$raw.ReflectionFactor|file")
+						{
+							// TODO: Temp - this should be handled by Hazel's filesystem
+							std::filesystem::path path = filename;
+							auto parentPath = path.parent_path();
+							parentPath /= str;
+							std::string texturePath = parentPath.string();
+
+							auto texture = Texture2D::Create(texturePath);
+							if (texture->Loaded())
+							{
+								CL_CORE_TRACE("  Metalness map path = {0}", texturePath);
+								mi->Set("u_MetalnessTexture", texture);
+								mi->Set("u_MetalnessTexToggle", 1.0f);
+							}
+							else
+							{
+								CL_CORE_ERROR("Could not load texture: {0}", texturePath);
+								mi->Set("u_Metalness", 0.5f);
+								mi->Set("u_MetalnessTexToggle", 1.0f);
+							}
+						}
+					}
+				}
+
+
+				// Normal maps
+				if (aiMaterial->GetTexture(aiTextureType_NORMALS, 0, &aiTexPath) == AI_SUCCESS)
+				{
+					// TODO: Temp - this should be handled by Hazel's filesystem
+					std::filesystem::path path = filename;
+					auto parentPath = path.parent_path();
+					parentPath /= std::string(aiTexPath.data);
+					std::string texturePath = parentPath.string();
+
+					auto texture = Texture2D::Create(texturePath);
+					if (texture->Loaded())
+					{
+						CL_CORE_TRACE("  Normal map path = {0}", texturePath);
+						mi->Set("u_NormalTexture", texture);
+						mi->Set("u_NormalTexToggle", 1.0f);
+					}
+					else
+					{
+						CL_CORE_ERROR("Could not load texture: {0}", texturePath);
+						//mi->Set("u_AlbedoTexToggle", 0.0f);
+						// mi->Set("u_AlbedoColor", glm::vec3{ color.r, color.g, color.b });
+					}
+				}
+
+				// Roughness map
+				if (aiMaterial->GetTexture(aiTextureType_SHININESS, 0, &aiTexPath) == AI_SUCCESS)
+				{
+					// TODO: Temp - this should be handled by Hazel's filesystem
+					std::filesystem::path path = filename;
+					auto parentPath = path.parent_path();
+					parentPath /= std::string(aiTexPath.data);
+					std::string texturePath = parentPath.string();
+
+					auto texture = Texture2D::Create(texturePath);
+					if (texture->Loaded())
+					{
+						CL_CORE_TRACE("  Roughness map path = {0}", texturePath);
+						mi->Set("u_RoughnessTexture", texture);
+						mi->Set("u_RoughnessTexToggle", 1.0f);
+					}
+					else
+					{
+						CL_CORE_ERROR("Could not load texture: {0}", texturePath);
+						mi->Set("u_RoughnessTexToggle", 1.0f);
+						mi->Set("u_Roughness", 0.5f);
+					}
+				}
+
+				// Metalness map
+				if (aiMaterial->Get("$raw.ReflectionFactor|file", aiPTI_String, 0, aiTexPath) == AI_SUCCESS)
+				{
+					// TODO: Temp - this should be handled by Hazel's filesystem
+					std::filesystem::path path = filename;
+					auto parentPath = path.parent_path();
+					parentPath /= std::string(aiTexPath.data);
+					std::string texturePath = parentPath.string();
+
+					auto texture = Texture2D::Create(texturePath);
+					if (texture->Loaded())
+					{
+						CL_CORE_TRACE("  Metalness map path = {0}", texturePath);
+						mi->Set("u_MetalnessTexture", texture);
+						mi->Set("u_MetalnessTexToggle", 1.0f);
+					}
+					else
+					{
+						CL_CORE_ERROR("Could not load texture: {0}", texturePath);
+						mi->Set("u_Metalness", 0.5f);
+						mi->Set("u_MetalnessTexToggle", 1.0f);
+					}
+				}
+			}
+		}
+
 
 		m_VertexArray = VertexArray::Create();
 		if (m_IsAnimated)
@@ -232,17 +441,46 @@ namespace ChocoGL {
 	Mesh::~Mesh()
 	{
 	}
-
-	void Mesh::TraverseNodes(aiNode* node )
+	void Mesh::OnUpdate(Timestep ts)
 	{
+		if (m_IsAnimated)
+		{
+			if (m_AnimationPlaying)
+			{
+				m_WorldTime += ts;
+
+				float ticksPerSecond = (float)(m_Scene->mAnimations[0]->mTicksPerSecond != 0 ? m_Scene->mAnimations[0]->mTicksPerSecond : 25.0f) * m_TimeMultiplier;
+				m_AnimationTime += ts * ticksPerSecond;
+				m_AnimationTime = fmod(m_AnimationTime, (float)m_Scene->mAnimations[0]->mDuration);
+			}
+
+			// TODO: We only need to recalc bones if rendering has been requested at the current animation frame
+			BoneTransform(m_AnimationTime);
+		}
+	}
+
+
+	static std::string LevelToSpaces(uint32_t level)
+	{
+		std::string result = "";
+		for (uint32_t i = 0; i < level; i++)
+			result += "--";
+		return result;
+	}
+
+	void Mesh::TraverseNodes(aiNode* node, const glm::mat4& parentTransform, uint32_t level)
+	{
+		glm::mat4 transform = parentTransform * Mat4FromAssimpMat4(node->mTransformation);
 		for (uint32_t i = 0; i < node->mNumMeshes; i++)
 		{
 			uint32_t mesh = node->mMeshes[i];
-			m_Submeshes[mesh].Transform = aiMatrix4x4ToGlm(node->mTransformation);
+			m_Submeshes[mesh].Transform = transform;
 		}
 
+		// CL_CORE_TRACE("{0} {1}", LevelToSpaces(level), node->mName.C_Str());
+
 		for (uint32_t i = 0; i < node->mNumChildren; i++)
-			TraverseNodes(node->mChildren[i]);
+			TraverseNodes(node->mChildren[i], transform, level + 1);
 	}
 
 	uint32_t Mesh::FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim)
@@ -360,11 +598,11 @@ namespace ChocoGL {
 		return { aiVec.x, aiVec.y, aiVec.z };
 	}
 
-	void Mesh::ReadNodeHierarchy(float AnimationTime, const aiNode* pNode, const glm::mat4& ParentTransform)
+	void Mesh::ReadNodeHierarchy(float AnimationTime, const aiNode* pNode, const glm::mat4& parentTransform)
 	{
 		std::string name(pNode->mName.data);
 		const aiAnimation* animation = m_Scene->mAnimations[0];
-		glm::mat4 nodeTransform(aiMatrix4x4ToGlm(pNode->mTransformation));
+		glm::mat4 nodeTransform(Mat4FromAssimpMat4(pNode->mTransformation));
 		const aiNodeAnim* nodeAnim = FindNodeAnim(animation, name);
 
 		if (nodeAnim)
@@ -381,7 +619,7 @@ namespace ChocoGL {
 			nodeTransform = translationMatrix * rotationMatrix * scaleMatrix;
 		}
 
-		glm::mat4 transform = ParentTransform * nodeTransform;
+		glm::mat4 transform = parentTransform * nodeTransform;
 
 		if (m_BoneMapping.find(name) != m_BoneMapping.end())
 		{
@@ -412,75 +650,7 @@ namespace ChocoGL {
 			m_BoneTransforms[i] = m_BoneInfo[i].FinalTransformation;
 	}
 
-	void Mesh::Render(TimeStep ts, Ref<MaterialInstance> materialInstance)
-	{
-		Render(ts, glm::mat4(1.0f), materialInstance);
-	}
-
-	void Mesh::Render(TimeStep ts, const glm::mat4& transform, Ref<MaterialInstance> materialInstance)
-	{
-		if (m_IsAnimated)
-		{
-			if (m_AnimationPlaying)
-			{
-				m_WorldTime += ts;
-
-				float ticksPerSecond = (float)(m_Scene->mAnimations[0]->mTicksPerSecond != 0 ? m_Scene->mAnimations[0]->mTicksPerSecond : 25.0f) * m_TimeMultiplier;
-				m_AnimationTime += ts * ticksPerSecond;
-				m_AnimationTime = fmod(m_AnimationTime, (float)m_Scene->mAnimations[0]->mDuration);
-			}
-
-			BoneTransform(m_AnimationTime);
-		}
-
-		if (materialInstance)
-			materialInstance->Bind();
-
-		// TODO: Sort this out
-		m_VertexArray->Bind();
-
-		bool materialOverride = !!materialInstance;
-
-		// TODO: replace with render API calls
-		Renderer::Submit([=]() {
-			for (Submesh& submesh : m_Submeshes)
-			{
-				if (m_IsAnimated)
-				{
-					for (size_t i = 0; i < m_BoneTransforms.size(); i++)
-					{
-						std::string uniformName = std::string("u_BoneTransforms[") + std::to_string(i) + std::string("]");
-						m_MeshShader->SetMat4FromRenderThread(uniformName, m_BoneTransforms[i]);
-					}
-				}
-
-				//if (!materialOverride)
-				//	m_MeshShader->SetMat4FromRenderThread("u_ModelMatrix", transform * submesh.Transform, false);
-				glDrawElementsBaseVertex(GL_TRIANGLES, submesh.IndexCount, GL_UNSIGNED_INT, (void*)(sizeof(uint32_t) * submesh.BaseIndex), submesh.BaseVertex);
-			}
-			});
-	}
-
-	void Mesh::OnImGuiRender()
-	{
-		ImGui::Begin("Mesh Debug");
-		if (ImGui::CollapsingHeader(m_FilePath.c_str()))
-		{
-			if (m_IsAnimated)
-			{
-				if (ImGui::CollapsingHeader("Animation"))
-				{
-					if (ImGui::Button(m_AnimationPlaying ? "Pause" : "Play"))
-						m_AnimationPlaying = !m_AnimationPlaying;
-
-					ImGui::SliderFloat("##AnimationTime", &m_AnimationTime, 0.0f, (float)m_Scene->mAnimations[0]->mDuration);
-					ImGui::DragFloat("Time Scale", &m_TimeMultiplier, 0.05f, 0.0f, 10.0f);
-				}
-			}
-		}
-
-		ImGui::End();
-	}
+	
 
 	void Mesh::DumpVertexBuffer()
 	{

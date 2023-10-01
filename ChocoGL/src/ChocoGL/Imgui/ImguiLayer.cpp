@@ -3,6 +3,8 @@
 
 #include "imgui.h"
 #include "ImGuizmo.h"
+
+#define IMGUI_IMPL_API
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
 
@@ -16,7 +18,6 @@
 namespace ChocoGL {
 
 	ImGuiLayer::ImGuiLayer()
-		: Layer("ImGuiLayer")
 	{
 	}
 	ImGuiLayer::ImGuiLayer(const std::string& name)
@@ -52,6 +53,7 @@ namespace ChocoGL {
 			style.WindowRounding = 0.0f;
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
+		style.Colors[ImGuiCol_WindowBg] = ImVec4(0.15f, 0.15f, 0.15f, style.Colors[ImGuiCol_WindowBg].w);
 
 		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
@@ -97,8 +99,8 @@ namespace ChocoGL {
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		//static bool show = true;
+		//ImGui::ShowDemoWindow(&show);
 
 	}
 

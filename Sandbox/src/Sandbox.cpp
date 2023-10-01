@@ -133,7 +133,7 @@ public:
 	{
 	}
 
-	virtual void OnUpdate(ChocoGL::TimeStep ts) override
+	virtual void OnUpdate(ChocoGL::Timestep ts) override
 	{
 		// THINGS TO LOOK AT:
 		// - BRDF LUT

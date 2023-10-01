@@ -1,14 +1,14 @@
-#include"clpch.h"
-#include"WindowsInput.h"
+#include "clpch.h"
+#include "ChocoGL\Core\Input.h"
+#include "WindowsWindow.h"
+
+#include "ChocoGL/Core/Application.h"
 
 #include<GLFW/glfw3.h>
-#include"ChocoGL/Core/Application.h"
 
 namespace ChocoGL {
 
-	Input* Input::s_Instancel = new WinodwsInput();
-
-	bool WinodwsInput::IsKeyPressedImpl(int keycode)
+	bool Input::IsKeyPressed(int keycode)
 	{
 		auto window = static_cast<GLFWwindow*>( Application::Get().GetWindow().GetNativeWindow());
 
@@ -17,7 +17,7 @@ namespace ChocoGL {
 
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
-	bool WinodwsInput::IsMouseButtonPressedImpl(int button)
+	bool Input::IsMouseButtonPressed(int button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 
@@ -27,7 +27,7 @@ namespace ChocoGL {
 		return state == GLFW_PRESS;
 	}
 
-	std::pair<float, float> WinodwsInput::GetMousePositionImpl()
+	/*std::pair<float, float> WinodwsInput::GetMousePositionImpl()
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 
@@ -35,26 +35,23 @@ namespace ChocoGL {
 		glfwGetCursorPos(window, &xpos, &ypos);
 		return { (float)xpos,(float)ypos };
 
-	}
+	}*/
 
-	float WinodwsInput::GetMouseXImpl()
+	float Input::GetMouseX()
 	{
-		auto [x, y] = GetMousePositionImpl();
-
-		return x;
-	}
-	float WinodwsInput::GetMouseYImpl()
-	{
-		/*
-		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-
+		auto& window = static_cast<WindowsWindow&>(Application::Get().GetWindow());
 		double xpos, ypos;
-		glfwGetCursorPos(window, &xpos, &ypos);
-		*/
+		glfwGetCursorPos(static_cast<GLFWwindow*>(window.GetNativeWindow()), &xpos, &ypos);
+		return (float)xpos;
 
-		auto [x, y] = GetMousePositionImpl();
-
-		return y;
+	}
+		
+	float Input::GetMouseY()
+	{
+		auto& window = static_cast<WindowsWindow&>(Application::Get().GetWindow());
+		double xpos, ypos;
+		glfwGetCursorPos(static_cast<GLFWwindow*>(window.GetNativeWindow()), &xpos, &ypos);
+		return (float)ypos;
 	}
 
 }

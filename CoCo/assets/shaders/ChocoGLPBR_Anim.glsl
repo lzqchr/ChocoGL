@@ -22,7 +22,7 @@ layout(location = 5) in ivec4 a_BoneIndices;
 layout(location = 6) in vec4 a_BoneWeights;
 
 uniform mat4 u_ViewProjectionMatrix;
-uniform mat4 u_ModelMatrix;
+uniform mat4 u_Transform;
 
 const int MAX_BONES = 100;
 uniform mat4 u_BoneTransforms[100];
@@ -45,13 +45,13 @@ void main()
 
 	vec4 localPosition = boneTransform * vec4(a_Position, 1.0);
 
-	vs_Output.WorldPosition = vec3(u_ModelMatrix * boneTransform * vec4(a_Position, 1.0));
+	vs_Output.WorldPosition = vec3(u_Transform * boneTransform * vec4(a_Position, 1.0));
     vs_Output.Normal = mat3(boneTransform) * a_Normal;
 	vs_Output.TexCoord = vec2(a_TexCoord.x, 1.0 - a_TexCoord.y);
-	vs_Output.WorldNormals = mat3(u_ModelMatrix) * mat3(a_Tangent, a_Binormal, a_Normal);
+	vs_Output.WorldNormals = mat3(u_Transform) * mat3(a_Tangent, a_Binormal, a_Normal);
 	vs_Output.Binormal = mat3(boneTransform) * a_Binormal;
 
-	gl_Position = u_ViewProjectionMatrix * u_ModelMatrix * localPosition;
+	gl_Position = u_ViewProjectionMatrix * u_Transform * localPosition;
 }
 
 #type fragment
@@ -288,12 +288,7 @@ vec3 IBL(vec3 F0, vec3 Lr)
 	int u_EnvRadianceTexLevels = textureQueryLevels(u_EnvRadianceTex);
 	float NoV = clamp(m_Params.NdotV, 0.0, 1.0);
 	vec3 R = 2.0 * dot(m_Params.View, m_Params.Normal) * m_Params.Normal - m_Params.View;
-	vec3 specularIrradiance = vec3(0.0);
-
-	if (u_RadiancePrefilter > 0.5)
-		specularIrradiance = PrefilterEnvMap(m_Params.Roughness * m_Params.Roughness, R) * u_RadiancePrefilter;
-	else
-		specularIrradiance = textureLod(u_EnvRadianceTex, RotateVectorAboutY(u_EnvMapRotation, Lr), sqrt(m_Params.Roughness) * u_EnvRadianceTexLevels).rgb * (1.0 - u_RadiancePrefilter);
+	vec3 specularIrradiance = textureLod(u_EnvRadianceTex, RotateVectorAboutY(u_EnvMapRotation, Lr), (m_Params.Roughness * m_Params.Roughness) * u_EnvRadianceTexLevels).rgb;
 
 	// Sample BRDF Lut, 1.0 - roughness for y-coord because texture was generated (in Sparky) for gloss model
 	vec2 specularBRDF = texture(u_BRDFLUTTexture, vec2(m_Params.NdotV, 1.0 - m_Params.Roughness)).rg;
@@ -327,7 +322,7 @@ void main()
 	// Fresnel reflectance, metals use albedo
 	vec3 F0 = mix(Fdielectric, m_Params.Albedo, m_Params.Metalness);
 
-	vec3 lightContribution = Lighting(F0);
+	vec3 lightContribution = vec3(0.0);//Lighting(F0);
 	vec3 iblContribution = IBL(F0, Lr);
 
 	color = vec4(lightContribution + iblContribution, 1.0);

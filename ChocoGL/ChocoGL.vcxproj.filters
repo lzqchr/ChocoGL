@@ -73,7 +73,7 @@
     <ClInclude Include="src\ChocoGL\Core\MouseButtonCodes.h">
       <Filter>ChocoGL\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\ChocoGL\Core\TimeStep.h">
+    <ClInclude Include="src\ChocoGL\Core\Timestep.h">
       <Filter>ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Window.h">
@@ -161,6 +161,11 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\clpch.h" />
+    <ClInclude Include="src\ChocoGL\Scene\Entity.h" />
+    <ClInclude Include="src\ChocoGL\Scene\Scene.h" />
+    <ClInclude Include="src\ChocoGL\Renderer\SceneRenderer.h" />
+    <ClInclude Include="src\ChocoGL\Editor\SceneHierarchyPanel.h" />
+    <ClInclude Include="src\ChocoGL\Core\Math\Mat4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChocoGL\Core\Application.cpp">
@@ -178,7 +183,7 @@
     <ClCompile Include="src\ChocoGL\Core\Log.cpp">
       <Filter>ChocoGL\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\ChocoGL\Core\TimeStep.cpp">
+    <ClCompile Include="src\ChocoGL\Core\Timestep.cpp">
       <Filter>ChocoGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiBuild.cpp">
@@ -260,5 +265,10 @@
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\clpch.cpp" />
+    <ClCompile Include="src\ChocoGL\Scene\Entity.cpp" />
+    <ClCompile Include="src\ChocoGL\Scene\Scene.cpp" />
+    <ClCompile Include="src\ChocoGL\Renderer\SceneRenderer.cpp" />
+    <ClCompile Include="src\ChocoGL\Editor\SceneHierarchyPanel.cpp" />
+    <ClCompile Include="src\ChocoGL\Core\Math\Mat4.cpp" />
   </ItemGroup>
 </Project>

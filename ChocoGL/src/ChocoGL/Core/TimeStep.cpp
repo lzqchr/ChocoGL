@@ -1,9 +1,9 @@
 #include "clpch.h"
-#include "TimeStep.h"
+#include "Timestep.h"
 
 namespace ChocoGL {
 
-	TimeStep::TimeStep(float time)
+	Timestep::Timestep(float time)
 		: m_Time(time)
 	{
 	}

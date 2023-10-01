@@ -3,7 +3,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-#include "ChocoGL/Core/TimeStep.h"
+#include "ChocoGL/Core/Timestep.h"
 
 #include "ChocoGL/Renderer/VertexArray.h"
 #include "ChocoGL/Renderer/Buffer.h"
@@ -119,23 +119,26 @@ namespace ChocoGL {
 		Mesh(const std::string& filename);
 		~Mesh();
 
-		void Render(TimeStep ts, Ref<MaterialInstance> materialInstance = Ref<MaterialInstance>());
-		void Render(TimeStep ts, const glm::mat4& transform = glm::mat4(1.0f), Ref<MaterialInstance> materialInstance = Ref<MaterialInstance>());
+		void OnUpdate(Timestep ts);
 
-		void Render(TimeStep ts, Shader* shader);
+		//void Render(Timestep ts, Ref<MaterialInstance> materialInstance = Ref<MaterialInstance>());
+		//void Render(Timestep ts, const glm::mat4& transform = glm::mat4(1.0f), Ref<MaterialInstance> materialInstance = Ref<MaterialInstance>());
+
+		void Render(Timestep ts, Shader* shader);
 		void OnImGuiRender();
 		void DumpVertexBuffer();
 
 
-		inline Ref<Shader> GetMeshShader() { return m_MeshShader; }
-		inline Ref<Material> GetMaterial() { return m_Material; }
-
-		inline const std::string& GetFilePath() const { return m_FilePath; }
+		Ref<Shader> GetMeshShader() { return m_MeshShader; }
+		Ref<Material> GetMaterial() { return m_BaseMaterial; }
+		std::vector<Ref<MaterialInstance>> GetMaterials() { return m_Materials; }
+		const std::vector<Ref<Texture2D>>& GetTextures() const { return m_Textures; }
+		const std::string& GetFilePath() const { return m_FilePath; }
 	private:
 		void BoneTransform(float time);
 		void ReadNodeHierarchy(float AnimationTime, const aiNode* pNode, const glm::mat4& ParentTransform);
 
-		void TraverseNodes(aiNode* node);
+		void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
 
 		const aiNodeAnim* FindNodeAnim(const aiAnimation* animation, const std::string& nodeName);
 		uint32_t FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim);
@@ -167,7 +170,10 @@ namespace ChocoGL {
 
 		// Materials
 		Ref<Shader> m_MeshShader;
-		Ref<Material> m_Material;
+		Ref<Material> m_BaseMaterial;
+		std::vector<Ref<Texture2D>> m_Textures;
+		std::vector<Ref<Texture2D>> m_NormalMaps;
+		std::vector<Ref<MaterialInstance>> m_Materials;
 
 		// Animation
 		bool m_IsAnimated = false;
@@ -179,5 +185,6 @@ namespace ChocoGL {
 		std::string m_FilePath;
 
 		friend class Renderer;
+		friend class SceneHierarchyPanel;
 	};
 }

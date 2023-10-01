@@ -19,9 +19,6 @@ namespace ChocoGL {
 
 	}
 
-
-
-
 	void* RenderCommandQueue::Allocate(RenderCommandFn fn, uint32_t size)
 
 	{
@@ -33,12 +30,8 @@ namespace ChocoGL {
 
 		m_CommandBufferPtr += sizeof(RenderCommandFn);
 
-
-
-
 		*(uint32_t*)m_CommandBufferPtr = size;
 		m_CommandBufferPtr += sizeof(uint32_t);
-
 
 		void* memory = m_CommandBufferPtr;
 
@@ -57,9 +50,7 @@ namespace ChocoGL {
 
 	//	CL_RENDER_TRACE("RenderCommandQueue::Execute -- {0} commands, {1} bytes", m_CommandCount, (m_CommandBufferPtr - m_CommandBuffer));
 
-
 		byte* buffer = m_CommandBuffer;
-
 
 		for (uint32_t i = 0; i < m_CommandCount; i++)
 		{
@@ -71,9 +62,7 @@ namespace ChocoGL {
 			function(buffer);
 			buffer += size;
 		}
-
 		m_CommandBufferPtr = m_CommandBuffer;
-
 		m_CommandCount = 0;
 
 	}

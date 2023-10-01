@@ -12,7 +12,7 @@
 #include "ChocoGL/Renderer/Shader.h"
 #include "ChocoGL/Renderer/Buffer.h"
 
-#include"ChocoGL\Core/TimeStep.h"
+#include"ChocoGL\Core/Timestep.h"
 
 
 
@@ -34,7 +34,7 @@ namespace ChocoGL {
 
 		virtual void OnInit() {}
 		virtual void OnShutdown() {}
-		virtual void OnUpdate(TimeStep ts) {}
+		virtual void OnUpdate(Timestep ts) {}
 
 		virtual void OnEvent(Event& event);
 
@@ -58,7 +58,7 @@ namespace ChocoGL {
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_ImGuiLayer;
 
-		TimeStep m_TimeStep;
+		Timestep m_Timestep;
 
 		float m_LastFrameTime = 0.0f;
 

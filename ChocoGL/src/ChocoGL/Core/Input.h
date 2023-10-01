@@ -5,26 +5,34 @@
 namespace ChocoGL {
 
 	class  Input {
+
 	public:
-		inline static bool IsKeyPressed(int keycode) { return s_Instancel->IsKeyPressedImpl(keycode); }
+		static bool IsKeyPressed(int keycode);
 
-		inline static bool IsMouseButtonPressed(int button) { return s_Instancel->IsMouseButtonPressedImpl(button); }
+		static bool IsMouseButtonPressed(int button);
+		static float GetMouseX();
+		static float GetMouseY();
 
-		inline static float GetMouseX( ) { return s_Instancel->GetMouseXImpl(); }
-		inline static float GetMouseY() { return s_Instancel->GetMouseYImpl(); }
+		/*public:
+			inline static bool IsKeyPressed(int keycode) { return s_Instancel->IsKeyPressedImpl(keycode); }
 
-		inline static std::pair<float,float>GetMousePosition() { return s_Instancel->GetMousePositionImpl(); }
+			inline static bool IsMouseButtonPressed(int button) { return s_Instancel->IsMouseButtonPressedImpl(button); }
 
-	protected:
-		virtual bool IsKeyPressedImpl(int keycode) = 0;
-		virtual bool IsMouseButtonPressedImpl(int button) = 0;
+			inline static float GetMouseX( ) { return s_Instancel->GetMouseXImpl(); }
+			inline static float GetMouseY() { return s_Instancel->GetMouseYImpl(); }
 
-		virtual float GetMouseXImpl() = 0;
-		virtual float GetMouseYImpl() = 0;
-		virtual std::pair<float, float> GetMousePositionImpl() = 0;
+			inline static std::pair<float,float>GetMousePosition() { return s_Instancel->GetMousePositionImpl(); }
 
-	private:
-		static Input* s_Instancel;
+		protected:
+			virtual bool IsKeyPressedImpl(int keycode) = 0;
+			virtual bool IsMouseButtonPressedImpl(int button) = 0;
+
+			virtual float GetMouseXImpl() = 0;
+			virtual float GetMouseYImpl() = 0;
+			virtual std::pair<float, float> GetMousePositionImpl() = 0;
+
+		private:
+			static Input* s_Instancel;
+		};*/
 	};
-
 }
