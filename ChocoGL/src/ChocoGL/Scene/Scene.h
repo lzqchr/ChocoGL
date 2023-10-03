@@ -21,6 +21,7 @@ namespace ChocoGL {
 		void Init();
 
 		void OnUpdate(Timestep ts);
+		void OnEvent(Event& e);
 
 		void SetCamera(const Camera& camera);
 		Camera& GetCamera() { return m_Camera; }
@@ -31,7 +32,7 @@ namespace ChocoGL {
 		float& GetSkyboxLod() { return m_SkyboxLod; }
 
 		void AddEntity(Entity* entity);
-		Entity* CreateEntity();
+		Entity* CreateEntity(const std::string& name = "");
 	private:
 		std::string m_DebugName;
 		std::vector<Entity*> m_Entities;

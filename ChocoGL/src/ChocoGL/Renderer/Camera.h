@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include "ChocoGL/Core/Timestep.h"
+#include "ChocoGL/Core/Events/MouseEvent.h"
 
 namespace ChocoGL {
 
@@ -10,8 +11,11 @@ namespace ChocoGL {
 	public:
 		Camera(const glm::mat4& projectionMatrix);
 		Camera() = default;
+
 		void Focus();
 		void Update(Timestep ts);
+		void OnUpdate(Timestep ts);
+		void OnEvent(Event& e);
 
 		inline float GetDistance() const { return m_Distance; }
 		inline void SetDistance(float distance) { m_Distance = distance; }
@@ -21,6 +25,7 @@ namespace ChocoGL {
 
 		const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
 		const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }
+		const glm::mat4& GetViewProjection() const { return m_ProjectionMatrix * m_ViewMatrix; }
 
 		glm::vec3 GetUpDirection();
 		glm::vec3 GetRightDirection();
@@ -30,6 +35,7 @@ namespace ChocoGL {
 		float GetExposure() const { return m_Exposure; }
 		float& GetExposure() { return m_Exposure; }
 	private:
+		bool OnMouseScroll(MouseScrolledEvent& e);
 		void MousePan(const glm::vec2& delta);
 		void MouseRotate(const glm::vec2& delta);
 		void MouseZoom(float delta);

@@ -166,6 +166,7 @@
     <ClInclude Include="src\ChocoGL\Renderer\SceneRenderer.h" />
     <ClInclude Include="src\ChocoGL\Editor\SceneHierarchyPanel.h" />
     <ClInclude Include="src\ChocoGL\Core\Math\Mat4.h" />
+    <ClInclude Include="src\ChocoGL\Renderer\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChocoGL\Core\Application.cpp">
@@ -270,5 +271,6 @@
     <ClCompile Include="src\ChocoGL\Renderer\SceneRenderer.cpp" />
     <ClCompile Include="src\ChocoGL\Editor\SceneHierarchyPanel.cpp" />
     <ClCompile Include="src\ChocoGL\Core\Math\Mat4.cpp" />
+    <ClCompile Include="src\ChocoGL\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

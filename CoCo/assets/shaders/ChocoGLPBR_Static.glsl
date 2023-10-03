@@ -34,7 +34,7 @@ out VertexOutput
 void main()
 {
 	vs_Output.WorldPosition = vec3(u_Transform * vec4(a_Position, 1.0));
-    vs_Output.Normal = a_Normal;
+    vs_Output.Normal = mat3(u_Transform) * a_Normal;
 	vs_Output.TexCoord = vec2(a_TexCoord.x, 1.0 - a_TexCoord.y);
 	vs_Output.WorldNormals = mat3(u_Transform) * mat3(a_Tangent, a_Binormal, a_Normal);
 	vs_Output.WorldTransform = mat3(u_Transform);
@@ -271,7 +271,8 @@ vec3 Lighting(vec3 F0)
 vec3 IBL(vec3 F0, vec3 Lr)
 {
 	vec3 irradiance = texture(u_EnvIrradianceTex, m_Params.Normal).rgb;
-	vec3 F = fresnelSchlickRoughness(F0, m_Params.NdotV, m_Params.Roughness);
+	//vec3 F = fresnelSchlickRoughness(F0, m_Params.NdotV, m_Params.Roughness);
+	vec3 F = fresnelSchlick(F0, m_Params.NdotV);
 	vec3 kd = (1.0 - F) * (1.0 - m_Params.Metalness);
 	vec3 diffuseIBL = m_Params.Albedo * irradiance;
 
@@ -316,4 +317,5 @@ void main()
 	vec3 iblContribution = IBL(F0, Lr);
 
 	color = vec4(lightContribution + iblContribution, 1.0);
+	color = vec4(iblContribution, 1.0);
 }

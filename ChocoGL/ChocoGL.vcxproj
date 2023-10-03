@@ -172,6 +172,7 @@
     <ClInclude Include="src\ChocoGL\Renderer\Material.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Mesh.h" />
     <ClInclude Include="src\ChocoGL\Renderer\RenderCommandQueue.h" />
+    <ClInclude Include="src\ChocoGL\Renderer\Renderer2D.h" />
     <ClInclude Include="src\ChocoGL\Renderer\RenderPass.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Renderer.h" />
     <ClInclude Include="src\ChocoGL\Renderer\RendererAPI.h" />
@@ -212,6 +213,7 @@
     <ClCompile Include="src\ChocoGL\Renderer\Material.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Mesh.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\RenderCommandQueue.cpp" />
+    <ClCompile Include="src\ChocoGL\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\RenderPass.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Renderer.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\SceneRenderer.cpp" />

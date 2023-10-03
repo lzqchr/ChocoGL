@@ -42,11 +42,12 @@ namespace ChocoGL {
 				glTextureParameterf(m_RendererID, GL_TEXTURE_MAX_ANISOTROPY, RendererAPI::GetCapabilities().MaxAnisotropy);
 
 				glTexImage2D(GL_TEXTURE_2D, 0, ChocoGLToOpenGLTextureFormat(m_Format), m_Width, m_Height, 0, ChocoGLToOpenGLTextureFormat(m_Format), GL_UNSIGNED_BYTE, nullptr);
-				glGenerateMipmap(GL_TEXTURE_2D);
+			//	glGenerateMipmap(GL_TEXTURE_2D);
 
 				glBindTexture(GL_TEXTURE_2D, 0);
 
 				});
+		m_ImageData.Allocate(width * height * Texture::GetBPP(m_Format));
 	}
 
 

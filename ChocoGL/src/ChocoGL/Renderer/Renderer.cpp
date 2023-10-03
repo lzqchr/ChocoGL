@@ -5,7 +5,10 @@
 #include "Mesh.h"
 
 #include <glad/glad.h>
+
+#include "RendererAPI.h"
 #include "SceneRenderer.h"
+#include "Renderer2D.h"
 
 namespace ChocoGL {
 
@@ -43,16 +46,16 @@ namespace ChocoGL {
 
 		QuadVertex* data = new QuadVertex[4];
 
-		data[0].Position = glm::vec3(x, y, 0);
+		data[0].Position = glm::vec3(x, y, 0.1f);
 		data[0].TexCoord = glm::vec2(0, 0);
 
-		data[1].Position = glm::vec3(x + width, y, 0);
+		data[1].Position = glm::vec3(x + width, y, 0.1f);
 		data[1].TexCoord = glm::vec2(1, 0);
 
-		data[2].Position = glm::vec3(x + width, y + height, 0);
+		data[2].Position = glm::vec3(x + width, y + height, 0.1f);
 		data[2].TexCoord = glm::vec2(1, 1);
 
-		data[3].Position = glm::vec3(x, y + height, 0);
+		data[3].Position = glm::vec3(x, y + height, 0.1f);
 		data[3].TexCoord = glm::vec2(0, 1);
 
 		s_Data.m_FullscreenQuadVertexArray = VertexArray::Create();
@@ -67,6 +70,8 @@ namespace ChocoGL {
 
 		s_Data.m_FullscreenQuadVertexArray->AddVertexBuffer(quadVB);
 		s_Data.m_FullscreenQuadVertexArray->SetIndexBuffer(quadIB);
+		
+		Renderer2D::Init();
 	}
 
 	const Scope<ShaderLibrary>& Renderer::GetShaderLibrary()
@@ -99,10 +104,17 @@ namespace ChocoGL {
 	{
 	}
 
-	void Renderer::DrawIndexed(uint32_t count, bool depthTest)
+	void Renderer::DrawIndexed(uint32_t count, PrimitiveType type, bool depthTest)
 	{
 		Renderer::Submit([=]() {
-			RendererAPI::DrawIndexed(count, depthTest);
+			RendererAPI::DrawIndexed(count, type, depthTest);
+			});
+	}
+
+	void Renderer::SetLineThickness(float thickness)
+	{
+		Renderer::Submit([=]() {
+			RendererAPI::SetLineThickness(thickness);
 			});
 	}
 
@@ -111,7 +123,7 @@ namespace ChocoGL {
 		s_Data.m_CommandQueue.Execute();
 	}
 
-	void Renderer::BeginRenderPass(const Ref<RenderPass>& renderPass)
+	void Renderer::BeginRenderPass(const Ref<RenderPass>& renderPass, bool clear)
 	{
 		CL_CORE_ASSERT(renderPass, "Render pass cannot be null!");
 
@@ -119,10 +131,13 @@ namespace ChocoGL {
 		s_Data.m_ActiveRenderPass = renderPass;
 
 		renderPass->GetSpecification().TargetFramebuffer->Bind();
-		const glm::vec4& clearColor = renderPass->GetSpecification().TargetFramebuffer->GetSpecification().ClearColor;
-		Renderer::Submit([=]() {
-			RendererAPI::Clear(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-			});
+		if (clear)
+		{
+			const glm::vec4& clearColor = renderPass->GetSpecification().TargetFramebuffer->GetSpecification().ClearColor;
+			Renderer::Submit([=]() {
+				RendererAPI::Clear(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+				});
+		}
 	}
 
 	void Renderer::EndRenderPass()
@@ -145,7 +160,7 @@ namespace ChocoGL {
 		}
 
 		s_Data.m_FullscreenQuadVertexArray->Bind();
-		Renderer::DrawIndexed(6, depthTest);
+		Renderer::DrawIndexed(6, PrimitiveType::Triangles, depthTest);
 	}
 
 	void Renderer::SubmitFullscreenQuad(const Ref<MaterialInstance>& material)
@@ -158,7 +173,8 @@ namespace ChocoGL {
 		}
 
 		s_Data.m_FullscreenQuadVertexArray->Bind();
-		Renderer::DrawIndexed(6, depthTest);
+		//Renderer::DrawIndexed(6, depthTest);
+		Renderer::DrawIndexed(6, PrimitiveType::Triangles, depthTest);
 	}
 	void Renderer::SubmitMesh(const Ref<Mesh>& mesh, const glm::mat4& transform, const Ref<MaterialInstance>& overrideMaterial)
 	{
@@ -196,7 +212,37 @@ namespace ChocoGL {
 				});
 		}
 	}
+	void Renderer::DrawAABB(const Ref<Mesh>& mesh, const glm::vec4& color)
+	{
+		for (Submesh& submesh : mesh->m_Submeshes)
+		{
+			const auto& transform = submesh.Transform;
+			glm::vec4 min = { submesh.Min.x, submesh.Min.y, submesh.Min.z, 1.0f };
+			glm::vec4 max = { submesh.Max.x, submesh.Max.y, submesh.Max.z, 1.0f };
 
+			glm::vec4 corners[8] =
+			{
+				transform * glm::vec4 { submesh.Min.x, submesh.Min.y, submesh.Max.z, 1.0f },
+				transform * glm::vec4 { submesh.Min.x, submesh.Max.y, submesh.Max.z, 1.0f },
+				transform * glm::vec4 { submesh.Max.x, submesh.Max.y, submesh.Max.z, 1.0f },
+				transform * glm::vec4 { submesh.Max.x, submesh.Min.y, submesh.Max.z, 1.0f },
+
+				transform * glm::vec4 { submesh.Min.x, submesh.Min.y, submesh.Min.z, 1.0f },
+				transform * glm::vec4 { submesh.Min.x, submesh.Max.y, submesh.Min.z, 1.0f },
+				transform * glm::vec4 { submesh.Max.x, submesh.Max.y, submesh.Min.z, 1.0f },
+				transform * glm::vec4 { submesh.Max.x, submesh.Min.y, submesh.Min.z, 1.0f }
+			};
+
+			for (uint32_t i = 0; i < 4; i++)
+				Renderer2D::DrawLine(corners[i], corners[(i + 1) % 4], color);
+
+			for (uint32_t i = 0; i < 4; i++)
+				Renderer2D::DrawLine(corners[i + 4], corners[((i + 1) % 4) + 4], color);
+
+			for (uint32_t i = 0; i < 4; i++)
+				Renderer2D::DrawLine(corners[i], corners[i + 4], color);
+		}
+	}
 	RenderCommandQueue& Renderer::GetRenderCommandQueue()
 	{
 		return s_Data.m_CommandQueue;

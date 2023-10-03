@@ -31,12 +31,12 @@ namespace ChocoGL {
 		virtual void OnUpdate(Timestep ts) override;
 
 		virtual void OnImGuiRender() override;
-		virtual void OnEvent(Event& event) override;
+		virtual void OnEvent(Event& e) override;
 
 		bool OnKeyPressedEvent(KeyPressedEvent& e);
 
 		// ImGui UI helpers
-		void Property(const std::string& name, bool& value);
+		bool Property(const std::string& name, bool& value);
 		void Property(const std::string& name, float& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
 		void Property(const std::string& name, glm::vec2& value, PropertyFlag flags);
 		void Property(const std::string& name, glm::vec2& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
@@ -44,6 +44,8 @@ namespace ChocoGL {
 		void Property(const std::string& name, glm::vec3& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
 		void Property(const std::string& name, glm::vec4& value, PropertyFlag flags);
 		void Property(const std::string& name, glm::vec4& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
+
+		void ShowBoundingBoxes(bool show, bool onTop = false);
 	private:
 		Scope<SceneHierarchyPanel> m_SceneHierarchyPanel;
 
@@ -118,6 +120,13 @@ namespace ChocoGL {
 		Ref<Texture2D> m_CheckerboardTex;
 		int m_GizmoType = -1; // -1 = no gizmo
 		//glm::mat4 m_Transform;
+
+		bool m_AllowViewportCameraEvents = false;
+		bool m_DrawOnTopBoundingBoxes = false;
+
+		bool m_UIShowBoundingBoxes = false;
+		bool m_UIShowBoundingBoxesOnTop = false;
+
 	};
 
 }

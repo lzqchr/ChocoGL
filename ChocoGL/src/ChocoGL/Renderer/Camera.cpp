@@ -56,7 +56,7 @@ namespace ChocoGL {
 		return speed;
 	}
 
-	void Camera::Update(Timestep ts)
+	void Camera::OnUpdate(Timestep ts)
 	{
 		if (Input::IsKeyPressed(GLFW_KEY_LEFT_ALT))
 		{
@@ -82,7 +82,19 @@ namespace ChocoGL {
 		m_ViewMatrix = glm::inverse(m_ViewMatrix);
 	
 	}
+	void Camera::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<MouseScrolledEvent>(CL_BIND_EVENT_FN(Camera::OnMouseScroll));
+	}
 
+	bool Camera::OnMouseScroll(MouseScrolledEvent& e)
+	{
+
+		float delta = e.GetYOffset() * 0.1f;
+		MouseZoom(delta);
+		return false;
+	}
 	void Camera::MousePan(const glm::vec2& delta)
 	{
 		auto [xSpeed, ySpeed] = PanSpeed();

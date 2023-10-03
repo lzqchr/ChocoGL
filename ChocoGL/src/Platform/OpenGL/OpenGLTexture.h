@@ -32,6 +32,11 @@ namespace ChocoGL {
 		virtual bool Loaded() const override { return m_Loaded; }
 
 		virtual RendererID GetRendererID() const override { return m_RendererID; }
+
+		virtual bool operator==(const Texture& other) const override
+		{
+			return m_RendererID == ((OpenGLTexture2D&)other).m_RendererID;
+		}
 	private:
 		RendererID m_RendererID;
 		TextureFormat m_Format;
@@ -67,6 +72,11 @@ namespace ChocoGL {
 		virtual const std::string& GetPath() const override { return m_FilePath; }
 
 		virtual RendererID GetRendererID() const override { return m_RendererID; }
+
+		virtual bool operator==(const Texture& other) const override
+		{
+			return m_RendererID == ((OpenGLTextureCube&)other).m_RendererID;
+		}
 	private:
 		RendererID m_RendererID;
 		TextureFormat m_Format;
