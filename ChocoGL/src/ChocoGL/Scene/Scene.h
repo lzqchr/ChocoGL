@@ -12,6 +12,14 @@ namespace ChocoGL {
 		static Environment Load(const std::string& filepath);
 	};
 
+	struct Light
+	{
+		glm::vec3 Direction;
+		glm::vec3 Radiance;
+
+		float Multiplier = 1.0f;
+	};
+
 	class Scene
 	{
 	public:
@@ -31,12 +39,17 @@ namespace ChocoGL {
 
 		float& GetSkyboxLod() { return m_SkyboxLod; }
 
+		Light& GetLight() { return m_Light; }
+
 		void AddEntity(Entity* entity);
 		Entity* CreateEntity(const std::string& name = "");
 	private:
 		std::string m_DebugName;
 		std::vector<Entity*> m_Entities;
 		Camera m_Camera;
+
+		Light m_Light;
+		float m_LightMultiplier = 0.3f;
 
 		Environment m_Environment;
 		Ref<TextureCube> m_SkyboxTexture;

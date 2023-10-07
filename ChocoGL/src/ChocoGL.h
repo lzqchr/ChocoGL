@@ -12,6 +12,8 @@
 
 #include"ChocoGL/Imgui/ImguiLayer.h"
 
+#include "ChocoGL/Core/Math/AABB.h"
+#include "ChocoGL/Core/Math/Ray.h"
 
 #include"imgui\imgui.h"
 

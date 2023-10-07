@@ -167,6 +167,8 @@
     <ClInclude Include="src\ChocoGL\Editor\SceneHierarchyPanel.h" />
     <ClInclude Include="src\ChocoGL\Core\Math\Mat4.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Renderer2D.h" />
+    <ClInclude Include="src\ChocoGL\Core\Math\AABB.h" />
+    <ClInclude Include="src\ChocoGL\Core\Math\Ray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChocoGL\Core\Application.cpp">

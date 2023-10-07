@@ -157,7 +157,9 @@
     <ClInclude Include="src\ChocoGL\Core\Layer.h" />
     <ClInclude Include="src\ChocoGL\Core\LayerStack.h" />
     <ClInclude Include="src\ChocoGL\Core\Log.h" />
+    <ClInclude Include="src\ChocoGL\Core\Math\AABB.h" />
     <ClInclude Include="src\ChocoGL\Core\Math\Mat4.h" />
+    <ClInclude Include="src\ChocoGL\Core\Math\Ray.h" />
     <ClInclude Include="src\ChocoGL\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\ChocoGL\Core\Timestep.h" />
     <ClInclude Include="src\ChocoGL\Core\Window.h" />

@@ -13,6 +13,8 @@ namespace ChocoGL {
 		static float GetMouseX();
 		static float GetMouseY();
 
+		static std::pair<float, float> GetMousePosition();
+
 		/*public:
 			inline static bool IsKeyPressed(int keycode) { return s_Instancel->IsKeyPressedImpl(keycode); }
 

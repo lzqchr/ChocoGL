@@ -123,4 +123,8 @@
 #define CL_KEY_RIGHT_SUPER        347
 #define CL_KEY_MENU               348
 
+#define CL_MOUSE_BUTTON_LEFT        0
+#define CL_MOUSE_BUTTON_RIGHT       1
+#define CL_MOUSE_BUTTON_MIDDLE      2
+
 #define CL_KEY_LAST               CL_KEY_MENU
