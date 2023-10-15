@@ -24,7 +24,7 @@
 
 namespace ChocoGL {
 	
-#define MESH_DEBUG_LOG 1
+#define MESH_DEBUG_LOG 0
 #if MESH_DEBUG_LOG
 #define CL_MESH_LOG(...) CL_CORE_TRACE(__VA_ARGS__)
 #else
@@ -85,8 +85,8 @@ namespace ChocoGL {
 
 		m_IsAnimated = scene->mAnimations != nullptr;
 		m_MeshShader = m_IsAnimated ? Renderer::GetShaderLibrary()->Get("ChocoGLPBR_Anim") : Renderer::GetShaderLibrary()->Get("ChocoGLPBR_Static");
-		m_BaseMaterial = CreateRef<Material>(m_MeshShader);
-		// m_MaterialInstance = std::make_shared<MaterialInstance>(m_BaseMaterial);
+		m_BaseMaterial = Ref<Material>::Create(m_MeshShader);
+		// m_MaterialInstance = Ref<MaterialInstance>::Create(m_BaseMaterial);
 		m_InverseTransform = glm::inverse(Mat4FromAssimpMat4(scene->mRootNode->mTransformation));
 
 		uint32_t vertexCount = 0;
@@ -231,7 +231,7 @@ namespace ChocoGL {
 				auto aiMaterial = scene->mMaterials[i];
 				auto aiMaterialName = aiMaterial->GetName();
 
-				auto mi = CreateRef<MaterialInstance>(m_BaseMaterial);
+				auto mi = Ref<MaterialInstance>::Create(m_BaseMaterial);
 				m_Materials[i] = mi;
 
 				CL_MESH_LOG(" {0} (Index = {1})", aiMaterialName.data, i);
@@ -246,6 +246,8 @@ namespace ChocoGL {
 				float shininess, metalness;
 				aiMaterial->Get(AI_MATKEY_SHININESS, shininess);
 				aiMaterial->Get(AI_MATKEY_REFLECTIVITY, metalness);
+
+				metalness = 0.0f;
 
 				// float roughness = 1.0f - shininess * 0.01f;
 				// roughness *= roughness;

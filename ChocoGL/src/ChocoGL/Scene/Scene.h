@@ -1,6 +1,9 @@
 #pragma once
-#include "Entity.h"
 #include "ChocoGL/Renderer/Camera.h"
+#include "ChocoGL/Renderer/Texture.h"
+#include "ChocoGL/Renderer/Material.h"
+
+#include "entt/entt.hpp"
 
 namespace ChocoGL {
 
@@ -19,8 +22,10 @@ namespace ChocoGL {
 
 		float Multiplier = 1.0f;
 	};
+	
+	class Entity;
 
-	class Scene
+	class Scene : public RefCounted
 	{
 	public:
 		Scene(const std::string& debugName = "Scene");
@@ -31,9 +36,6 @@ namespace ChocoGL {
 		void OnUpdate(Timestep ts);
 		void OnEvent(Event& e);
 
-		void SetCamera(const Camera& camera);
-		Camera& GetCamera() { return m_Camera; }
-
 		void SetEnvironment(const Environment& environment);
 		void SetSkybox(const Ref<TextureCube>& skybox);
 
@@ -41,12 +43,20 @@ namespace ChocoGL {
 
 		Light& GetLight() { return m_Light; }
 
-		void AddEntity(Entity* entity);
-		Entity* CreateEntity(const std::string& name = "");
+		Entity CreateEntity(const std::string& name = "");
+		void DestroyEntity(Entity entity);
+
+		template<typename T>
+		auto GetAllEntitiesWith()
+		{
+			return m_Registry.view<T>();
+		}
 	private:
+		uint32_t m_SceneID;
+		entt::entity m_SceneEntity;
+		entt::registry m_Registry;
+
 		std::string m_DebugName;
-		std::vector<Entity*> m_Entities;
-		Camera m_Camera;
 
 		Light m_Light;
 		float m_LightMultiplier = 0.3f;
@@ -57,6 +67,7 @@ namespace ChocoGL {
 
 		float m_SkyboxLod = 1.0f;
 
+		friend class Entity;
 		friend class SceneRenderer;
 		friend class SceneHierarchyPanel;
 	};

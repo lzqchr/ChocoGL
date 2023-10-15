@@ -11,3 +11,6 @@
 [submodule "ChocoGL/vendor/glm"]
 	path = ChocoGL/vendor/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "ChocoGL/vendor/FastNoise"]
+	path = ChocoGL/vendor/FastNoise
+	url = https://github.com/Auburns/FastNoise

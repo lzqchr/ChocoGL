@@ -5,7 +5,8 @@
 #include "ChocoGL/Core/Core.h"
 #include "ChocoGL/Core/Events/Event.h"
 
-namespace ChocoGL {
+namespace ChocoGL 
+{
 
 	struct WindowProps
 	{
@@ -22,7 +23,7 @@ namespace ChocoGL {
 	};
 
 	// Interface representing a desktop system based Window
-	class  Window
+	class  Window : public RefCounted
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

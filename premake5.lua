@@ -20,11 +20,22 @@ IncludeDir["GLFW"] = "ChocoGL/vendor/GLFW/include"
 IncludeDir["Glad"] = "ChocoGL/vendor/Glad/include"
 IncludeDir["ImGui"]= "ChocoGL/vendor/imgui"
 IncludeDir["glm"]  = "ChocoGL/vendor/glm"
+IncludeDir["entt"] = "ChocoGL/vendor/entt/include"
+IncludeDir["FastNoise"] = "ChocoGL/vendor/FastNoise"
+IncludeDir["mono"] = "ChocoGL/vendor/mono/include"
+
+LibraryDir = {}
+LibraryDir["mono"] = "vendor/mono/lib/Debug/mono-2.0-sgen.lib"
+
+group "Dependencies"
 
 include "ChocoGL/vendor/GLFW"
 include "ChocoGL/vendor/Glad"
 include "ChocoGL/vendor/imgui"
 
+group ""
+
+group "Core"
 project "ChocoGL"
 	location "ChocoGL"
 	kind "StaticLib"
@@ -43,7 +54,10 @@ project "ChocoGL"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.c",
 		"%{prj.name}/src/**.hpp", 
-		"%{prj.name}/src/**.cpp" 
+		"%{prj.name}/src/**.cpp" ,
+		"%{prj.name}/src/**.cpp",
+
+		"%{prj.name}/vendor/FastNoise/**.cpp"
 		
 	}
 
@@ -62,7 +76,10 @@ project "ChocoGL"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.mono}",
+		"%{IncludeDir.FastNoise}",
 	}
 
 	links 
@@ -70,8 +87,11 @@ project "ChocoGL"
 		"GLFW",
 		"Glad",
 		"ImGui",
-		"opengl32.lib"
+		"opengl32.lib",
+		"%{LibraryDir.mono}"
 	}
+	filter "files:%{prj.name}/vendor/FastNoise/**.cpp"
+   	flags { "NoPCH" }
 
 	filter "system:windows"
 
@@ -88,19 +108,31 @@ project "ChocoGL"
 
 	filter "configurations:Debug"
 		defines "CL_DEBUG"
-		runtime "Debug"
 		symbols "on"
 
 	filter "configurations:Release"
 		defines "CL_RELEASE"
-		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CL_DIST"
-		runtime "Release"
 		optimize "on"
 
+project "ChocoGL-ScriptCore"
+	location "ChocoGL-ScriptCore"
+	kind "SharedLib"
+	language "C#"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/src/**.cs", 
+	}
+group ""
+
+group "Tools"
 project "CoCo"
 	location "CoCo"
 	kind "ConsoleApp"
@@ -126,12 +158,9 @@ project "CoCo"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"ChocoGL/vendor/spdlog/include",
-		"%{prj.name}/vendor/spdlog/include",
-		"%{prj.name}/vendor/assimp/include",
-		"%{prj.name}/vendor/stb/include",
 		"ChocoGL/src",
 		"ChocoGL/vendor",
+		"%{IncludeDir.entt}",
 		"%{IncludeDir.glm}"
 	}
 
@@ -151,7 +180,6 @@ project "CoCo"
 
 	filter "configurations:Debug"
 		defines "CL_DEBUG"
-		runtime "Debug"
 		symbols "on"
 
 		links
@@ -160,12 +188,12 @@ project "CoCo"
 		}
 		postbuildcommands 
 		{
-			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
+			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"',
+			'{COPY} "../ChocoGL/vendor/mono/bin/Debug/mono-2.0-sgen.dll" "%{cfg.targetdir}"'
 		}
 
 	filter "configurations:Release"
 		defines "CL_RELEASE"
-		runtime "Release"
 		optimize "on"
 		links
 		{
@@ -173,12 +201,12 @@ project "CoCo"
 		}
 		postbuildcommands 
 		{
-			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
+			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"',
+			'{COPY} "../Hazel/vendor/mono/bin/Debug/mono-2.0-sgen.dll" "%{cfg.targetdir}"'
 		}
 
 	filter "configurations:Dist"
 		defines "CL_DIST"
-		runtime "Release"
 		optimize "on"
 		
 		links
@@ -187,10 +215,31 @@ project "CoCo"
 		}
 		postbuildcommands 
 		{
-			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"'
+			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"',
+			'{COPY} "../ChocoGL/vendor/mono/bin/Debug/mono-2.0-sgen.dll" "%{cfg.targetdir}"'
 		}
+group ""
 
-project "Sandbox"
+group "Examples"
+project "ExampleApp"
+	location "ExampleApp"
+	kind "SharedLib"
+	language "C#"
+
+	targetdir ("CoCo/assets/scripts")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/src/**.cs", 
+	}
+
+	links
+	{
+		"ChocoGL-ScriptCore"
+	}
+	
+--[[project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
@@ -259,3 +308,5 @@ project "Sandbox"
 		{	
 			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
 		}
+]]
+group ""

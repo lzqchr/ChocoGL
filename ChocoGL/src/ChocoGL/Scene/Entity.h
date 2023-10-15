@@ -1,6 +1,10 @@
 #pragma once
 #include <glm/glm.hpp>
+
+#include"Scene.h"
 #include "ChocoGL/Renderer/Mesh.h"
+
+#include"Components.h"
 
 namespace ChocoGL {
 
@@ -10,36 +14,53 @@ namespace ChocoGL {
 
 	public:
 
-		Entity();
+		Entity() = default;
+		Entity(entt::entity handle, Scene* scene)
+			: m_EntityHandle(handle), m_Scene(scene) {}
 
-		~Entity();
+		~Entity() {}
 
-		// TODO: Move to Component
+		template<typename T, typename... Args>
+		T& AddComponent(Args&&... args)
+		{
+			return m_Scene->m_Registry.emplace<T>(m_EntityHandle, std::forward<Args>(args)...);
+		}
 
-		void SetMesh(const Ref<Mesh>& mesh) { m_Mesh = mesh; }
+		template<typename T>
+		T& GetComponent()
+		{
+			return m_Scene->m_Registry.get<T>(m_EntityHandle);
+		}
 
-		Ref<Mesh> GetMesh() { return m_Mesh; }
+		template<typename T>
+		bool HasComponent()
+		{
+			return m_Scene->m_Registry.has<T>(m_EntityHandle);
+		}
 
-		void SetMaterial(const Ref<MaterialInstance>& material) { m_Material = material; }
+		glm::mat4& Transform() { return m_Scene->m_Registry.get<TransformComponent>(m_EntityHandle); }
+		const glm::mat4& Transform() const { return m_Scene->m_Registry.get<TransformComponent>(m_EntityHandle); }
 
-		Ref<MaterialInstance> GetMaterial() { return m_Material; }
+		operator uint32_t () const { return (uint32_t)m_EntityHandle; }
+		operator bool() const { return (uint32_t)m_EntityHandle && m_Scene; }
 
-		const glm::mat4& GetTransform() const { return m_Transform; }
+		bool operator==(const Entity& other) const
+		{
+			return m_EntityHandle == other.m_EntityHandle && m_Scene == other.m_Scene;
+		}
 
-		glm::mat4& Transform() { return m_Transform; }
-		const std::string& GetName() const { return m_Name; }
+		bool operator!=(const Entity& other) const
+		{
+			return !(*this == other);
+		}
 	private:
 		Entity(const std::string& name);
 
 	private:
-		std::string m_Name;
-		glm::mat4 m_Transform;
+		entt::entity m_EntityHandle;
+		Scene* m_Scene = nullptr;
 
-		// TODO: Temp
-
-		Ref<Mesh> m_Mesh;
-
-		Ref<MaterialInstance> m_Material;
 		friend class Scene;
+		friend class ScriptEngine;
 	};
 }

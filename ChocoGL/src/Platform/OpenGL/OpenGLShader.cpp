@@ -29,7 +29,7 @@ namespace ChocoGL {
 
 	Ref<OpenGLShader> OpenGLShader::CreateFromString(const std::string& source)
 	{
-		Ref<OpenGLShader> shader = std::make_shared<OpenGLShader>();
+		Ref<OpenGLShader> shader = Ref<OpenGLShader>::Create();
 		shader->Load(source);
 		return shader;
 	}
@@ -227,8 +227,8 @@ namespace ChocoGL {
 
 		m_Resources.clear();
 		m_Structs.clear();
-		m_VSMaterialUniformBuffer.reset();
-		m_PSMaterialUniformBuffer.reset();
+		m_VSMaterialUniformBuffer.Reset();
+		m_PSMaterialUniformBuffer.Reset();
 
 		auto& vertexSource = m_ShaderSource[GL_VERTEX_SHADER];
 		auto& fragmentSource = m_ShaderSource[GL_FRAGMENT_SHADER];
@@ -330,14 +330,14 @@ namespace ChocoGL {
 				if (domain == ShaderDomain::Vertex)
 				{
 					if (!m_VSMaterialUniformBuffer)
-						m_VSMaterialUniformBuffer.reset(new OpenGLShaderUniformBufferDeclaration("", domain));
+						m_VSMaterialUniformBuffer.Reset(new OpenGLShaderUniformBufferDeclaration("", domain));
 
 					m_VSMaterialUniformBuffer->PushUniform(declaration);
 				}
 				else if (domain == ShaderDomain::Pixel)
 				{
 					if (!m_PSMaterialUniformBuffer)
-						m_PSMaterialUniformBuffer.reset(new OpenGLShaderUniformBufferDeclaration("", domain));
+						m_PSMaterialUniformBuffer.Reset(new OpenGLShaderUniformBufferDeclaration("", domain));
 
 					m_PSMaterialUniformBuffer->PushUniform(declaration);
 				}
@@ -382,7 +382,7 @@ namespace ChocoGL {
 		}
 		m_Structs.push_back(uniformStruct);
 	}
-
+	//just find the location
 	void OpenGLShader::ResolveUniforms()
 	{
 		glUseProgram(m_RendererID);
@@ -624,7 +624,7 @@ namespace ChocoGL {
 			});
 	}
 
-	void OpenGLShader::ResolveAndSetUniforms(const Scope<OpenGLShaderUniformBufferDeclaration>& decl, Buffer buffer)
+	void OpenGLShader::ResolveAndSetUniforms(const Ref<OpenGLShaderUniformBufferDeclaration>& decl, Buffer buffer)
 	{
 		const ShaderUniformList& uniforms = decl->GetUniformDeclarations();
 		for (size_t i = 0; i < uniforms.size(); i++)
@@ -796,6 +796,13 @@ namespace ChocoGL {
 	{
 		Renderer::Submit([=]() {
 			UploadUniformInt(name, value);
+			});
+	}
+
+	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
+	{
+		Renderer::Submit([=]() {
+			UploadUniformFloat3(name, value);
 			});
 	}
 

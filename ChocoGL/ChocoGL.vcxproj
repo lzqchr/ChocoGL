@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>clpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CL_PLATFORM_WINDOWS;CL_BUILD_DLL;GLFW_INCLUDE_NONE;CL_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\assimp\include;vendor\stb\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\assimp\include;vendor\stb\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\entt\include;vendor\mono\include;vendor\FastNoise;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -89,7 +89,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;vendor\mono\lib\Debug\mono-2.0-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -98,7 +98,7 @@
       <PrecompiledHeaderFile>clpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CL_PLATFORM_WINDOWS;CL_BUILD_DLL;GLFW_INCLUDE_NONE;CL_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\assimp\include;vendor\stb\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\assimp\include;vendor\stb\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\entt\include;vendor\mono\include;vendor\FastNoise;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -114,7 +114,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;vendor\mono\lib\Debug\mono-2.0-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -123,7 +123,7 @@
       <PrecompiledHeaderFile>clpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;CL_PLATFORM_WINDOWS;CL_BUILD_DLL;GLFW_INCLUDE_NONE;CL_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\assimp\include;vendor\stb\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor;vendor\spdlog\include;vendor\assimp\include;vendor\stb\include;vendor\GLFW\include;vendor\Glad\include;vendor\imgui;vendor\glm;vendor\entt\include;vendor\mono\include;vendor\FastNoise;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -139,7 +139,7 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;vendor\mono\lib\Debug\mono-2.0-sgen.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -159,8 +159,11 @@
     <ClInclude Include="src\ChocoGL\Core\Log.h" />
     <ClInclude Include="src\ChocoGL\Core\Math\AABB.h" />
     <ClInclude Include="src\ChocoGL\Core\Math\Mat4.h" />
+    <ClInclude Include="src\ChocoGL\Core\Math\Noise.h" />
     <ClInclude Include="src\ChocoGL\Core\Math\Ray.h" />
     <ClInclude Include="src\ChocoGL\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\ChocoGL\Core\Ref.h" />
+    <ClInclude Include="src\ChocoGL\Core\Timer.h" />
     <ClInclude Include="src\ChocoGL\Core\Timestep.h" />
     <ClInclude Include="src\ChocoGL\Core\Window.h" />
     <ClInclude Include="src\ChocoGL\Editor\SceneHierarchyPanel.h" />
@@ -174,17 +177,21 @@
     <ClInclude Include="src\ChocoGL\Renderer\Material.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Mesh.h" />
     <ClInclude Include="src\ChocoGL\Renderer\RenderCommandQueue.h" />
-    <ClInclude Include="src\ChocoGL\Renderer\Renderer2D.h" />
     <ClInclude Include="src\ChocoGL\Renderer\RenderPass.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Renderer.h" />
+    <ClInclude Include="src\ChocoGL\Renderer\Renderer2D.h" />
     <ClInclude Include="src\ChocoGL\Renderer\RendererAPI.h" />
     <ClInclude Include="src\ChocoGL\Renderer\SceneRenderer.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Shader.h" />
     <ClInclude Include="src\ChocoGL\Renderer\ShaderUniform.h" />
     <ClInclude Include="src\ChocoGL\Renderer\Texture.h" />
     <ClInclude Include="src\ChocoGL\Renderer\VertexArray.h" />
+    <ClInclude Include="src\ChocoGL\Scene\Components.h" />
     <ClInclude Include="src\ChocoGL\Scene\Entity.h" />
     <ClInclude Include="src\ChocoGL\Scene\Scene.h" />
+    <ClInclude Include="src\ChocoGL\Script\ScriptEngine.h" />
+    <ClInclude Include="src\ChocoGL\Script\ScriptEngineRegistry.h" />
+    <ClInclude Include="src\ChocoGL\Script\ScriptWrappers.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
@@ -193,7 +200,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLShaderUniform.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\clpch.h" />
   </ItemGroup>
@@ -204,6 +210,7 @@
     <ClCompile Include="src\ChocoGL\Core\LayerStack.cpp" />
     <ClCompile Include="src\ChocoGL\Core\Log.cpp" />
     <ClCompile Include="src\ChocoGL\Core\Math\Mat4.cpp" />
+    <ClCompile Include="src\ChocoGL\Core\Math\Noise.cpp" />
     <ClCompile Include="src\ChocoGL\Core\Timestep.cpp" />
     <ClCompile Include="src\ChocoGL\Editor\SceneHierarchyPanel.cpp" />
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiBuild.cpp" />
@@ -215,15 +222,18 @@
     <ClCompile Include="src\ChocoGL\Renderer\Material.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Mesh.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\RenderCommandQueue.cpp" />
-    <ClCompile Include="src\ChocoGL\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\RenderPass.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\ChocoGL\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\SceneRenderer.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Shader.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\Texture.cpp" />
     <ClCompile Include="src\ChocoGL\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\ChocoGL\Scene\Entity.cpp" />
     <ClCompile Include="src\ChocoGL\Scene\Scene.cpp" />
+    <ClCompile Include="src\ChocoGL\Script\ScriptEngine.cpp" />
+    <ClCompile Include="src\ChocoGL\Script\ScriptEngineRegistry.cpp" />
+    <ClCompile Include="src\ChocoGL\Script\ScriptWrappers.cpp" />
     <ClCompile Include="src\ChocoGL\Vendor\stb_image.cpp.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
@@ -239,6 +249,7 @@
     <ClCompile Include="src\clpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="vendor\FastNoise\FastNoise.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

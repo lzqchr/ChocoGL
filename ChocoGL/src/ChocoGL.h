@@ -9,6 +9,7 @@
 #include"ChocoGL/Core/Input.h"
 #include"ChocoGL/Core/KeyCodes.h"
 #include"ChocoGL/Core/MouseButtonCodes.h"
+#include "ChocoGL/Core/Timer.h"
 
 #include"ChocoGL/Imgui/ImguiLayer.h"
 
@@ -33,6 +34,7 @@
 // Scenes
 #include "ChocoGL/Scene/Entity.h"
 #include "ChocoGL/Scene/Scene.h"
+#include "ChocoGL/Scene/Components.h"
 
 //-----------EntryPoint------------------------
 //#include"ChocoGL\EntryPoint.h"

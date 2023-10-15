@@ -1,278 +1,366 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ChocoGL">
-      <UniqueIdentifier>{64D0E623-D0AF-65BF-D9C7-F0954526CC20}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ChocoGL\Core">
-      <UniqueIdentifier>{3CD365A1-2836-F545-D1BB-2DFCBDFDC0C8}</UniqueIdentifier>
+    <Filter Include="src\ChocoGL">
+      <UniqueIdentifier>{7BD0202D-E785-9922-707A-93F9DC2E9026}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ChocoGL\Core\Events">
-      <UniqueIdentifier>{A0031EEB-0C65-FBF8-95D2-41AB013332B8}</UniqueIdentifier>
+    <Filter Include="src\ChocoGL\Core">
+      <UniqueIdentifier>{B37986B4-9F72-A506-C8A4-8A8BB4FC8412}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ChocoGL\Imgui">
-      <UniqueIdentifier>{AE888BCE-1A49-0705-E383-50824F034CE1}</UniqueIdentifier>
+    <Filter Include="src\ChocoGL\Core\Events">
+      <UniqueIdentifier>{37DEE1BC-A315-2A54-AC1F-8E7718D6504D}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ChocoGL\Renderer">
-      <UniqueIdentifier>{8AC43C87-76BD-5BD9-9FEF-405E8B473BE5}</UniqueIdentifier>
+    <Filter Include="src\ChocoGL\Core\Math">
+      <UniqueIdentifier>{6CE6835D-D852-3F58-A146-D7B50D7261C0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ChocoGL\Vendor">
-      <UniqueIdentifier>{217AC2BD-0D48-B6C3-F6DB-26EAE2489228}</UniqueIdentifier>
+    <Filter Include="src\ChocoGL\Editor">
+      <UniqueIdentifier>{5155EAF3-3D39-AB49-A699-A59C929C95CB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform">
-      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    <Filter Include="src\ChocoGL\Imgui">
+      <UniqueIdentifier>{05FEC045-7114-BFDB-BA8B-4AFD26E18F63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\OpenGL">
-      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
+    <Filter Include="src\ChocoGL\Renderer">
+      <UniqueIdentifier>{81CEA9EE-6D5D-33B8-167C-47B302EA435E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\Windows">
-      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    <Filter Include="src\ChocoGL\Scene">
+      <UniqueIdentifier>{D86D7046-4484-6EDC-8DFB-F9FDF9503F64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ChocoGL\Script">
+      <UniqueIdentifier>{5F368514-4B1A-466A-B47A-40BDA07D30EC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ChocoGL\Vendor">
+      <UniqueIdentifier>{589AA61B-447E-6771-ADDE-61C499E151F3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform">
+      <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\Windows">
+      <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\FastNoise">
+      <UniqueIdentifier>{EEFAAAA2-DAF3-C9F4-0326-AF79EF7DA900}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ChocoGL.h" />
+    <ClInclude Include="src\ChocoGL.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Application.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Assert.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Buffer.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Core.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Events\ApplicationEvent.h">
-      <Filter>ChocoGL\Core\Events</Filter>
+      <Filter>src\ChocoGL\Core\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Events\Event.h">
-      <Filter>ChocoGL\Core\Events</Filter>
+      <Filter>src\ChocoGL\Core\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Events\KeyEvent.h">
-      <Filter>ChocoGL\Core\Events</Filter>
+      <Filter>src\ChocoGL\Core\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Events\MouseEvent.h">
-      <Filter>ChocoGL\Core\Events</Filter>
+      <Filter>src\ChocoGL\Core\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Input.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\KeyCodes.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Layer.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\LayerStack.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Log.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Math\AABB.h">
+      <Filter>src\ChocoGL\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Math\Mat4.h">
+      <Filter>src\ChocoGL\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Math\Noise.h">
+      <Filter>src\ChocoGL\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Math\Ray.h">
+      <Filter>src\ChocoGL\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\MouseButtonCodes.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Ref.h">
+      <Filter>src\ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Core\Timer.h">
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Timestep.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Core\Window.h">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Editor\SceneHierarchyPanel.h">
+      <Filter>src\ChocoGL\Editor</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\EntryPoint.h">
-      <Filter>ChocoGL</Filter>
+      <Filter>src\ChocoGL</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Imgui\ImGuiLayer.h">
-      <Filter>ChocoGL\Imgui</Filter>
+      <Filter>src\ChocoGL\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Imgui\ImGuizmo.h">
-      <Filter>ChocoGL\Imgui</Filter>
+      <Filter>src\ChocoGL\Imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Buffer.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Camera.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Framebuffer.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\GraphicsContext.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Material.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Mesh.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\RenderCommandQueue.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\RenderPass.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Renderer.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Renderer\Renderer2D.h">
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\RendererAPI.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Renderer\SceneRenderer.h">
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Shader.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\ShaderUniform.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Texture.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\VertexArray.h">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Scene\Components.h">
+      <Filter>src\ChocoGL\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Scene\Entity.h">
+      <Filter>src\ChocoGL\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Scene\Scene.h">
+      <Filter>src\ChocoGL\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Script\ScriptEngine.h">
+      <Filter>src\ChocoGL\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Script\ScriptEngineRegistry.h">
+      <Filter>src\ChocoGL\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Script\ScriptWrappers.h">
+      <Filter>src\ChocoGL\Script</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRenderPass.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLShaderUniform.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
-      <Filter>Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\clpch.h" />
-    <ClInclude Include="src\ChocoGL\Scene\Entity.h" />
-    <ClInclude Include="src\ChocoGL\Scene\Scene.h" />
-    <ClInclude Include="src\ChocoGL\Renderer\SceneRenderer.h" />
-    <ClInclude Include="src\ChocoGL\Editor\SceneHierarchyPanel.h" />
-    <ClInclude Include="src\ChocoGL\Core\Math\Mat4.h" />
-    <ClInclude Include="src\ChocoGL\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\ChocoGL\Core\Math\AABB.h" />
-    <ClInclude Include="src\ChocoGL\Core\Math\Ray.h" />
+    <ClInclude Include="src\clpch.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ChocoGL\Core\Application.cpp">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Core\Core.cpp">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Core\Layer.cpp">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Core\LayerStack.cpp">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Core\Log.cpp">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Core\Math\Mat4.cpp">
+      <Filter>src\ChocoGL\Core\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Core\Math\Noise.cpp">
+      <Filter>src\ChocoGL\Core\Math</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Core\Timestep.cpp">
-      <Filter>ChocoGL\Core</Filter>
+      <Filter>src\ChocoGL\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Editor\SceneHierarchyPanel.cpp">
+      <Filter>src\ChocoGL\Editor</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Imgui\ImGuiBuild.cpp">
-      <Filter>ChocoGL\Imgui</Filter>
+      <Filter>src\ChocoGL\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Imgui\ImGuizmo.cpp">
-      <Filter>ChocoGL\Imgui</Filter>
+      <Filter>src\ChocoGL\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Imgui\ImguiLayer.cpp">
-      <Filter>ChocoGL\Imgui</Filter>
+      <Filter>src\ChocoGL\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Buffer.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Camera.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Framebuffer.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Material.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Mesh.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\RenderCommandQueue.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\RenderPass.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Renderer.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Renderer\Renderer2D.cpp">
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Renderer\SceneRenderer.cpp">
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Shader.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Texture.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\VertexArray.cpp">
-      <Filter>ChocoGL\Renderer</Filter>
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Scene\Entity.cpp">
+      <Filter>src\ChocoGL\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Scene\Scene.cpp">
+      <Filter>src\ChocoGL\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Script\ScriptEngine.cpp">
+      <Filter>src\ChocoGL\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Script\ScriptEngineRegistry.cpp">
+      <Filter>src\ChocoGL\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Script\ScriptWrappers.cpp">
+      <Filter>src\ChocoGL\Script</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Vendor\stb_image.cpp.cpp">
-      <Filter>ChocoGL\Vendor</Filter>
+      <Filter>src\ChocoGL\Vendor</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRenderPass.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLShaderUniform.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
-      <Filter>Platform\OpenGL</Filter>
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
-      <Filter>Platform\Windows</Filter>
+      <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\clpch.cpp" />
-    <ClCompile Include="src\ChocoGL\Scene\Entity.cpp" />
-    <ClCompile Include="src\ChocoGL\Scene\Scene.cpp" />
-    <ClCompile Include="src\ChocoGL\Renderer\SceneRenderer.cpp" />
-    <ClCompile Include="src\ChocoGL\Editor\SceneHierarchyPanel.cpp" />
-    <ClCompile Include="src\ChocoGL\Core\Math\Mat4.cpp" />
-    <ClCompile Include="src\ChocoGL\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\clpch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\FastNoise\FastNoise.cpp">
+      <Filter>vendor\FastNoise</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
