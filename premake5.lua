@@ -90,7 +90,7 @@ project "ChocoGL"
 		"opengl32.lib",
 		"%{LibraryDir.mono}"
 	}
-	filter "files:%{prj.name}/vendor/FastNoise/**.cpp"
+	filter "files:ChocoGL/vendor/FastNoise/**.cpp"
    	flags { "NoPCH" }
 
 	filter "system:windows"

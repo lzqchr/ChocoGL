@@ -44,11 +44,10 @@ namespace ChocoGL {
 				glTexImage2D(GL_TEXTURE_2D, 0, ChocoGLToOpenGLTextureFormat(instance->m_Format), instance->m_Width, instance->m_Height, 0, ChocoGLToOpenGLTextureFormat(instance->m_Format), GL_UNSIGNED_BYTE, nullptr);
 
 				glBindTexture(GL_TEXTURE_2D, 0);
+			});
 
-				});
 		m_ImageData.Allocate(width * height * Texture::GetBPP(m_Format));
 	}
-
 
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path, bool srgb)
 		: m_FilePath(path)
@@ -101,13 +100,13 @@ namespace ChocoGL {
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 					GLenum internalFormat = ChocoGLToOpenGLTextureFormat(instance->m_Format);
 					GLenum format = srgb ? GL_SRGB8 : (instance->m_IsHDR ? GL_RGB : ChocoGLToOpenGLTextureFormat(instance->m_Format)); // HDR = GL_RGB for now
 					GLenum type = internalFormat == GL_RGBA16F ? GL_FLOAT : GL_UNSIGNED_BYTE;
 					glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, instance->m_Width, instance->m_Height, 0, format, type, instance->m_ImageData.Data);
+					glGenerateMipmap(GL_TEXTURE_2D);
 
 					glBindTexture(GL_TEXTURE_2D, 0);
 				}
@@ -141,8 +140,7 @@ namespace ChocoGL {
 		m_Locked = false;
 		Ref<OpenGLTexture2D> instance = this;
 		Renderer::Submit([instance]() {
-			glTextureSubImage2D(instance->m_RendererID, 0, 0, 0, instance->m_Width, instance->m_Height,
-				ChocoGLToOpenGLTextureFormat(instance->m_Format), GL_UNSIGNED_BYTE, instance->m_ImageData.Data);
+			glTextureSubImage2D(instance->m_RendererID, 0, 0, 0, instance->m_Width, instance->m_Height, ChocoGLToOpenGLTextureFormat(instance->m_Format), GL_UNSIGNED_BYTE, instance->m_ImageData.Data);
 			});
 	}
 
@@ -170,6 +168,7 @@ namespace ChocoGL {
 	//////////////////////////////////////////////////////////////////////////////////
 	// TextureCube
 	//////////////////////////////////////////////////////////////////////////////////
+
 	OpenGLTextureCube::OpenGLTextureCube(TextureFormat format, uint32_t width, uint32_t height)
 	{
 		m_Width = width;
@@ -177,24 +176,23 @@ namespace ChocoGL {
 		m_Format = format;
 
 		uint32_t levels = Texture::CalculateMipMapCount(width, height);
-
 		Ref<OpenGLTextureCube> instance = this;
 		Renderer::Submit([instance, levels]() mutable
 			{
 				glCreateTextures(GL_TEXTURE_CUBE_MAP, 1, &instance->m_RendererID);
 				glTextureStorage2D(instance->m_RendererID, levels, ChocoGLToOpenGLTextureFormat(instance->m_Format), instance->m_Width, instance->m_Height);
 				glTextureParameteri(instance->m_RendererID, GL_TEXTURE_MIN_FILTER, levels > 1 ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR);
-				
 				glTextureParameteri(instance->m_RendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 				glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 				glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 				glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-			// glTextureParameterf(m_RendererID, GL_TEXTURE_MAX_ANISOTROPY, 16);
+				// glTextureParameterf(m_RendererID, GL_TEXTURE_MAX_ANISOTROPY, 16);
 			});
 	}
 
-
+	// TODO: Revisit this, as currently env maps are being loaded as equirectangular 2D images
+	//       so this is an old path
 	OpenGLTextureCube::OpenGLTextureCube(const std::string& path)
 		: m_FilePath(path)
 	{
@@ -258,27 +256,31 @@ namespace ChocoGL {
 				glGenTextures(1, &instance->m_RendererID);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, instance->m_RendererID);
 
-			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-			glTextureParameterf(instance->m_RendererID, GL_TEXTURE_MAX_ANISOTROPY, RendererAPI::GetCapabilities().MaxAnisotropy);
+				glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+				glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+				glTextureParameterf(instance->m_RendererID, GL_TEXTURE_MAX_ANISOTROPY, RendererAPI::GetCapabilities().MaxAnisotropy);
 
-			auto format = ChocoGLToOpenGLTextureFormat(instance->m_Format);
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[2]);
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[0]);
+				auto format = ChocoGLToOpenGLTextureFormat(instance->m_Format);
+				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[2]);
+				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[0]);
 
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[4]);
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[5]);
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[1]);
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[3]);
-			glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
-			glBindTexture(GL_TEXTURE_2D, 0);
-			for (size_t i = 0; i < faces.size(); i++)
-				delete[] faces[i];
+				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[4]);
+				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[5]);
 
-			stbi_image_free(instance->m_ImageData);
+				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[1]);
+				glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, format, faceWidth, faceHeight, 0, format, GL_UNSIGNED_BYTE, faces[3]);
+
+				glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+
+				glBindTexture(GL_TEXTURE_2D, 0);
+
+				for (size_t i = 0; i < faces.size(); i++)
+					delete[] faces[i];
+
+				stbi_image_free(instance->m_ImageData);
 			});
 	}
 
@@ -302,4 +304,5 @@ namespace ChocoGL {
 	{
 		return Texture::CalculateMipMapCount(m_Width, m_Height);
 	}
+
 }

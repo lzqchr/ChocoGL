@@ -21,7 +21,7 @@ namespace ChocoGL {
 		switch (RendererAPI::Current())
 		{
 		case RendererAPIType::None: return nullptr;
-		case RendererAPIType::OpenGL: return Ref<OpenGLTexture2D>::Create(path,srgb);
+		case RendererAPIType::OpenGL: return Ref<OpenGLTexture2D>::Create(path, srgb);
 		}
 		return nullptr;
 	}
@@ -41,7 +41,7 @@ namespace ChocoGL {
 		switch (RendererAPI::Current())
 		{
 		case RendererAPIType::None: return nullptr;
-		case RendererAPIType::OpenGL:  return Ref<OpenGLTextureCube>::Create(path);
+		case RendererAPIType::OpenGL: return Ref<OpenGLTextureCube>::Create(path);
 		}
 		return nullptr;
 	}
