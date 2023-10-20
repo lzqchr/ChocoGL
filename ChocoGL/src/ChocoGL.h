@@ -34,6 +34,8 @@
 // Scenes
 #include "ChocoGL/Scene/Entity.h"
 #include "ChocoGL/Scene/Scene.h"
+#include "ChocoGL/Scene/SceneCamera.h"
+#include "ChocoGL/Scene/SceneSerializer.h"
 #include "ChocoGL/Scene/Components.h"
 
 //-----------EntryPoint------------------------

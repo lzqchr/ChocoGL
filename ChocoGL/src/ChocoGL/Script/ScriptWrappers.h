@@ -19,13 +19,13 @@ namespace ChocoGL { namespace Script {
 	bool ChocoGL_Input_IsKeyPressed(KeyCode key);
 
 	// Entity
-	void ChocoGL_Entity_GetTransform(uint32_t sceneID, uint32_t entityID, glm::mat4* outTransform);
-	void ChocoGL_Entity_SetTransform(uint32_t sceneID, uint32_t entityID, glm::mat4* inTransform);
-	void ChocoGL_Entity_CreateComponent(uint32_t sceneID, uint32_t entityID, void* type);
-	bool ChocoGL_Entity_HasComponent(uint32_t sceneID, uint32_t entityID, void* type);
+	void ChocoGL_Entity_GetTransform(uint64_t entityID, glm::mat4* outTransform);
+	void ChocoGL_Entity_SetTransform(uint64_t entityID, glm::mat4* inTransform);
+	void ChocoGL_Entity_CreateComponent(uint64_t entityID, void* type);
+	bool ChocoGL_Entity_HasComponent(uint64_t entityID, void* type);
 
-	void* ChocoGL_MeshComponent_GetMesh(uint32_t sceneID, uint32_t entityID);
-	void ChocoGL_MeshComponent_SetMesh(uint32_t sceneID, uint32_t entityID, Ref<Mesh>* inMesh);
+	void* ChocoGL_MeshComponent_GetMesh(uint64_t entityID);
+	void ChocoGL_MeshComponent_SetMesh(uint64_t entityID, Ref<Mesh>* inMesh);
 
 	// Renderer
 	// Texture2D

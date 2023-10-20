@@ -96,7 +96,7 @@ namespace ChocoGL {
 		{
 			CL_CORE_ASSERT(false, "Could not load shader!");
 		}
-
+		in.close();
 		return result;
 	}
 

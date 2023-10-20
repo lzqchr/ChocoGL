@@ -57,7 +57,11 @@ project "ChocoGL"
 		"%{prj.name}/src/**.cpp" ,
 		"%{prj.name}/src/**.cpp",
 
-		"%{prj.name}/vendor/FastNoise/**.cpp"
+		"%{prj.name}/vendor/FastNoise/**.cpp",
+
+		"%{prj.name}/vendor/yaml-cpp/src/**.cpp",
+		"%{prj.name}/vendor/yaml-cpp/src/**.h",
+		"%{prj.name}/vendor/yaml-cpp/include/**.h"
 		
 	}
 
@@ -80,6 +84,7 @@ project "ChocoGL"
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.mono}",
 		"%{IncludeDir.FastNoise}",
+		"%{prj.name}/vendor/yaml-cpp/include"
 	}
 
 	links 
@@ -90,11 +95,10 @@ project "ChocoGL"
 		"opengl32.lib",
 		"%{LibraryDir.mono}"
 	}
-	filter "files:ChocoGL/vendor/FastNoise/**.cpp"
+	filter "files:ChocoGL/vendor/FastNoise/**.cpp or files:ChocoGL/vendor/yaml-cpp/src/**.cpp"
    	flags { "NoPCH" }
 
 	filter "system:windows"
-
 		systemversion "latest"
 
 		defines
@@ -129,6 +133,24 @@ project "ChocoGL-ScriptCore"
 	files 
 	{
 		"%{prj.name}/src/**.cs", 
+	}
+
+project "ExampleApp"
+	location "ExampleApp"
+	kind "SharedLib"
+	language "C#"
+
+	targetdir ("CoCo/assets/scripts")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/src/**.cs", 
+	}
+
+	links
+	{
+		"ChocoGL-ScriptCore"
 	}
 group ""
 
@@ -202,7 +224,7 @@ project "CoCo"
 		postbuildcommands 
 		{
 			'{COPY} "../ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.dll" "%{cfg.targetdir}"',
-			'{COPY} "../Hazel/vendor/mono/bin/Debug/mono-2.0-sgen.dll" "%{cfg.targetdir}"'
+			'{COPY} "../ChocoGL/vendor/mono/bin/Debug/mono-2.0-sgen.dll" "%{cfg.targetdir}"'
 		}
 
 	filter "configurations:Dist"
@@ -220,7 +242,6 @@ project "CoCo"
 		}
 group ""
 
-group "Examples"
 project "ExampleApp"
 	location "ExampleApp"
 	kind "SharedLib"
@@ -237,6 +258,19 @@ project "ExampleApp"
 	links
 	{
 		"ChocoGL-ScriptCore"
+	}
+
+project "ChocoGL-ScriptCore"
+	location "ChocoGL-ScriptCore"
+	kind "SharedLib"
+	language "C#"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"%{prj.name}/src/**.cs", 
 	}
 	
 --[[project "Sandbox"
@@ -309,4 +343,3 @@ project "ExampleApp"
 			"ChocoGL/vendor/assimp/bin/Debug/assimp-vc141-mtd.lib"
 		}
 ]]
-group ""

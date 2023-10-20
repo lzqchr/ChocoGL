@@ -3,6 +3,7 @@
 #include "ChocoGL.h"
 
 #include "ChocoGL/ImGui/ImGuiLayer.h"
+#include "ChocoGL/Editor/EditorCamera.h"
 #include "imgui/imgui_internal.h"
 
 #include <glm/glm.hpp>
@@ -12,7 +13,9 @@
 #include <glm/gtx/quaternion.hpp>
 
 #include <string>
+
 #include "ChocoGL/Editor/SceneHierarchyPanel.h"
+
 namespace ChocoGL {
 
 	class EditorLayer : public Layer
@@ -32,7 +35,6 @@ namespace ChocoGL {
 
 		virtual void OnImGuiRender() override;
 		virtual void OnEvent(Event& e) override;
-
 		bool OnKeyPressedEvent(KeyPressedEvent& e);
 		bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
 
@@ -47,6 +49,7 @@ namespace ChocoGL {
 		void Property(const std::string& name, glm::vec4& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
 
 		void ShowBoundingBoxes(bool show, bool onTop = false);
+		void SelectEntity(Entity entity);
 	private:
 		std::pair<float, float> GetMouseViewportSpace();
 		std::pair<glm::vec3, glm::vec3> CastRay(float mx, float my);
@@ -54,28 +57,30 @@ namespace ChocoGL {
 		struct SelectedSubmesh
 		{
 			ChocoGL::Entity Entity;
-			Submesh* Mesh;
-			float Distance;
+			Submesh* Mesh = nullptr;
+			float Distance = 0.0f;
 		};
+
 		void OnSelected(const SelectedSubmesh& selectionContext);
+		void OnEntityDeleted(Entity e);
 		Ray CastMouseRay();
+
+		void OnScenePlay();
+		void OnSceneStop();
 	private:
 		Scope<SceneHierarchyPanel> m_SceneHierarchyPanel;
 
-		Ref<Scene> m_Scene;
-		Ref<Scene> m_SphereScene;
 		Ref<Scene> m_ActiveScene;
+		Ref<Scene> m_RuntimeScene, m_EditorScene;
+
+		EditorCamera m_EditorCamera;
 
 		Ref<Shader> m_BrushShader;
 		Ref<Material> m_SphereBaseMaterial;
 
-		Entity m_MeshEntity;
-		Entity m_CameraEntity;
-
 		Ref<Material> m_MeshMaterial;
 		std::vector<Ref<MaterialInstance>> m_MetalSphereMaterialInstances;
 		std::vector<Ref<MaterialInstance>> m_DielectricSphereMaterialInstances;
-
 
 		struct AlbedoInput
 		{
@@ -109,14 +114,6 @@ namespace ChocoGL {
 		};
 		RoughnessInput m_RoughnessInput;
 
-		struct Light
-		{
-			glm::vec3 Direction;
-			glm::vec3 Radiance;
-		};
-		Light m_Light;
-		float m_LightMultiplier = 0.3f;
-
 		// PBR params
 		bool m_RadiancePrefilter = false;
 
@@ -130,16 +127,25 @@ namespace ChocoGL {
 
 		// Editor resources
 		Ref<Texture2D> m_CheckerboardTex;
+		Ref<Texture2D> m_PlayButtonTex;
 
 		glm::vec2 m_ViewportBounds[2];
 		int m_GizmoType = -1; // -1 = no gizmo
-		//glm::mat4 m_Transform;
 		float m_SnapValue = 0.5f;
 		bool m_AllowViewportCameraEvents = false;
 		bool m_DrawOnTopBoundingBoxes = false;
 
 		bool m_UIShowBoundingBoxes = false;
 		bool m_UIShowBoundingBoxesOnTop = false;
+
+		bool m_ViewportPanelMouseOver = false;
+		bool m_ViewportPanelFocused = false;
+
+		enum class SceneState
+		{
+			Edit = 0, Play = 1, Pause = 2
+		};
+		SceneState m_SceneState = SceneState::Edit;
 
 		enum class SelectionMode
 		{
@@ -150,7 +156,6 @@ namespace ChocoGL {
 		std::vector<SelectedSubmesh> m_SelectionContext;
 		glm::mat4* m_RelativeTransform = nullptr;
 		glm::mat4* m_CurrentlySelectedTransform = nullptr;
-
 	};
 
 }
