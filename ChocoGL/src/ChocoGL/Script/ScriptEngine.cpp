@@ -220,6 +220,7 @@ namespace ChocoGL {
 		return mono_string_new(s_MonoDomain, "Hello!");
 	}
 
+	//set  domain and image
 	void ScriptEngine::LoadChocoGLRuntimeAssembly(const std::string& path)
 	{
 		MonoDomain* domain = nullptr;

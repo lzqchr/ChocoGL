@@ -59,7 +59,7 @@ namespace ChocoGL {
 		m_SkyboxMaterial = MaterialInstance::Create(Material::Create(skyboxShader));
 		m_SkyboxMaterial->SetFlag(MaterialFlag::DepthTest, false);
 	}
-
+	 
 	// Merge OnUpdate/Render into one function?
 	void Scene::OnUpdate(Timestep ts)
 	{

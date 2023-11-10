@@ -23,7 +23,7 @@ namespace ChocoGL {
 	void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height, bool forceRecreate)
 	{
 		if (!forceRecreate && (m_Specification.Width == width && m_Specification.Height == height))
-
+			return;
 		m_Specification.Width = width;
 		m_Specification.Height = height;
 		Renderer::Submit([this]()
@@ -44,7 +44,7 @@ namespace ChocoGL {
 					glCreateTextures(GL_TEXTURE_2D_MULTISAMPLE, 1, &m_ColorAttachment);
 					glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_ColorAttachment);
 
-					// TODO: Create Hazel texture object based on format here
+					// TODO: Create ChocoGL texture object based on format here
 					if (m_Specification.Format == FramebufferFormat::RGBA16F)
 					{
 						glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, m_Specification.Samples, GL_RGBA16F, m_Specification.Width, m_Specification.Height, GL_FALSE);
@@ -63,7 +63,7 @@ namespace ChocoGL {
 					glCreateTextures(GL_TEXTURE_2D, 1, &m_ColorAttachment);
 					glBindTexture(GL_TEXTURE_2D, m_ColorAttachment);
 
-					// TODO: Create Hazel texture object based on format here
+					// TODO: Create ChocoGL texture object based on format here
 					if (m_Specification.Format == FramebufferFormat::RGBA16F)
 					{
 						glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, m_Specification.Width, m_Specification.Height, 0, GL_RGBA, GL_FLOAT, nullptr);
