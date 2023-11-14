@@ -45,6 +45,9 @@ namespace ChocoGL {
 		std::string OpenFile(const char* filter = "All\0*.*\0") const;
 		std::string SaveFile(const char* filter = "All\0*.*\0") const;
 
+		static const char* GetConfigurationName();
+		static const char* GetPlatformName();
+
 		inline Window& GetWindow() { return *m_Window; }
 
 		static inline Application& Get() { return *s_Instance; }

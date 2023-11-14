@@ -23,7 +23,7 @@ namespace ChocoGL {
 	public:
 		enum class PropertyFlag
 		{
-			None = 0, ColorProperty = 1
+			None = 0, ColorProperty = 1, DragProperty = 2, SliderProperty = 4
 		};
 	public:
 		EditorLayer();
@@ -40,13 +40,13 @@ namespace ChocoGL {
 
 		// ImGui UI helpers
 		bool Property(const std::string& name, bool& value);
-		void Property(const std::string& name, float& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
-		void Property(const std::string& name, glm::vec2& value, PropertyFlag flags);
-		void Property(const std::string& name, glm::vec2& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
-		void Property(const std::string& name, glm::vec3& value, PropertyFlag flags);
-		void Property(const std::string& name, glm::vec3& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
-		void Property(const std::string& name, glm::vec4& value, PropertyFlag flags);
-		void Property(const std::string& name, glm::vec4& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
+		bool Property(const std::string& name, float& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
+		bool Property(const std::string& name, glm::vec2& value, PropertyFlag flags);
+		bool Property(const std::string& name, glm::vec2& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
+		bool Property(const std::string& name, glm::vec3& value, PropertyFlag flags);
+		bool Property(const std::string& name, glm::vec3& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
+		bool Property(const std::string& name, glm::vec4& value, PropertyFlag flags);
+		bool Property(const std::string& name, glm::vec4& value, float min = -1.0f, float max = 1.0f, PropertyFlag flags = PropertyFlag::None);
 
 		void ShowBoundingBoxes(bool show, bool onTop = false);
 		void SelectEntity(Entity entity);
@@ -67,11 +67,13 @@ namespace ChocoGL {
 
 		void OnScenePlay();
 		void OnSceneStop();
+
+		void UpdateWindowTitle(const std::string& sceneName);
 	private:
 		Scope<SceneHierarchyPanel> m_SceneHierarchyPanel;
 
-		Ref<Scene> m_ActiveScene;
 		Ref<Scene> m_RuntimeScene, m_EditorScene;
+		bool m_ReloadScriptOnPlay = false;
 
 		EditorCamera m_EditorCamera;
 

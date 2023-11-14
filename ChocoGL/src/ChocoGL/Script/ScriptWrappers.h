@@ -27,6 +27,7 @@ namespace ChocoGL { namespace Script {
 	void* ChocoGL_MeshComponent_GetMesh(uint64_t entityID);
 	void ChocoGL_MeshComponent_SetMesh(uint64_t entityID, Ref<Mesh>* inMesh);
 
+	void ChocoGL_RigidBody2DComponent_ApplyLinearImpulse(uint64_t entityID, glm::vec2* impulse, glm::vec2* offset, bool wake);
 	// Renderer
 	// Texture2D
 	void* ChocoGL_Texture2D_Constructor(uint32_t width, uint32_t height);
@@ -41,6 +42,7 @@ namespace ChocoGL { namespace Script {
 	void ChocoGL_MaterialInstance_Destructor(Ref<MaterialInstance>* _this);
 	void ChocoGL_MaterialInstance_SetFloat(Ref<MaterialInstance>* _this, MonoString* uniform, float value);
 	void ChocoGL_MaterialInstance_SetVector3(Ref<MaterialInstance>* _this, MonoString* uniform, glm::vec3* value);
+	void ChocoGL_MaterialInstance_SetVector4(Ref<MaterialInstance>* _this, MonoString* uniform, glm::vec4* value);
 	void ChocoGL_MaterialInstance_SetTexture(Ref<MaterialInstance>* _this, MonoString* uniform, Ref<Texture2D>* texture);
 
 	// Mesh

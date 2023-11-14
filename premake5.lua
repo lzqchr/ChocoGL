@@ -23,6 +23,7 @@ IncludeDir["glm"]  = "ChocoGL/vendor/glm"
 IncludeDir["entt"] = "ChocoGL/vendor/entt/include"
 IncludeDir["FastNoise"] = "ChocoGL/vendor/FastNoise"
 IncludeDir["mono"] = "ChocoGL/vendor/mono/include"
+IncludeDir["Box2D"] = "ChocoGL/vendor/Box2D/include"
 
 LibraryDir = {}
 LibraryDir["mono"] = "vendor/mono/lib/Debug/mono-2.0-sgen.lib"
@@ -32,6 +33,7 @@ group "Dependencies"
 include "ChocoGL/vendor/GLFW"
 include "ChocoGL/vendor/Glad"
 include "ChocoGL/vendor/imgui"
+include "ChocoGL/vendor/Box2D"
 
 group ""
 
@@ -80,6 +82,7 @@ project "ChocoGL"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.Box2D}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.mono}",
@@ -92,6 +95,7 @@ project "ChocoGL"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"Box2D",
 		"opengl32.lib",
 		"%{LibraryDir.mono}"
 	}

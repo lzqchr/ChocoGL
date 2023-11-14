@@ -231,7 +231,7 @@ namespace ChocoGL {
 				auto aiMaterial = scene->mMaterials[i];
 				auto aiMaterialName = aiMaterial->GetName();
 
-				auto mi = Ref<MaterialInstance>::Create(m_BaseMaterial);
+				auto mi = Ref<MaterialInstance>::Create(m_BaseMaterial, aiMaterialName.data);
 				m_Materials[i] = mi;
 
 				CL_MESH_LOG(" {0} (Index = {1})", aiMaterialName.data, i);
@@ -613,8 +613,7 @@ namespace ChocoGL {
 		CL_CORE_ASSERT(NextPositionIndex < nodeAnim->mNumPositionKeys);
 		float DeltaTime = (float)(nodeAnim->mPositionKeys[NextPositionIndex].mTime - nodeAnim->mPositionKeys[PositionIndex].mTime);
 		float Factor = (animationTime - (float)nodeAnim->mPositionKeys[PositionIndex].mTime) / DeltaTime;
-		if (Factor < 0.0f)
-			Factor = 0.0f;
+		Factor = glm::clamp(Factor,0.0f, 1.0f);
 		CL_CORE_ASSERT(Factor <= 1.0f, "Factor must be below 1.0f");
 		const aiVector3D& Start = nodeAnim->mPositionKeys[PositionIndex].mValue;
 		const aiVector3D& End = nodeAnim->mPositionKeys[NextPositionIndex].mValue;
@@ -638,8 +637,7 @@ namespace ChocoGL {
 		CL_CORE_ASSERT(NextRotationIndex < nodeAnim->mNumRotationKeys);
 		float DeltaTime = (float)(nodeAnim->mRotationKeys[NextRotationIndex].mTime - nodeAnim->mRotationKeys[RotationIndex].mTime);
 		float Factor = (animationTime - (float)nodeAnim->mRotationKeys[RotationIndex].mTime) / DeltaTime;
-		if (Factor < 0.0f)
-			Factor = 0.0f;
+		Factor = glm::clamp(Factor, 0.0f, 1.0f);
 		CL_CORE_ASSERT(Factor <= 1.0f, "Factor must be below 1.0f");
 		const aiQuaternion& StartRotationQ = nodeAnim->mRotationKeys[RotationIndex].mValue;
 		const aiQuaternion& EndRotationQ = nodeAnim->mRotationKeys[NextRotationIndex].mValue;
@@ -664,8 +662,7 @@ namespace ChocoGL {
 		CL_CORE_ASSERT(nextIndex < nodeAnim->mNumScalingKeys);
 		float deltaTime = (float)(nodeAnim->mScalingKeys[nextIndex].mTime - nodeAnim->mScalingKeys[index].mTime);
 		float factor = (animationTime - (float)nodeAnim->mScalingKeys[index].mTime) / deltaTime;
-		if (factor < 0.0f)
-			factor = 0.0f;
+		factor = glm::clamp(factor, 0.0f, 1.0f);
 		CL_CORE_ASSERT(factor <= 1.0f, "Factor must be below 1.0f");
 		const auto& start = nodeAnim->mScalingKeys[index].mValue;
 		const auto& end = nodeAnim->mScalingKeys[nextIndex].mValue;

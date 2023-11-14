@@ -18,9 +18,12 @@ namespace ChocoGL {
 		virtual std::pair<uint32_t, uint32_t> GetSize() const override { return { m_Data.Width, m_Data.Height }; }
 		virtual std::pair<float, float> GetWindowPos() const override;
 		// Window attributes
-		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
-		void SetVSync(bool enabled);
-		bool IsVSync() const;
+		virtual void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+		virtual void SetVSync(bool enabled) override;
+		virtual bool IsVSync() const override;
+
+		virtual const std::string& GetTitle() const override { return m_Data.Title; }
+		virtual void SetTitle(const std::string& title) override;
 		inline void* GetNativeWindow() const { return m_Window; }
 	private:
 		virtual void Init(const WindowProps& props);

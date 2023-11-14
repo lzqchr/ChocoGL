@@ -56,21 +56,21 @@
   <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Dist|x64' ">
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Hazel\Entity.cs" />
-    <Compile Include="src\Hazel\Input.cs" />
-    <Compile Include="src\Hazel\KeyCodes.cs" />
-    <Compile Include="src\Hazel\Math\Matrix4.cs" />
-    <Compile Include="src\Hazel\Math\Noise.cs" />
-    <Compile Include="src\Hazel\Math\Vector2.cs" />
-    <Compile Include="src\Hazel\Math\Vector3.cs" />
-    <Compile Include="src\Hazel\Math\Vector4.cs" />
-    <Compile Include="src\Hazel\Renderer\Color.cs" />
-    <Compile Include="src\Hazel\Renderer\Material.cs" />
-    <Compile Include="src\Hazel\Renderer\Mesh.cs" />
-    <Compile Include="src\Hazel\Renderer\MeshFactory.cs" />
-    <Compile Include="src\Hazel\Renderer\Texture2D.cs" />
-    <Compile Include="src\Hazel\Scene\Component.cs" />
-    <Compile Include="src\Hazel\SpriteRenderer.cs" />
+    <Compile Include="src\ChocoGL\Entity.cs" />
+    <Compile Include="src\ChocoGL\Input.cs" />
+    <Compile Include="src\ChocoGL\KeyCodes.cs" />
+    <Compile Include="src\ChocoGL\Math\Matrix4.cs" />
+    <Compile Include="src\ChocoGL\Math\Noise.cs" />
+    <Compile Include="src\ChocoGL\Math\Vector2.cs" />
+    <Compile Include="src\ChocoGL\Math\Vector3.cs" />
+    <Compile Include="src\ChocoGL\Math\Vector4.cs" />
+    <Compile Include="src\ChocoGL\Renderer\Color.cs" />
+    <Compile Include="src\ChocoGL\Renderer\Material.cs" />
+    <Compile Include="src\ChocoGL\Renderer\Mesh.cs" />
+    <Compile Include="src\ChocoGL\Renderer\MeshFactory.cs" />
+    <Compile Include="src\ChocoGL\Renderer\Texture2D.cs" />
+    <Compile Include="src\ChocoGL\Scene\Component.cs" />
+    <Compile Include="src\ChocoGL\SpriteRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

@@ -38,6 +38,8 @@ namespace ChocoGL {
 		Component_RegisterType(ScriptComponent);
 		Component_RegisterType(CameraComponent);
 		Component_RegisterType(SpriteRendererComponent);
+		Component_RegisterType(RigidBody2DComponent);
+		Component_RegisterType(BoxCollider2DComponent);
 	}
 
 	void ScriptEngineRegistry::RegisterAll()
@@ -48,6 +50,7 @@ namespace ChocoGL {
 
 		mono_add_internal_call("ChocoGL.Entity::GetTransform_Native", ChocoGL::Script::ChocoGL_Entity_GetTransform);
 		mono_add_internal_call("ChocoGL.Entity::SetTransform_Native", ChocoGL::Script::ChocoGL_Entity_SetTransform);
+		mono_add_internal_call("ChocoGL.RigidBody2DComponent::ApplyLinearImpulse_Native", ChocoGL::Script::ChocoGL_RigidBody2DComponent_ApplyLinearImpulse);
 		mono_add_internal_call("ChocoGL.Entity::CreateComponent_Native", ChocoGL::Script::ChocoGL_Entity_CreateComponent);
 		mono_add_internal_call("ChocoGL.Entity::HasComponent_Native", ChocoGL::Script::ChocoGL_Entity_HasComponent);
 		
@@ -67,6 +70,7 @@ namespace ChocoGL {
 		mono_add_internal_call("ChocoGL.MaterialInstance::Destructor_Native", ChocoGL::Script::ChocoGL_MaterialInstance_Destructor);
 		mono_add_internal_call("ChocoGL.MaterialInstance::SetFloat_Native", ChocoGL::Script::ChocoGL_MaterialInstance_SetFloat);
 		mono_add_internal_call("ChocoGL.MaterialInstance::SetVector3_Native", ChocoGL::Script::ChocoGL_MaterialInstance_SetVector3);
+		mono_add_internal_call("ChocoGL.MaterialInstance::SetVector4_Native", ChocoGL::Script::ChocoGL_MaterialInstance_SetVector4);
 		mono_add_internal_call("ChocoGL.MaterialInstance::SetTexture_Native", ChocoGL::Script::ChocoGL_MaterialInstance_SetTexture);
 
 		mono_add_internal_call("ChocoGL.Mesh::Constructor_Native", ChocoGL::Script::ChocoGL_Mesh_Constructor);
