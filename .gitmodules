@@ -14,3 +14,6 @@
 [submodule "ChocoGL/vendor/FastNoise"]
 	path = ChocoGL/vendor/FastNoise
 	url = https://github.com/Auburns/FastNoise
+[submodule "ChocoGL/vendor/Box2D"]
+	path = ChocoGL/vendor/Box2D
+	url = https://github.com/TheCherno/Box2D
