@@ -42,12 +42,13 @@ namespace ChocoGL {
 	void Material::OnShaderReloaded()
 	{
 
-		return;//??????????????????????
+		return;
 		AllocateStorage();
 
 		for (auto mi : m_MaterialInstances)
 			mi->OnShaderReloaded();
 	}
+	
 
 	ShaderUniformDeclaration* Material::FindUniformDeclaration(const std::string& name)
 	{

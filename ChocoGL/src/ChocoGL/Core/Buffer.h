@@ -42,11 +42,19 @@ namespace ChocoGL {
 				memset(Data, 0, Size);
 		}
 
+		template<typename T>
+		T& Read(uint32_t offset = 0)
+		{
+			return *(T*)(Data + offset);
+		}
+
 		void Write(void* data, uint32_t size, uint32_t offset = 0)
 		{
 			CL_CORE_ASSERT(offset + size <= Size, "Buffer overflow!");
 			memcpy(Data + offset, data, size);
 		}
+
+
 
 		operator bool() const
 		{

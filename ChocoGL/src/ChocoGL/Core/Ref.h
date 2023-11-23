@@ -46,14 +46,15 @@ namespace ChocoGL {
 		template<typename T2>
 		Ref(const Ref<T2>& other)
 		{
-			m_Instance = other.m_Instance;
+
+			m_Instance = (T*)other.m_Instance;
 			IncRef();
 		}
 		//move Constructor
 		template<typename T2>
 		Ref(Ref<T2>&& other)
 		{
-			m_Instance = other.m_Instance;
+			m_Instance = (T*)other.m_Instance;
 			other.m_Instance = nullptr;
 		}
 
@@ -90,7 +91,7 @@ namespace ChocoGL {
 			other.IncRef();
 			DecRef();
 
-			m_Instance = other.m_Instance;
+			m_Instance = (T*)other.m_Instance;
 			return *this;
 		}
 
@@ -99,7 +100,8 @@ namespace ChocoGL {
 		{
 			DecRef();
 
-			m_Instance = other.m_Instance;
+			m_Instance = (T*)other.m_Instance;
+
 			other.m_Instance = nullptr;
 			return *this;
 		}

@@ -22,9 +22,6 @@ namespace ChocoGL {
 	void* RenderCommandQueue::Allocate(RenderCommandFn fn, uint32_t size)
 
 	{
-		//m_CommandBufferPtr  
-		// &fn sizeof(fn) &fn1 sizeof(fn1) &fn2 sizeof(fn2)
-		// TODO: alignment
 
 		*(RenderCommandFn*)m_CommandBufferPtr = fn;
 
