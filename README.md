@@ -1,8 +1,8 @@
 # ChocoGL
-## ChocoGL Engin ![Language](https://img.shields.io/badge/language-c++-brightgreen)
+## ChocoGL Engine ![Language](https://img.shields.io/badge/language-c++-)
 ### TODO
 - physics
-- RBR
+- PBR
 - ImGui
 - Play Button
 - Mouse pick 
