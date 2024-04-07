@@ -5,8 +5,10 @@
 
 #include "ChocoGL/Core/Timestep.h"
 
-#include "ChocoGL/Renderer/VertexArray.h"
-#include "ChocoGL/Renderer/Buffer.h"
+
+#include "ChocoGL/Renderer/Pipeline.h"
+#include "ChocoGL/Renderer/IndexBuffer.h"
+#include "ChocoGL/Renderer/VertexBuffer.h"
 #include "ChocoGL/Renderer/Shader.h"
 #include "ChocoGL/Renderer/Material.h"
 #include "ChocoGL/Core/Math/AABB.h"
@@ -169,7 +171,9 @@ namespace ChocoGL {
 		uint32_t m_BoneCount = 0;
 		std::vector<BoneInfo> m_BoneInfo;
 
-		Ref<VertexArray> m_VertexArray;
+		Ref<Pipeline> m_Pipeline;
+		Ref<VertexBuffer> m_VertexBuffer;
+		Ref<IndexBuffer> m_IndexBuffer;
 
 
 		std::vector<Vertex> m_StaticVertices;

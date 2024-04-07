@@ -59,6 +59,7 @@
     <Compile Include="src\ChocoGL\Entity.cs" />
     <Compile Include="src\ChocoGL\Input.cs" />
     <Compile Include="src\ChocoGL\KeyCodes.cs" />
+    <Compile Include="src\ChocoGL\Math\Mathf.cs" />
     <Compile Include="src\ChocoGL\Math\Matrix4.cs" />
     <Compile Include="src\ChocoGL\Math\Noise.cs" />
     <Compile Include="src\ChocoGL\Math\Vector2.cs" />

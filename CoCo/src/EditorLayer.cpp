@@ -111,6 +111,7 @@ namespace ChocoGL {
 
 	void EditorLayer::OnDetach()
 	{
+		m_EditorScene->OnShutdown();
 	}
 
 	void EditorLayer::OnScenePlay()

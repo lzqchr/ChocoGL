@@ -16,20 +16,22 @@
 #include "ChocoGL/Core/Math/AABB.h"
 #include "ChocoGL/Core/Math/Ray.h"
 
-#include"imgui\imgui.h"
+#include"imgui/imgui.h"
 
 
 //----------Render API ---------------
 #include "ChocoGL/Renderer/Renderer.h"
 #include "ChocoGL/Renderer/SceneRenderer.h"
+#include "ChocoGL/Renderer/RenderPass.h"
 #include "ChocoGL/Renderer/Framebuffer.h"
-#include "ChocoGL/Renderer/Buffer.h"
+#include "ChocoGL/Renderer/VertexBuffer.h"
+#include "ChocoGL/Renderer/IndexBuffer.h"
+#include "ChocoGL/Renderer/Pipeline.h"
 #include "ChocoGL/Renderer/Texture.h"
 #include "ChocoGL/Renderer/Shader.h"
 #include "ChocoGL/Renderer/Mesh.h"
 #include "ChocoGL/Renderer/Camera.h"
 #include "ChocoGL/Renderer/Material.h"
-#include "ChocoGL/Renderer/RenderPass.h"
 
 // Scenes
 #include "ChocoGL/Scene/Entity.h"

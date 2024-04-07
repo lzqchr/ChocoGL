@@ -41,6 +41,23 @@ namespace ChocoGL
             Z = vector.Z;
         }
 
+        public void Clamp(Vector3 min, Vector3 max)
+        {
+            X = Mathf.Clamp(X, min.X, max.X);
+            Y = Mathf.Clamp(Y, min.Y, max.Y);
+            Z = Mathf.Clamp(Z, min.Z, max.Z);
+        }
+
+        public static Vector3 operator *(Vector3 left, float scalar)
+        {
+            return new Vector3(left.X * scalar, left.Y * scalar, left.Z * scalar);
+        }
+
+        public static Vector3 operator *(float scalar, Vector3 right)
+        {
+            return new Vector3(scalar * right.X, scalar * right.Y, scalar * right.Z);
+        }
+
         public Vector2 XY
         {
             get { return new Vector2(X, Y); }

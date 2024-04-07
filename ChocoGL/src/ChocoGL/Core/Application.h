@@ -10,7 +10,7 @@
 #include "ChocoGL/ImGui/ImGuiLayer.h"
 
 #include "ChocoGL/Renderer/Shader.h"
-#include "ChocoGL/Renderer/Buffer.h"
+//#include "ChocoGL/Renderer/Buffer.h"
 
 #include"ChocoGL\Core/Timestep.h"
 

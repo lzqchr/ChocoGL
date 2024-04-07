@@ -4,7 +4,7 @@
 
 #include <assimp/matrix4x4.h>
 
-namespace Hazel {
+namespace ChocoGL {
 
 	/*glm::mat4 Mat4::FromAssimpMat4(const aiMatrix4x4& matrix)
 	{

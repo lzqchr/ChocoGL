@@ -22,6 +22,9 @@
     <Filter Include="src\ChocoGL\Imgui">
       <UniqueIdentifier>{05FEC045-7114-BFDB-BA8B-4AFD26E18F63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ChocoGL\Physics">
+      <UniqueIdentifier>{ED1E6BCA-5980-48D8-E2ED-8E8A4E4E7F97}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\ChocoGL\Renderer">
       <UniqueIdentifier>{81CEA9EE-6D5D-33B8-167C-47B302EA435E}</UniqueIdentifier>
     </Filter>
@@ -162,8 +165,8 @@
     <ClInclude Include="src\ChocoGL\Imgui\ImGuizmo.h">
       <Filter>src\ChocoGL\Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\ChocoGL\Renderer\Buffer.h">
-      <Filter>src\ChocoGL\Renderer</Filter>
+    <ClInclude Include="src\ChocoGL\Physics\Physics3D.h">
+      <Filter>src\ChocoGL\Physics</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Camera.h">
       <Filter>src\ChocoGL\Renderer</Filter>
@@ -174,10 +177,16 @@
     <ClInclude Include="src\ChocoGL\Renderer\GraphicsContext.h">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\ChocoGL\Renderer\IndexBuffer.h">
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Material.h">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\Mesh.h">
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ChocoGL\Renderer\Pipeline.h">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Renderer\RenderCommandQueue.h">
@@ -207,7 +216,7 @@
     <ClInclude Include="src\ChocoGL\Renderer\Texture.h">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\ChocoGL\Renderer\VertexArray.h">
+    <ClInclude Include="src\ChocoGL\Renderer\VertexBuffer.h">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\ChocoGL\Scene\Components.h">
@@ -234,13 +243,16 @@
     <ClInclude Include="src\ChocoGL\Script\ScriptWrappers.h">
       <Filter>src\ChocoGL\Script</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLIndexBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLPipeline.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRenderPass.h">
@@ -255,7 +267,7 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
@@ -485,8 +497,8 @@
     <ClCompile Include="src\ChocoGL\Imgui\ImguiLayer.cpp">
       <Filter>src\ChocoGL\Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\ChocoGL\Renderer\Buffer.cpp">
-      <Filter>src\ChocoGL\Renderer</Filter>
+    <ClCompile Include="src\ChocoGL\Physics\Physics3D.cpp">
+      <Filter>src\ChocoGL\Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Camera.cpp">
       <Filter>src\ChocoGL\Renderer</Filter>
@@ -494,10 +506,16 @@
     <ClCompile Include="src\ChocoGL\Renderer\Framebuffer.cpp">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\ChocoGL\Renderer\IndexBuffer.cpp">
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Material.cpp">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\Mesh.cpp">
+      <Filter>src\ChocoGL\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ChocoGL\Renderer\Pipeline.cpp">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Renderer\RenderCommandQueue.cpp">
@@ -521,7 +539,7 @@
     <ClCompile Include="src\ChocoGL\Renderer\Texture.cpp">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\ChocoGL\Renderer\VertexArray.cpp">
+    <ClCompile Include="src\ChocoGL\Renderer\VertexBuffer.cpp">
       <Filter>src\ChocoGL\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\ChocoGL\Scene\Entity.cpp">
@@ -548,13 +566,16 @@
     <ClCompile Include="src\ChocoGL\Vendor\stb_image.cpp.cpp">
       <Filter>src\ChocoGL\Vendor</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
-      <Filter>src\Platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLIndexBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLPipeline.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRenderPass.cpp">
@@ -572,7 +593,7 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLTexture.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -680,5 +701,8 @@
     <ClCompile Include="vendor\yaml-cpp\src\tag.cpp">
       <Filter>vendor\yaml-cpp\src</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

@@ -147,7 +147,7 @@ namespace ChocoGL {
 				}
 			}
 		}
-
+		//friendly template;
 		template<class T2>
 		friend class Ref;
 		T* m_Instance;

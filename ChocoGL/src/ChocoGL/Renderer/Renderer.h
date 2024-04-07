@@ -22,7 +22,6 @@ namespace ChocoGL {
 
 		static void DrawIndexed(uint32_t count, PrimitiveType type, bool depthTest = true);
 
-		// For OpenGL
 		static void SetLineThickness(float thickness);
 
 		static void ClearMagenta();
@@ -43,8 +42,8 @@ namespace ChocoGL {
 				// NOTE: Instead of destroying we could try and enforce all items to be trivally destructible
 				// however some items like uniforms which contain std::strings still exist for now
 				// static_assert(std::is_trivially_destructible_v<FuncT>, "FuncT must be trivially destructible");
-				//pFunc->~FuncT();
-				std::destroy_at(pFunc);
+				pFunc->~FuncT();
+				//std::destroy_at(pFunc);
 			};
 		
 			auto storageBuffer = GetRenderCommandQueue().Allocate(renderCmd, sizeof(func));

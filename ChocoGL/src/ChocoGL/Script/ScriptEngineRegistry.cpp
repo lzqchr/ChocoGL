@@ -40,6 +40,9 @@ namespace ChocoGL {
 		Component_RegisterType(SpriteRendererComponent);
 		Component_RegisterType(RigidBody2DComponent);
 		Component_RegisterType(BoxCollider2DComponent);
+		Component_RegisterType(RigidBodyComponent);
+		Component_RegisterType(BoxColliderComponent);
+		Component_RegisterType(SphereColliderComponent);
 	}
 
 	void ScriptEngineRegistry::RegisterAll()
@@ -50,6 +53,9 @@ namespace ChocoGL {
 
 		mono_add_internal_call("ChocoGL.Entity::GetTransform_Native", ChocoGL::Script::ChocoGL_Entity_GetTransform);
 		mono_add_internal_call("ChocoGL.Entity::SetTransform_Native", ChocoGL::Script::ChocoGL_Entity_SetTransform);
+		mono_add_internal_call("ChocoGL.Entity::GetForwardDirection_Native", ChocoGL::Script::ChocoGL_Entity_GetForwardDirection);
+		mono_add_internal_call("ChocoGL.Entity::GetRightDirection_Native", ChocoGL::Script::ChocoGL_Entity_GetRightDirection);
+		mono_add_internal_call("ChocoGL.Entity::GetUpDirection_Native", ChocoGL::Script::ChocoGL_Entity_GetUpDirection);
 		mono_add_internal_call("ChocoGL.RigidBody2DComponent::ApplyLinearImpulse_Native", ChocoGL::Script::ChocoGL_RigidBody2DComponent_ApplyLinearImpulse);
 		mono_add_internal_call("ChocoGL.Entity::CreateComponent_Native", ChocoGL::Script::ChocoGL_Entity_CreateComponent);
 		mono_add_internal_call("ChocoGL.Entity::HasComponent_Native", ChocoGL::Script::ChocoGL_Entity_HasComponent);
@@ -61,6 +67,10 @@ namespace ChocoGL {
 		mono_add_internal_call("ChocoGL.RigidBody2DComponent::ApplyLinearImpulse_Native", ChocoGL::Script::ChocoGL_RigidBody2DComponent_ApplyLinearImpulse);
 		mono_add_internal_call("ChocoGL.RigidBody2DComponent::GetLinearVelocity_Native", ChocoGL::Script::ChocoGL_RigidBody2DComponent_GetLinearVelocity);
 		mono_add_internal_call("ChocoGL.RigidBody2DComponent::SetLinearVelocity_Native", ChocoGL::Script::ChocoGL_RigidBody2DComponent_SetLinearVelocity);
+		mono_add_internal_call("ChocoGL.RigidBodyComponent::AddForce_Native", ChocoGL::Script::ChocoGL_RigidBodyComponent_AddForce);
+		mono_add_internal_call("ChocoGL.RigidBodyComponent::AddTorque_Native", ChocoGL::Script::ChocoGL_RigidBodyComponent_AddTorque);
+		mono_add_internal_call("ChocoGL.RigidBodyComponent::GetLinearVelocity_Native", ChocoGL::Script::ChocoGL_RigidBodyComponent_GetLinearVelocity);
+		mono_add_internal_call("ChocoGL.RigidBodyComponent::SetLinearVelocity_Native", ChocoGL::Script::ChocoGL_RigidBodyComponent_SetLinearVelocity);
 
 		mono_add_internal_call("ChocoGL.Input::IsKeyPressed_Native", ChocoGL::Script::ChocoGL_Input_IsKeyPressed);
 

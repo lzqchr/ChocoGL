@@ -1,2 +1,1077 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ChocoGL::Application" Collapsed="true">
+    <Position X="36" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAAoAAQDCAAABgAlQAAgAgAAACAEQARABAAAGAAgI=</HashCode>
+      <FileName>src\ChocoGL\Core\Application.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::AppRenderEvent">
+    <Position X="6.75" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\ApplicationEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::AppTickEvent">
+    <Position X="12.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\ApplicationEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::AppUpdateEvent" Collapsed="true">
+    <Position X="14" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\ApplicationEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Camera" Collapsed="true">
+    <Position X="1.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAQAAAAAQAAAAAAAiAAAAAAAMAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ContactListener" Collapsed="true">
+    <Position X="37.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAABAAAAgAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Scene.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::EditorCamera" Collapsed="true">
+    <Position X="2.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASQIAABAACQAAEBgAMAACQKAQKAYCQAEABCAAAMAREA=</HashCode>
+      <FileName>src\ChocoGL\Editor\EditorCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Entity" Collapsed="true">
+    <Position X="39.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAABAAAgAIAAAEAAAABQQAACAASAAEACAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Entity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Event" Collapsed="true">
+    <Position X="11.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAIAIAAIAAAEAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\Event.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::EventDispatcher" Collapsed="true">
+    <Position X="41.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAgAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\Event.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Framebuffer" Collapsed="true">
+    <Position X="16.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAABAABAAAAAAAAAAAAAABgEAAAAAEAQEAEAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Framebuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::FramebufferPool" Collapsed="true">
+    <Position X="43" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAQAAAAAAAAgAAAAAAAAAEAAAAAgEBAAAAgAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Framebuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::GraphicsContext" Collapsed="true">
+    <Position X="11.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAIAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\GraphicsContext.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ImGuiLayer" Collapsed="true">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABIAAAAAAAAAAAAAgAAAAAAAAIAAEAAABAABAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Imgui\ImGuiLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::IndexBuffer" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAABAAAAAACAAAAAAAABAAAAgEAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\IndexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Input" Collapsed="true">
+    <Position X="44.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAQAAABAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Input.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::KeyEvent" Collapsed="true">
+    <Position X="15.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAACAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\KeyEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::KeyPressedEvent" Collapsed="true">
+    <Position X="14.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAABAAAIAAABAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\KeyEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::KeyReleasedEvent" Collapsed="true">
+    <Position X="16.5" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\KeyEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::KeyTypedEvent" Collapsed="true">
+    <Position X="18.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\KeyEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Layer" Collapsed="true">
+    <Position X="0.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAEAEAAAAAAAIAAEAAEAAABAAEABAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Layer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::LayerStack" Collapsed="true">
+    <Position X="46.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACACAAAAAAAAACAEAQAAICAAAAAAgAAAIAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\LayerStack.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Log" Collapsed="true">
+    <Position X="48.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAACABAAAAAAAAAAAAAAAAAAAAABAAACAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Log.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Mat4" Collapsed="true">
+    <Position X="36" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Math\Mat4.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Material" Collapsed="true">
+    <Position X="22.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BEAAgAAQCDAEBABAAAAAAAAgAAAAAMAAABBACBBAAAg=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Material.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::MaterialInstance" Collapsed="true">
+    <Position X="25.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAAAhAAICCAABABABAIAAAAgAAACAMAAAABACBAABAg=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Material.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Mesh" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAiIAEAQBIEoBFkAoASUIAgAoCAAMYUAARgAsAEAMAg=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::MouseButtonEvent" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAMAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\MouseEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::MouseButtonPressedEvent" Collapsed="true">
+    <Position X="7" Y="9.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\MouseEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::MouseButtonReleasedEvent" Collapsed="true">
+    <Position X="9.75" Y="9.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\MouseEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::MouseMovedEvent" Collapsed="true">
+    <Position X="17.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAEAAADAAAAAAAAAAAAYAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\MouseEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::MouseScrolledEvent" Collapsed="true">
+    <Position X="19.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAMAAAAAAEAAAAAAAAgAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\MouseEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Noise" Collapsed="true">
+    <Position X="37.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Math\Noise.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLContext" Collapsed="true">
+    <Position X="12" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAgACAAAAIAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLContext.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLFramebuffer" Collapsed="true">
+    <Position X="17.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAiAAAABAABAQAAAAAAAAAAAABhAQAABAEAQEABAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLFramebuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLIndexBuffer" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAiAABAAAAAECAAAAAAAAAIAAAgQAAAAAAAAIAAAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLIndexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLPipeline" Collapsed="true">
+    <Position X="15.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAEAAAAAAQAAAAAAAAAAAIBAACAAAAAAEAAAAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLPipeline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLRenderPass" Collapsed="true">
+    <Position X="8.75" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAEAAAAAAABAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLRenderPass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLShader" Collapsed="true">
+    <Position X="19.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBAgjUgAgAAACgAcAAHFCQCCBQUCoFMBCBCYzAFWdEA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLShader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLShaderResourceDeclaration" Collapsed="true">
+    <Position X="6.75" Y="6.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAQEIAAAAAAAAAAAgAAAAAABCQAAAAEAAAAAAAQABAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLShaderUniformBufferDeclaration" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAEACAgAAAAAIAAQAAAEAAQAAAAAIgJAg=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLShaderUniformDeclaration" Collapsed="true">
+    <Position X="3.75" Y="6.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAQEMAACAAAAIAiAgAAIAAABAAgAIAEAAAAAAQYAJIg=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLTexture2D" Collapsed="true">
+    <Position X="11.75" Y="4.75" Width="1.75" />
+    <InheritanceLine Type="ChocoGL::Texture2D" FixedToPoint="true">
+      <Path>
+        <Point X="12.5" Y="3.927" />
+        <Point X="12.5" Y="4.302" />
+        <Point X="11.375" Y="4.302" />
+        <Point X="11.375" Y="4.938" />
+        <Point X="11.75" Y="4.938" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>gAAQiAgAAAEABAgBAEAAAQJAAgBCgALgABAAAEEAAAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLTexture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLTextureCube" Collapsed="true">
+    <Position X="14" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAiAAAAAAABAABEEIAAQBAAgBCgACAABAAAEAAAAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLTexture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::OpenGLVertexBuffer" Collapsed="true">
+    <Position X="21" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAiAABAAAAAECAIAACAAAAIACAgAAIAAAAAAIQAAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLVertexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Physics3D" Collapsed="true">
+    <Position X="39.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAQAAAAAgAAAQIAAAAAQAgACAACBQAASAA=</HashCode>
+      <FileName>src\ChocoGL\Physics\Physics3D.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::PhysXContactListener" Collapsed="true">
+    <Position X="41.25" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAEAAAIAAQAAAAAAAAACABAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Scene.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Pipeline" Collapsed="true">
+    <Position X="14.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgQAEAAAAAAAAAAAAAAAAAAABAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Pipeline.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Ref&lt;T&gt;" Collapsed="true">
+    <Position X="43" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAQAADgAEABAAAgAAAAAAAEAIAAAgAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Ref.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::RefCounted" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAACAAAAAAAAAQAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Ref.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::RenderCommandQueue" Collapsed="true">
+    <Position X="44.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAMAAAAAAQCAAAAAAAAACAAAAAAAQAAAACAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\RenderCommandQueue.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Renderer" Collapsed="true">
+    <Position X="46.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAgAAAQAAAAAAAAAEAMAAAEAAAABAABgACCIQBAAQA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Renderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Renderer2D" Collapsed="true">
+    <Position X="48.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAAEAAAgAAAAAQAAAAAAAAAAFEACAAIJAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Renderer2D.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::RendererAPI" Collapsed="true">
+    <Position X="36" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAECEAQAAAAAABCAAAAACAABAAQA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\RendererAPI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::RenderPass" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAEAAAAAAEAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\RenderPass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Scene" Collapsed="true">
+    <Position X="11" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FCXIARACAAACACQsgFACAAIjQCQAoQAAiAQKRAEAYoA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::SceneCamera" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABFIABAEAAAAAAAgAAAAACKIkICAGRBCAAAAEAAAAiA=</HashCode>
+      <FileName>src\ChocoGL\Scene\SceneCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::SceneHierarchyPanel" Collapsed="true">
+    <Position X="37.75" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABIMAAAAAgAAAAAAAAEAEAAgAIAoAACAAEg=</HashCode>
+      <FileName>src\ChocoGL\Editor\SceneHierarchyPanel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::SceneRenderer" Collapsed="true">
+    <Position X="39.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAACAIAACAEgAAAIEAAAgAAAABBECAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\SceneRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::SceneSerializer" Collapsed="true">
+    <Position X="41.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAABAAAAAAAAACBEAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\SceneSerializer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ScriptEngine" Collapsed="true">
+    <Position X="43" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAAAAAAAgggAgAAAAAAAAQAIAAAEEAAQABACOQBAAAI=</HashCode>
+      <FileName>src\ChocoGL\Script\ScriptEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ScriptEngineRegistry" Collapsed="true">
+    <Position X="44.75" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Script\ScriptEngineRegistry.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Shader" Collapsed="true">
+    <Position X="19" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAgQAAgAAAAgAMAAEFAQCCAQQAgEEACAAQCAAABAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ShaderLibrary" Collapsed="true">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAAAAABAAAAAgAAAAAAAAAAAAAAAAABAIAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ShaderResourceDeclaration" Collapsed="true">
+    <Position X="6.75" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\ShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ShaderStruct" Collapsed="true">
+    <Position X="46.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAEggAAAAiAgAAAAAAAAAAAIAAAAAAAAAIABAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\ShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ShaderUniformBufferDeclaration" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAQAAAEAAQAAAAAAABAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\ShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::ShaderUniformDeclaration" Collapsed="true">
+    <Position X="3.75" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAiAgAAAAAAAAAAAAAAAAAAAAAAABAg=</HashCode>
+      <FileName>src\ChocoGL\Renderer\ShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Submesh" Collapsed="true">
+    <Position X="48.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAEAAAAQAASAAAAAAAAAAABAAAAE=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Texture" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAAAgAAAAAAAAQBAAgBAgAAAAAABAEAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Texture2D" Collapsed="true">
+    <Position X="11.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAQAAAAAAEAAAAAAAAAAAAAAAACAEBAAAAAAAEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::TextureCube" Collapsed="true">
+    <Position X="13.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Timer" Collapsed="true">
+    <Position X="36" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAACAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Timestep" Collapsed="true">
+    <Position X="37.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAIBAAAAAQAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Timestep.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::UUID" Collapsed="true">
+    <Position X="39.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAEAAAAIAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>src\ChocoGL\Core\UUID.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::VertexBuffer" Collapsed="true">
+    <Position X="20.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAgAABAAAAAACAAAAAAAAAAACAgEAIAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\VertexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::VertexBufferLayout" Collapsed="true">
+    <Position X="41.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAiACAAAAAAAAAAAAAQAQAAABAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>src\ChocoGL\Renderer\VertexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::Window" Collapsed="true">
+    <Position X="27.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEEQAAAQADAAAAAAABAAQAAAGAAgAAAAEEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Window.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::WindowCloseEvent">
+    <Position X="4.75" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\ApplicationEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::WindowResizeEvent" Collapsed="true">
+    <Position X="10.25" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAFAAAAAABAAAAAAACAEAAAAEAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\ApplicationEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChocoGL::WindowsWindow" Collapsed="true">
+    <Position X="23.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAEEQAAAQADAAICBAQBAAAAAECAAgAACAEEAAAA=</HashCode>
+      <FileName>src\Platform\Windows\WindowsWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ChocoGL::AABB" Collapsed="true">
+    <Position X="36" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Math\AABB.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::AnimatedVertex" Collapsed="true">
+    <Position X="37.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAgAAAAAABCACAIAAACAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::ApplicationProps" Collapsed="true">
+    <Position X="39.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Application.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::BoneInfo" Collapsed="true">
+    <Position X="41.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Box2DWorldComponent" Collapsed="true">
+    <Position X="43" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Scene.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::BoxCollider2DComponent" Collapsed="true">
+    <Position X="44.75" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAgAAAAAAAAAABAAAAAAEAAAAAAAAAhAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::BoxColliderComponent" Collapsed="true">
+    <Position X="46.5" Y="4.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Buffer" Collapsed="true">
+    <Position X="48.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAgACEAAAAAAAgAgEAQBAAAAAAAAEAQAQ=</HashCode>
+      <FileName>src\ChocoGL\Core\Buffer.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::CameraComponent" Collapsed="true">
+    <Position X="36" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAgEACAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::CapsuleColliderComponent" Collapsed="true">
+    <Position X="37.75" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::CircleCollider2DComponent" Collapsed="true">
+    <Position X="39.5" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>QAAIAAAAAAAAAAAAAAAAAAABAAAAAAEAAAAAAAAAhAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::EntityInstance" Collapsed="true">
+    <Position X="41.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAABAAAAQIAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Script\ScriptEngine.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::EntityInstanceData" Collapsed="true">
+    <Position X="43" Y="5.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Script\ScriptEngine.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::EntityScriptClass" Collapsed="true">
+    <Position X="44.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAADAAIAAAAIAAAAgAAAQACAAACAAAAAgkAA=</HashCode>
+      <FileName>src\ChocoGL\Script\ScriptEngine.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Environment" Collapsed="true">
+    <Position X="46.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQgAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Scene.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::FramebufferSpecification" Collapsed="true">
+    <Position X="48.25" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAABAAAAAAAAAAAAEAAAAgAAAggAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Framebuffer.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::GLShaderUniformField" Collapsed="true">
+    <Position X="36" Y="6.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABIAAAAACAAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\Platform\OpenGL\OpenGLShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::IDComponent" Collapsed="true">
+    <Position X="37.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Index" Collapsed="true">
+    <Position X="39.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAABAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Light" Collapsed="true">
+    <Position X="41.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAABAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Scene.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::LineVertex" Collapsed="true">
+    <Position X="43" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Renderer2D.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::LogStream" Collapsed="true">
+    <Position X="44.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::MeshComponent" Collapsed="true">
+    <Position X="46.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAgAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::PhysicsMaterialComponent" Collapsed="true">
+    <Position X="48.25" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAQAAAAAAIAAAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::PhysXSceneComponent" Collapsed="true">
+    <Position X="36" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Scene.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::PipelineSpecification" Collapsed="true">
+    <Position X="37.75" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Pipeline.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::PublicField" Collapsed="true">
+    <Position X="39.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CBKAAQBCQABAAABAQAAAABQAAAAAAAAAAQQAgAEAAEA=</HashCode>
+      <FileName>src\ChocoGL\Script\ScriptEngine.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::QuadVertex" Collapsed="true">
+    <Position X="41.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAgAAIAAAAAAAAAAAAAAAAAgAAIAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Renderer2D.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Ray" Collapsed="true">
+    <Position X="43" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAACAAAAAAAQBBAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Math\Ray.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::RenderAPICapabilities" Collapsed="true">
+    <Position X="44.75" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAgIAAAAAAAAAAAAABAACCAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\RendererAPI.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Renderer2DData" Collapsed="true">
+    <Position X="46.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gBBEAMACACAHEgAEABEAUEEEAAEQAAAAAAIAEBAAAEA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Renderer2D.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::RendererData" Collapsed="true">
+    <Position X="48.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAIAAAAAACAAAAAgAEAAAAAIAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Renderer.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::RenderPassSpecification" Collapsed="true">
+    <Position X="36" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\RenderPass.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::RigidBody2DComponent" Collapsed="true">
+    <Position X="37.75" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQABAAIAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::RigidBodyComponent" Collapsed="true">
+    <Position X="39.5" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAPAAAAAAAIAA4AACAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::SceneComponent" Collapsed="true">
+    <Position X="41.25" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Scene.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::SceneRendererCamera" Collapsed="true">
+    <Position X="43" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\SceneRenderer.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::SceneRendererData" Collapsed="true">
+    <Position X="44.75" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BIAAEAAAAQAAABQAAAAAAAAAEAAAAAAEABCAAABAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\SceneRenderer.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::SceneRendererOptions" Collapsed="true">
+    <Position X="46.5" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\SceneRenderer.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::ScriptComponent" Collapsed="true">
+    <Position X="48.25" Y="8.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::ShaderUniform" Collapsed="true">
+    <Position X="36" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::ShaderUniformCollection" Collapsed="true">
+    <Position X="37.75" Y="9.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::SphereColliderComponent" Collapsed="true">
+    <Position X="39.5" Y="9.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::SpriteRendererComponent" Collapsed="true">
+    <Position X="41.25" Y="9.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAQAAAAAAAAAAAAAAAIAgAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::TagComponent" Collapsed="true">
+    <Position X="43" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAIgAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::TransformComponent" Collapsed="true">
+    <Position X="44.75" Y="9.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAQCAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Scene\Components.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Triangle" Collapsed="true">
+    <Position X="46.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAABAAAAAAAAgAQAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::UniformBuffer" Collapsed="true">
+    <Position X="48.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::UniformBufferBase" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::UniformBufferDeclaration&lt;N, U&gt;" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAAAAAAAAQAAAAABAAAAAAIAAEAAAAASAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::UniformDecl" Collapsed="true">
+    <Position X="36" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAAAAAgAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::Vertex" Collapsed="true">
+    <Position X="37.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAACACAIAAACAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::VertexBoneData" Collapsed="true">
+    <Position X="39.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAABAAAACAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::VertexBufferElement" Collapsed="true">
+    <Position X="41.25" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgQAEAAAAAgAAAAAAAAAQAAAAAAAAAAQAAAAAAgAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\VertexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="ChocoGL::WindowProps" Collapsed="true">
+    <Position X="43" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEABAAAAEAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Core\Window.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="ChocoGL::EventCategory" Collapsed="true">
+    <Position X="36" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAQAAAAAAAAAAAAAAAAAAAQAAQAAEAAIA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\Event.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::EventType" Collapsed="true">
+    <Position X="37.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAEACAAAAAAgAAAIgAAAAgAAAAEBAgAAAAAIABFgAQA=</HashCode>
+      <FileName>src\ChocoGL\Core\Events\Event.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::FieldType" Collapsed="true">
+    <Position X="39.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAggEgAGA=</HashCode>
+      <FileName>src\ChocoGL\Script\ScriptEngine.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::FilterGroup" Collapsed="true">
+    <Position X="41.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAABAAAAAAAAAAAAAAAEAIAAAAAAAAA=</HashCode>
+      <FileName>src\ChocoGL\Physics\Physics3D.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::ForceMode" Collapsed="true">
+    <Position X="43" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAIAAA=</HashCode>
+      <FileName>src\ChocoGL\Physics\Physics3D.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::FramebufferFormat" Collapsed="true">
+    <Position X="44.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAQEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Framebuffer.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::KeyCode" Collapsed="true">
+    <Position X="46.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BMIqAmJQCJAgQEQJgIEAACgXii0MBAoKCwCAvv//ZUM=</HashCode>
+      <FileName>src\ChocoGL\Core\KeyCodes.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::MaterialFlag" Collapsed="true">
+    <Position X="48.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Material.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::PrimitiveType" Collapsed="true">
+    <Position X="36" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\RendererAPI.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::RendererAPIType" Collapsed="true">
+    <Position X="37.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAEA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\RendererAPI.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::ShaderDataType" Collapsed="true">
+    <Position X="39.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAQAAAAAgAAAAAAAMAgAAAAAAAAAAAAEgACA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\VertexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::ShaderDomain" Collapsed="true">
+    <Position X="41.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAABAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\ShaderUniform.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::TextureFormat" Collapsed="true">
+    <Position X="43" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAIAQAAAAEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Texture.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::TextureWrap" Collapsed="true">
+    <Position X="44.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Texture.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::UniformType" Collapsed="true">
+    <Position X="46.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAQgAAEAAAAAEgAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\Shader.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ChocoGL::VertexBufferUsage" Collapsed="true">
+    <Position X="48.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAEAAAAAAEAAAA=</HashCode>
+      <FileName>src\ChocoGL\Renderer\VertexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

@@ -46,6 +46,8 @@ namespace ChocoGL {
 		// Physics
 		MonoMethod* OnCollision2DBeginMethod = nullptr;
 		MonoMethod* OnCollision2DEndMethod = nullptr;
+		MonoMethod* OnCollisionBeginMethod = nullptr;
+		MonoMethod* OnCollisionEndMethod = nullptr;
 
 		void InitClassMethods(MonoImage* image)
 		{
@@ -53,8 +55,11 @@ namespace ChocoGL {
 			OnUpdateMethod = GetMethod(image, FullName + ":OnUpdate(single)");
 
 			// Physics (Entity class)
+			OnCollisionBeginMethod = GetMethod(s_CoreAssemblyImage, "ChocoGL.Entity:OnCollisionBegin(single)");
+			OnCollisionEndMethod = GetMethod(s_CoreAssemblyImage, "ChocoGL.Entity:OnCollisionEnd(single)");
 			OnCollision2DBeginMethod = GetMethod(s_CoreAssemblyImage, "ChocoGL.Entity:OnCollision2DBegin(single)");
 			OnCollision2DEndMethod = GetMethod(s_CoreAssemblyImage, "ChocoGL.Entity:OnCollision2DEnd(single)");
+		
 		}
 	};
 
@@ -391,6 +396,39 @@ namespace ChocoGL {
 			CallMethod(entityInstance.GetInstance(), entityInstance.ScriptClass->OnCollision2DEndMethod, args);
 		}
 	}
+
+	void ScriptEngine::OnCollisionBegin(Entity entity)
+	{
+		OnCollisionBegin(entity.m_Scene->GetUUID(), entity.GetComponent<IDComponent>().ID);
+	}
+
+	void ScriptEngine::OnCollisionBegin(UUID sceneID, UUID entityID)
+	{
+		EntityInstance& entityInstance = GetEntityInstanceData(sceneID, entityID).Instance;
+		if (entityInstance.ScriptClass->OnCollisionBeginMethod)
+		{
+			float value = 5.0f;
+			void* args[] = { &value };
+			CallMethod(entityInstance.GetInstance(), entityInstance.ScriptClass->OnCollisionBeginMethod, args);
+		}
+	}
+
+	void ScriptEngine::OnCollisionEnd(Entity entity)
+	{
+		OnCollisionEnd(entity.m_Scene->GetUUID(), entity.GetComponent<IDComponent>().ID);
+	}
+
+	void ScriptEngine::OnCollisionEnd(UUID sceneID, UUID entityID)
+	{
+		EntityInstance& entityInstance = GetEntityInstanceData(sceneID, entityID).Instance;
+		if (entityInstance.ScriptClass->OnCollisionEndMethod)
+		{
+			float value = 5.0f;
+			void* args[] = { &value };
+			CallMethod(entityInstance.GetInstance(), entityInstance.ScriptClass->OnCollisionEndMethod, args);
+		}
+	}
+
 	void ScriptEngine::OnScriptComponentDestroyed(UUID sceneID, UUID entityID)
 	{
 		CL_CORE_ASSERT(s_EntityInstanceMap.find(sceneID) != s_EntityInstanceMap.end());

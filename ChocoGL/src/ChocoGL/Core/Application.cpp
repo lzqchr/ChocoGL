@@ -8,6 +8,7 @@
 #include <imgui.h>
 
 #include "ChocoGL/Script/ScriptEngine.h"
+#include "ChocoGL/Physics/Physics3D.h"
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
 #include <Windows.h>
@@ -31,13 +32,17 @@ namespace ChocoGL {
 		PushOverlay(m_ImGuiLayer);
 
 		ScriptEngine::Init("assets/scripts/ExampleApp.dll");
-
+		Physics3D::Init();
 		Renderer::Init();
 		Renderer::WaitAndRender();
 	}
 
 	Application::~Application()
 	{
+		for (Layer* layer : m_LayerStack)
+			layer->OnDetach();
+
+		Physics3D::Shutdown();
 		ScriptEngine::Shutdown();
 	}
 
@@ -99,6 +104,7 @@ namespace ChocoGL {
 		EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{

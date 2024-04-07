@@ -8,7 +8,9 @@
 #include "ChocoGL/Scene/Components.h"
 
 #include <box2d/box2d.h>
-
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #include "ChocoGL/Core/Input.h"
@@ -39,6 +41,16 @@ namespace ChocoGL { namespace Script {
 	float ChocoGL_Noise_PerlinNoise(float x, float y)
 	{
 		return Noise::PerlinNoise(x, y);
+	}
+
+	static std::tuple<glm::vec3, glm::quat, glm::vec3> GetTransformDecomposition(const glm::mat4& transform)
+	{
+		glm::vec3 scale, translation, skew;
+		glm::vec4 perspective;
+		glm::quat orientation;
+		glm::decompose(transform, scale, orientation, translation, skew, perspective);
+
+		return { translation, orientation, scale };
 	}
 
 	////////////////////////////////////////////////////////////////
@@ -80,6 +92,48 @@ namespace ChocoGL { namespace Script {
 		Entity entity = entityMap.at(entityID);
 		auto& transformComponent = entity.GetComponent<TransformComponent>();
 		memcpy(glm::value_ptr(transformComponent.Transform), inTransform, sizeof(glm::mat4));
+	}
+
+	void ChocoGL_Entity_GetForwardDirection(uint64_t entityID, glm::vec3* outForward)
+	{
+		Ref<Scene> scene = ScriptEngine::GetCurrentSceneContext();
+		CL_CORE_ASSERT(scene, "No active scene!");
+		const auto& entityMap = scene->GetEntityMap();
+		CL_CORE_ASSERT(entityMap.find(entityID) != entityMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+
+		Entity entity = entityMap.at(entityID);
+		auto& transformComponent = entity.GetComponent<TransformComponent>();
+
+		auto [position, rotation, scale] = GetTransformDecomposition(transformComponent.Transform);
+		*outForward = glm::rotate(glm::inverse(glm::normalize(rotation)), glm::vec3(0, 0, -1));
+	}
+
+	void ChocoGL_Entity_GetRightDirection(uint64_t entityID, glm::vec3* outRight)
+	{
+		Ref<Scene> scene = ScriptEngine::GetCurrentSceneContext();
+		CL_CORE_ASSERT(scene, "No active scene!");
+		const auto& entityMap = scene->GetEntityMap();
+		CL_CORE_ASSERT(entityMap.find(entityID) != entityMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+
+		Entity entity = entityMap.at(entityID);
+		auto& transformComponent = entity.GetComponent<TransformComponent>();
+
+		auto [position, rotation, scale] = GetTransformDecomposition(transformComponent.Transform);
+		*outRight = glm::rotate(glm::inverse(glm::normalize(rotation)), glm::vec3(1, 0, 0));
+	}
+
+	void ChocoGL_Entity_GetUpDirection(uint64_t entityID, glm::vec3* outUp)
+	{
+		Ref<Scene> scene = ScriptEngine::GetCurrentSceneContext();
+		CL_CORE_ASSERT(scene, "No active scene!");
+		const auto& entityMap = scene->GetEntityMap();
+		CL_CORE_ASSERT(entityMap.find(entityID) != entityMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+
+		Entity entity = entityMap.at(entityID);
+		auto& transformComponent = entity.GetComponent<TransformComponent>();
+
+		auto [position, rotation, scale] = GetTransformDecomposition(transformComponent.Transform);
+		*outUp = glm::rotate(glm::inverse(glm::normalize(rotation)), glm::vec3(0, 1, 0));
 	}
 
 	void ChocoGL_Entity_CreateComponent(uint64_t entityID, void* type)
@@ -186,6 +240,95 @@ namespace ChocoGL { namespace Script {
 		b2Body* body = (b2Body*)component.RuntimeBody;
 		CL_CORE_ASSERT(velocity);
 		body->SetLinearVelocity({ velocity->x, velocity->y });
+	}
+
+	void ChocoGL_RigidBodyComponent_AddForce(uint64_t entityID, glm::vec3* force, ForceMode forceMode)
+	{
+		Ref<Scene> scene = ScriptEngine::GetCurrentSceneContext();
+		CL_CORE_ASSERT(scene, "No active scene!");
+		const auto& entityMap = scene->GetEntityMap();
+		CL_CORE_ASSERT(entityMap.find(entityID) != entityMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+
+		Entity entity = entityMap.at(entityID);
+		CL_CORE_ASSERT(entity.HasComponent<RigidBodyComponent>());
+		auto& component = entity.GetComponent<RigidBodyComponent>();
+		physx::PxRigidActor* actor = (physx::PxRigidActor*)component.RuntimeActor;
+		physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
+
+		// We don't want to assert since scripts might want to be able to switch
+		// between a static and dynamic actor at runtime
+		if (!dynamicActor)
+			return;
+
+		CL_CORE_ASSERT(force);
+		dynamicActor->addForce({ force->x, force->y, force->z }, (physx::PxForceMode::Enum)forceMode);
+	}
+
+	void ChocoGL_RigidBodyComponent_AddTorque(uint64_t entityID, glm::vec3* torque, ForceMode forceMode)
+	{
+		Ref<Scene> scene = ScriptEngine::GetCurrentSceneContext();
+		CL_CORE_ASSERT(scene, "No active scene!");
+		const auto& entityMap = scene->GetEntityMap();
+		CL_CORE_ASSERT(entityMap.find(entityID) != entityMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+
+		Entity entity = entityMap.at(entityID);
+		CL_CORE_ASSERT(entity.HasComponent<RigidBodyComponent>());
+		auto& component = entity.GetComponent<RigidBodyComponent>();
+		physx::PxRigidActor* actor = (physx::PxRigidActor*)component.RuntimeActor;
+		physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
+
+		// We don't want to assert since scripts might want to be able to switch
+		// between a static and dynamic actor at runtime
+		if (!dynamicActor)
+			return;
+
+		CL_CORE_ASSERT(torque);
+		dynamicActor->addTorque({ torque->x, torque->y, torque->z }, (physx::PxForceMode::Enum)forceMode);
+	}
+
+	void ChocoGL_RigidBodyComponent_GetLinearVelocity(uint64_t entityID, glm::vec3* outVelocity)
+	{
+		Ref<Scene> scene = ScriptEngine::GetCurrentSceneContext();
+		CL_CORE_ASSERT(scene, "No active scene!");
+		const auto& entityMap = scene->GetEntityMap();
+		CL_CORE_ASSERT(entityMap.find(entityID) != entityMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+
+		Entity entity = entityMap.at(entityID);
+		CL_CORE_ASSERT(entity.HasComponent<RigidBodyComponent>());
+		auto& component = entity.GetComponent<RigidBodyComponent>();
+		physx::PxRigidActor* actor = (physx::PxRigidActor*)component.RuntimeActor;
+		physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
+
+		// We don't want to assert since scripts might want to be able to switch
+		// between a static and dynamic actor at runtime
+		if (!dynamicActor)
+			return;
+
+		CL_CORE_ASSERT(outVelocity);
+		physx::PxVec3 velocity = dynamicActor->getLinearVelocity();
+		*outVelocity = { velocity.x, velocity.y, velocity.z };
+	}
+
+	void ChocoGL_RigidBodyComponent_SetLinearVelocity(uint64_t entityID, glm::vec3* velocity)
+	{
+		Ref<Scene> scene = ScriptEngine::GetCurrentSceneContext();
+		CL_CORE_ASSERT(scene, "No active scene!");
+		const auto& entityMap = scene->GetEntityMap();
+		CL_CORE_ASSERT(entityMap.find(entityID) != entityMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+
+		Entity entity = entityMap.at(entityID);
+		CL_CORE_ASSERT(entity.HasComponent<RigidBodyComponent>());
+		auto& component = entity.GetComponent<RigidBodyComponent>();
+		physx::PxRigidActor* actor = (physx::PxRigidActor*)component.RuntimeActor;
+		physx::PxRigidDynamic* dynamicActor = actor->is<physx::PxRigidDynamic>();
+
+		// We don't want to assert since scripts might want to be able to switch
+		// between a static and dynamic actor at runtime
+		if (!dynamicActor)
+			return;
+
+		CL_CORE_ASSERT(velocity);
+		dynamicActor->setLinearVelocity({ velocity->x, velocity->y, velocity->z });
 	}
 
 	Ref<Mesh>* ChocoGL_Mesh_Constructor(MonoString* filepath)

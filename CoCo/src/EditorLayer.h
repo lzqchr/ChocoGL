@@ -98,14 +98,14 @@ namespace ChocoGL {
 			bool SRGB = true;
 			bool UseTexture = false;
 		};
-		AlbedoInput m_AlbedoInput;
+		//AlbedoInput m_AlbedoInput;
 
 		struct NormalInput
 		{
 			Ref<Texture2D> TextureMap;
 			bool UseTexture = false;
 		};
-		NormalInput m_NormalInput;
+		//NormalInput m_NormalInput;
 
 		struct MetalnessInput
 		{
@@ -113,7 +113,7 @@ namespace ChocoGL {
 			Ref<Texture2D> TextureMap;
 			bool UseTexture = false;
 		};
-		MetalnessInput m_MetalnessInput;
+		//MetalnessInput m_MetalnessInput;
 
 		struct RoughnessInput
 		{
@@ -121,7 +121,7 @@ namespace ChocoGL {
 			Ref<Texture2D> TextureMap;
 			bool UseTexture = false;
 		};
-		RoughnessInput m_RoughnessInput;
+		//RoughnessInput m_RoughnessInput;
 
 		// PBR params
 		bool m_RadiancePrefilter = false;
@@ -167,5 +167,4 @@ namespace ChocoGL {
 		glm::mat4* m_RelativeTransform = nullptr;
 		glm::mat4* m_CurrentlySelectedTransform = nullptr;
 	};
-
 }

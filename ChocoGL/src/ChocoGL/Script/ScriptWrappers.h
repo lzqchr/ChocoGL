@@ -2,6 +2,7 @@
 
 #include "ChocoGL/Script/ScriptEngine.h"
 #include "ChocoGL/Core/KeyCodes.h"
+#include "ChocoGL/Physics/Physics3D.h"
 
 #include <glm/glm.hpp>
 
@@ -21,6 +22,9 @@ namespace ChocoGL { namespace Script {
 	// Entity
 	void ChocoGL_Entity_GetTransform(uint64_t entityID, glm::mat4* outTransform);
 	void ChocoGL_Entity_SetTransform(uint64_t entityID, glm::mat4* inTransform);
+	void ChocoGL_Entity_GetForwardDirection(uint64_t entityID, glm::vec3* outForward);
+	void ChocoGL_Entity_GetRightDirection(uint64_t entityID, glm::vec3* outRight);
+	void ChocoGL_Entity_GetUpDirection(uint64_t entityID, glm::vec3* outUp);
 	void ChocoGL_Entity_CreateComponent(uint64_t entityID, void* type);
 	bool ChocoGL_Entity_HasComponent(uint64_t entityID, void* type);
 	uint64_t ChocoGL_Entity_FindEntityByTag(MonoString* tag);
@@ -31,6 +35,12 @@ namespace ChocoGL { namespace Script {
 	void ChocoGL_RigidBody2DComponent_ApplyLinearImpulse(uint64_t entityID, glm::vec2* impulse, glm::vec2* offset, bool wake);
 	void ChocoGL_RigidBody2DComponent_GetLinearVelocity(uint64_t entityID, glm::vec2* outVelocity);
 	void ChocoGL_RigidBody2DComponent_SetLinearVelocity(uint64_t entityID, glm::vec2* velocity);
+
+	void ChocoGL_RigidBodyComponent_AddForce(uint64_t entityID, glm::vec3* force, ForceMode foceMode);
+	void ChocoGL_RigidBodyComponent_AddTorque(uint64_t entityID, glm::vec3* torque, ForceMode forceMode);
+	void ChocoGL_RigidBodyComponent_GetLinearVelocity(uint64_t entityID, glm::vec3* outVelocity);
+	void ChocoGL_RigidBodyComponent_SetLinearVelocity(uint64_t entityID, glm::vec3* velocity);
+
 	// Renderer
 	// Texture2D
 	void* ChocoGL_Texture2D_Constructor(uint32_t width, uint32_t height);

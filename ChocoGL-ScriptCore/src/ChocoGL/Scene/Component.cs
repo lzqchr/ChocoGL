@@ -4,15 +4,12 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace ChocoGL
 {
     public abstract class Component
     {
         public Entity Entity { get; set; }
-
     }
-
     public class TagComponent : Component
     {
         public string Tag
@@ -26,15 +23,11 @@ namespace ChocoGL
                 SetTag_Native(value);
             }
         }
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern string GetTag_Native(ulong entityID);
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern void SetTag_Native(string tag);
-
     }
-
     public class TransformComponent : Component
     {
         public Matrix4 Transform
@@ -50,15 +43,11 @@ namespace ChocoGL
                 SetTransform_Native(Entity.ID, ref value);
             }
         }
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern void GetTransform_Native(ulong entityID, out Matrix4 result);
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern void SetTransform_Native(ulong entityID, ref Matrix4 result);
-
     }
-
     public class MeshComponent : Component
     {
         public Mesh Mesh
@@ -74,30 +63,24 @@ namespace ChocoGL
                 SetMesh_Native(Entity.ID, ptr);
             }
         }
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern IntPtr GetMesh_Native(ulong entityID);
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void SetMesh_Native(ulong entityID, IntPtr unmanagedInstance);
-
     }
-
     public class CameraComponent : Component
     {
-       // TODO
+        // TODO
     }
-
     public class ScriptComponent : Component
     {
         // TODO
     }
-
     public class SpriteRendererComponent : Component
     {
         // TODO
     }
-
+    // TODO
     public class RigidBody2DComponent : Component
     {
         public void ApplyLinearImpulse(Vector2 impulse, Vector2 offset, bool wake)
@@ -109,23 +92,63 @@ namespace ChocoGL
             GetLinearVelocity_Native(Entity.ID, out Vector2 velocity);
             return velocity;
         }
-
         public void SetLinearVelocity(Vector2 velocity)
         {
             SetLinearVelocity_Native(Entity.ID, ref velocity);
         }
-
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void ApplyLinearImpulse_Native(ulong entityID, ref Vector2 impulse, ref Vector2 offset, bool wake);
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void GetLinearVelocity_Native(ulong entityID, out Vector2 velocity);
         [MethodImpl(MethodImplOptions.InternalCall)]
         internal static extern void SetLinearVelocity_Native(ulong entityID, ref Vector2 velocity);
-        public class BoxCollider2DComponent : Component
-        {
-        }
-
+    }
+    public class BoxCollider2DComponent : Component
+    {
     }
 
+    public class RigidBodyComponent : Component
+    {
+        public enum ForceMode
+        {
+            Force = 0,
+            Impulse,
+            VelocityChange,
+            Acceleration
+        }
+
+        public void AddForce(Vector3 force, ForceMode forceMode = ForceMode.Force)
+        {
+            AddForce_Native(Entity.ID, ref force, forceMode);
+        }
+
+        public void AddTorque(Vector3 torque, ForceMode forceMode = ForceMode.Force)
+        {
+            AddTorque_Native(Entity.ID, ref torque, forceMode);
+        }
+
+        public Vector3 GetLinearVelocity()
+        {
+            GetLinearVelocity_Native(Entity.ID, out Vector3 velocity);
+            return velocity;
+        }
+
+        public void SetLinearVelocity(Vector3 velocity)
+        {
+            SetLinearVelocity_Native(Entity.ID, ref velocity);
+        }
+
+        // TODO: Add SetMaxLinearVelocity() as well
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        internal static extern void AddForce_Native(ulong entityID, ref Vector3 force, ForceMode forceMode);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        internal static extern void AddTorque_Native(ulong entityID, ref Vector3 torque, ForceMode forceMode);
+
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        internal static extern void GetLinearVelocity_Native(ulong entityID, out Vector3 velocity);
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        internal static extern void SetLinearVelocity_Native(ulong entityID, ref Vector3 velocity);
+    }
 
 }

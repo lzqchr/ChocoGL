@@ -50,7 +50,7 @@ namespace ChocoGL {
 				m_Textures.resize((size_t)slot + 1);
 			m_Textures[slot] = texture;
 		}
-
+	
 		void Set(const std::string& name, const Ref<Texture2D>& texture)
 		{
 			Set(name, (const Ref<Texture>&)texture);

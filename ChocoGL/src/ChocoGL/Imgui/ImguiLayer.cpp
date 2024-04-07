@@ -19,7 +19,9 @@ namespace ChocoGL {
 
 	ImGuiLayer::ImGuiLayer()
 	{
+
 	}
+
 	ImGuiLayer::ImGuiLayer(const std::string& name)
 	{
 
@@ -27,6 +29,7 @@ namespace ChocoGL {
 
 	ImGuiLayer::~ImGuiLayer()
 	{
+
 	}
 
 	void ImGuiLayer::OnAttach()
@@ -41,6 +44,9 @@ namespace ChocoGL {
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
+
+		ImFont* pFont = io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
+		io.FontDefault = io.Fonts->Fonts.back();
 
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
@@ -59,7 +65,7 @@ namespace ChocoGL {
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
 		// Setup Platform/Renderer bindings
-		ImGui_ImplGlfw_InitForOpenGL(window, false);
+		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
@@ -82,7 +88,7 @@ namespace ChocoGL {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
-		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
+		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 
 		// Rendering
 		ImGui::Render();
@@ -99,10 +105,6 @@ namespace ChocoGL {
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		//static bool show = true;
-		//ImGui::ShowDemoWindow(&show);
-
 	}
-
 
 }
