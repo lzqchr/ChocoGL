@@ -56,7 +56,6 @@ namespace ChocoGL {
 		mono_add_internal_call("ChocoGL.Entity::GetForwardDirection_Native", ChocoGL::Script::ChocoGL_Entity_GetForwardDirection);
 		mono_add_internal_call("ChocoGL.Entity::GetRightDirection_Native", ChocoGL::Script::ChocoGL_Entity_GetRightDirection);
 		mono_add_internal_call("ChocoGL.Entity::GetUpDirection_Native", ChocoGL::Script::ChocoGL_Entity_GetUpDirection);
-		mono_add_internal_call("ChocoGL.RigidBody2DComponent::ApplyLinearImpulse_Native", ChocoGL::Script::ChocoGL_RigidBody2DComponent_ApplyLinearImpulse);
 		mono_add_internal_call("ChocoGL.Entity::CreateComponent_Native", ChocoGL::Script::ChocoGL_Entity_CreateComponent);
 		mono_add_internal_call("ChocoGL.Entity::HasComponent_Native", ChocoGL::Script::ChocoGL_Entity_HasComponent);
 		mono_add_internal_call("ChocoGL.Entity::FindEntityByTag_Native", ChocoGL::Script::ChocoGL_Entity_FindEntityByTag);
