@@ -1,6 +1,8 @@
 .vs/
 /bin/
 bin-int/
+/out/
+CMakeUserPresets.json
 
 *.user
 
